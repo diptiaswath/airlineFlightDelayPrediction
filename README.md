@@ -26,9 +26,7 @@ Flight delays can have widespread consequences for airlines, from passenger diss
 
 -   **Passenger Communication**: With accurate delay predictions, airlines can inform passengers in advance, manage expectations, and provide better customer service, such as offering rebooking options or compensation for delays.
 
-#### Example Usage:
-
-#### An AI system that predicts flight delays could:
+#### Example Usage: An AI system that predicts flight delays could:
 
 1.  Suggest alternate flight paths that are less likely to experience delays.
 
@@ -67,6 +65,22 @@ How can a multi-class classification model be developed to accurately predict fl
 **Delays Correlate with Higher Segment Numbers**: Flights scheduled for more segments in a day are more prone to delays, regardless of distance. These delays are likely due to operational factors, such as shorter turnaround times, leading to delayed departures and arrivals.
 
 ![A graph of different colored lines Description automatically generated with medium confidence](images/6972858dec585d485ce8ef20325ef477.jpeg)
+
+5.  **Average Departure Delay per Carrier**: Identified the top 10 carriers with the highest average departure delays. For each carrier, the top 5 airports with the most significant contribution to delays were identified.
+
+**Carrier-Specific Delay Patterns**: No consistent delay patterns across multiple airports for individual carriers were observed.
+
+**Airport-Specific Trends**: Airports contributing to delays varied significantly across carriers, with no clear pattern of repeated delays at specific airports for multiple carriers.
+
+**Unique Operational Factors**: The variation in delay trends suggests that delays may be influenced by unique factors for each carrier and airport rather than common issues across multiple locations.
+
+![A screenshot of a graph Description automatically generated](images/430493f520578486e0181894d318ed8b.jpeg)
+
+![A screenshot of a graph Description automatically generated](images/ee47ccc289d47407e8ffece5e769e514.jpeg)
+
+![A screenshot of a graph Description automatically generated](images/2b6cfa2ab5a26bffaac702577d267764.jpeg)
+
+### 
 
 ### Model Evaluation Summary and Performance Metrics:
 
@@ -112,15 +126,15 @@ Kaggle Dataset from [here](https://www.kaggle.com/datasets/threnjen/2019-airline
 
 1.  Data Preparation
 
-    Involved cleaning and merging multiple raw CSV files to create a unified data-set with \~4M entries (for training) and \~2M entries (for testing) with 34 predictor variables and 1 target variable. Raw data-set description is [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/raw_data/raw_data_documentation.txt). 
+    Involved cleaning and merging multiple raw CSV files to create a unified data-set with \~4M entries (for training) and \~2M entries (for testing) with 34 predictor variables and 1 target variable. Raw data-set description is [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/raw_data/raw_data_documentation.txt).
 
 2.  Feature Engineering
 
-    -   Delay Categories: Classified delays into four classes/categories. a) **On-time Departure and Arrival:** Flights that depart and arrive within their scheduled times. b) **Delayed Departure, On-time Arrival:** Flights that experience delays during departure but still arrive on time or within a minimal delay window. c) **On-time Departure, Delayed Arrival**. d) **Delayed Departure and Arrival:** Flights that experience delays both in departure and arrival times.
+    1.  Delay Categories: Classified delays into four classes/categories. a) **On-time Departure and Arrival:** Flights that depart and arrive within their scheduled times. b) **Delayed Departure, On-time Arrival:** Flights that experience delays during departure but still arrive on time or within a minimal delay window. c) **On-time Departure, Delayed Arrival**. d) **Delayed Departure and Arrival:** Flights that experience delays both in departure and arrival times.
 
         ![A graph showing different types of classes Description automatically generated with medium confidence](images/1c21c80d52ac3af3c5475634cc711073.jpeg)
 
-    -   Aggregation Features: Created historical delay averages such as,
+    2.  Aggregation Features: Created historical delay averages such as,
 
         CARRIER_HISTORICAL = captures the historical average delay rate of each carrier per month
 
@@ -132,11 +146,11 @@ Kaggle Dataset from [here](https://www.kaggle.com/datasets/threnjen/2019-airline
 
         DEP_BLOCK_HIST = captures historical average delay rate for different departure time blocks, aggregated by month
 
-    -   Time Based Features: Extracted season from month and part of the day from departure and arrival time blocks
+    3.  Time Based Features: Extracted season from month and part of the day from departure and arrival time blocks
 
-    ![A comparison of different colored bars Description automatically generated](images/c85203ce6491ccef94dedf1330bc73fd.jpeg)
+        ![A comparison of different colored bars Description automatically generated](images/c85203ce6491ccef94dedf1330bc73fd.jpeg)
 
-    ![A group of bars with numbers Description automatically generated with medium confidence](images/109e7b83d38d2bfe4e13dd5c67060ea6.jpeg)
+        ![A group of bars with numbers Description automatically generated with medium confidence](images/109e7b83d38d2bfe4e13dd5c67060ea6.jpeg)
 
 -   Distance Based Features: Mapped distance groups to descriptive text
 
@@ -152,15 +166,15 @@ Kaggle Dataset from [here](https://www.kaggle.com/datasets/threnjen/2019-airline
 
 -   Engineered features with their descriptions can be found [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/dataset_documentation.txt)
 
-3.   Data Pre-Processing: Missing values and outliers detected were removed. SMOTETomek was applied to just the training data-set. This combined SMOTE's oversampling of the minority classes (classes 1,2 and 3) and Tomek links' under-sampling. Categorical features were also target encoded and Numerical features were scaled.
+1.  Data Pre-Processing: Missing values and outliers detected were removed. SMOTETomek was applied to just the training data-set. This combined SMOTE's oversampling of the minority classes (classes 1,2 and 3) and Tomek links' under-sampling. Categorical features were also target encoded and Numerical features were scaled.
 
-4.  Modeling and Evaluation: Classification algorithms used were Decision Trees, Random Forest, and multi-nomial Logistic Regression, with evaluation metrics: F1 Score, PR AUC, ROC AUC and Accuracy scores. Sequential Feature Selection was used to select 5 features from among the 34 predictor variables.
+2.  Modeling and Evaluation: Classification algorithms used were Decision Trees, Random Forest, and multi-nomial Logistic Regression, with evaluation metrics: F1 Score, PR AUC, ROC AUC and Accuracy scores. Sequential Feature Selection was used to select 5 features from among the 34 predictor variables.
 
 ## Outline of Project:
 
 1.  Engineered Features and description [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/dataset_documentation.txt)
 
-2.  Merged Data for [train](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/train.csv) and [test](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/test.csv) is [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/tree/main/combined_data) 
+2.  Merged Data for [train](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/train.csv) and [test](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/test.csv) is [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/tree/main/combined_data)
 
 3.  Raw Data used for creating merged data is [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/tree/main/raw_data)
 
