@@ -112,7 +112,7 @@ Kaggle Dataset from [here](https://www.kaggle.com/datasets/threnjen/2019-airline
 
 1.  Data Preparation
 
-    Involved cleaning and merging multiple CSV files to create a unified data-set with \~4M entries (for training) and \~2M entries (for testing). Feature engineering resulted in approximately 35 features from the original raw data.
+    Involved cleaning and merging multiple raw CSV files to create a unified data-set with \~4M entries (for training) and \~2M entries (for testing) with 34 predictor variables and 1 target variable. Raw data-set description is [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/raw_data/raw_data_documentation.txt). 
 
 2.  Feature Engineering
 
@@ -150,7 +150,7 @@ Kaggle Dataset from [here](https://www.kaggle.com/datasets/threnjen/2019-airline
 
     ![A close-up of a document Description automatically generated](images/c2f445131a51350dbad395f03b0b4aad.png)![A close-up of a number Description automatically generated](images/7ce889c572198a3b6907833d26644d84.jpeg)
 
--   Engineered features with their descriptions can be found here
+-   Engineered features with their descriptions can be found [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/dataset_documentation.txt)
 
 1.  Data Pre-Processing: Missing values and outliers detected were removed. Categorical features were target encoded and Numerical features were scaled.
 
@@ -158,22 +158,22 @@ Kaggle Dataset from [here](https://www.kaggle.com/datasets/threnjen/2019-airline
 
 ## Outline of Project:
 
-1.  Engineered Features and description here
+1.  Engineered Features and description [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/dataset_documentation.txt)
 
-2.  Merged Data for train and test is here
+2.  Merged Data for [train](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/train.csv) and [test](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/test.csv) is [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/tree/main/combined_data) 
 
-3.  Raw Data used for creating merged data is here
+3.  Raw Data used for creating merged data is [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/tree/main/raw_data)
 
-4.  Exploratory Data Analysis plots from Auto Viz Visualization Library is here (credits: )
+4.  Exploratory Data Analysis plots from Auto Viz Visualization Library is [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/tree/main/plots). Credits: Seshadri, Ram (2020). GitHub - AutoViML/AutoViz: Automatically Visualize any dataset, any size with a single line of code. source code: https://github.com/AutoViML/AutoViz)
 
-5.  Images captured in this README are located here
+5.  Images captured in this README are located [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/tree/main/images)
 
-6.  Jupyter notebooks, a) Notebook for data preparation, merges and initial exploratory analysis is here, b) Notebook for data pre-processing, additional exploratory analysis, modeling and evaluation is here
+6.  Jupyter notebooks, a) Notebook for data preparation, merges and initial exploratory analysis is [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/notebooks/flight-delays-data-prep-and-eda_v1.ipynb), b) Notebook for data pre-processing, additional exploratory analysis, modeling and evaluation is [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/notebooks/flight-delays-data-preproc-and-modeling_v1.ipynb)
 
 ## Next Steps:
 
 1.  Use Dimensionality Reduction and Clustering to reduce dimensions, and cluster features together to reduce the count of 34 predictors. Relying on Sequential Feature Selection alone, takes a while to train any of the classification models.
 
-2.  Use the SVC classifier to compare its performance with the others
+2.  Use SVC classifier to compare its performance with others
 
-3.  Use StreamLit and Fast API to serve the flight prediction delays via an application interface
+3.  Use StreamLit and Fast API to serve flight prediction delays via an application interface
