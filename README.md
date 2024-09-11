@@ -50,17 +50,17 @@ How can a multi-class classification model be developed to accurately predict fl
 
 ![A graph showing the average arrival of passengers Description automatically generated](images/bed4de04b8db99bd5041395fbf01c60f.jpeg)
 
-1.  Top 20 congested airports in 2019 with flight delays
+2.  Top 20 congested airports in 2019 with flight delays
 
 ![A graph of the number of concordments Description automatically generated](images/df55706c97170783aca2bc9452162305.jpeg)
 
 ![A map of the united states with different colored spots Description automatically generated](images/b6cf1189a8363e9708a712a22171e35a.jpeg)
 
-1.  SMOTE Resampling on Training Data
+3.  SMOTE Resampling on Training Data
 
 ![A white background with black text Description automatically generated](images/f6d59c3a193cfd80aad2cd0a0252e569.jpeg)
 
-### By examining segment number trends across Distance Group descriptors, we gain valuable insights into how aircraft operational schedules and the number of daily flights contributed to 2019 delays.
+4.  By examining segment number trends across Distance Group descriptors, we gain valuable insights into how aircraft operational schedules and the number of daily flights contributed to 2019 delays.
 
 **Segment Number Decreases with Distance**: As flight distance increases, the number of segments (flights) decreases. Aircraft flying longer routes complete fewer flights in a day due to time constraints.
 
@@ -116,31 +116,31 @@ Kaggle Dataset from [here](https://www.kaggle.com/datasets/threnjen/2019-airline
 
 2.  Feature Engineering
 
--   Delay Categories: Classified delays into four classes/categories. a) **On-time Departure and Arrival:** Flights that depart and arrive within their scheduled times. b) **Delayed Departure, On-time Arrival:** Flights that experience delays during departure but still arrive on time or within a minimal delay window. c) **On-time Departure, Delayed Arrival**. d) **Delayed Departure and Arrival:** Flights that experience delays both in departure and arrival times.
+    -   Delay Categories: Classified delays into four classes/categories. a) **On-time Departure and Arrival:** Flights that depart and arrive within their scheduled times. b) **Delayed Departure, On-time Arrival:** Flights that experience delays during departure but still arrive on time or within a minimal delay window. c) **On-time Departure, Delayed Arrival**. d) **Delayed Departure and Arrival:** Flights that experience delays both in departure and arrival times.
 
-    ![A graph showing different types of classes Description automatically generated with medium confidence](images/1c21c80d52ac3af3c5475634cc711073.jpeg)
+        ![A graph showing different types of classes Description automatically generated with medium confidence](images/1c21c80d52ac3af3c5475634cc711073.jpeg)
 
--   Aggregation Features: Created historical delay averages such as,
+    -   Aggregation Features: Created historical delay averages such as,
 
-    CARRIER_HISTORICAL = captures the historical average delay rate of each carrier per month
+        CARRIER_HISTORICAL = captures the historical average delay rate of each carrier per month
 
-    DEP_AIRPORT_HIST = captures historical average delay rates for flights departing from specific airports per month
+        DEP_AIRPORT_HIST = captures historical average delay rates for flights departing from specific airports per month
 
-    PREV_AIRPORT_HIST = captures historical average delay rate for the airport from which the aircraft arrived before the current departure
+        PREV_AIRPORT_HIST = captures historical average delay rate for the airport from which the aircraft arrived before the current departure
 
-    DAY_HISTORICAL = captures historical average delays associated with each day of the week, adjusted monthly
+        DAY_HISTORICAL = captures historical average delays associated with each day of the week, adjusted monthly
 
-    DEP_BLOCK_HIST = captures historical average delay rate for different departure time blocks, aggregated by month
+        DEP_BLOCK_HIST = captures historical average delay rate for different departure time blocks, aggregated by month
 
--   Time Based Features: Extracted season from month and part of the day from departure and arrival time blocks
+    -   Time Based Features: Extracted season from month and part of the day from departure and arrival time blocks
 
-![A comparison of different colored bars Description automatically generated](images/c85203ce6491ccef94dedf1330bc73fd.jpeg)
+    ![A comparison of different colored bars Description automatically generated](images/c85203ce6491ccef94dedf1330bc73fd.jpeg)
 
-![A group of bars with numbers Description automatically generated with medium confidence](images/109e7b83d38d2bfe4e13dd5c67060ea6.jpeg)
+    ![A group of bars with numbers Description automatically generated with medium confidence](images/109e7b83d38d2bfe4e13dd5c67060ea6.jpeg)
 
 -   Distance Based Features: Mapped distance groups to descriptive text
 
-![A close-up of a graph Description automatically generated](images/30988bff062a1543f4a633070acbba1f.jpeg)
+    ![A close-up of a graph Description automatically generated](images/30988bff062a1543f4a633070acbba1f.jpeg)
 
 -   Delay Based Features: Created new features by combining actual departure and arrival times with planned times to create new delay features, ELAPSED_TIME_DIFF, DEP_DELAY, ARR_DELAY
 
@@ -152,9 +152,9 @@ Kaggle Dataset from [here](https://www.kaggle.com/datasets/threnjen/2019-airline
 
 -   Engineered features with their descriptions can be found [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/dataset_documentation.txt)
 
-1.  Data Pre-Processing: Missing values and outliers detected were removed. Categorical features were target encoded and Numerical features were scaled.
+3.   Data Pre-Processing: Missing values and outliers detected were removed. SMOTETomek was applied to just the training data-set. This combined SMOTE's oversampling of the minority classes (classes 1,2 and 3) and Tomek links' under-sampling. Categorical features were also target encoded and Numerical features were scaled.
 
-1.  Modeling and Evaluation: Classification algorithms used were Decision Trees, Random Forest, and multi-nomial Logistic Regression, with evaluation metrics: F1 Score, PR AUC, ROC AUC and Accuracy scores. Sequential Feature Selection was used to select 5 features from among the 34 predictor variables.
+4.  Modeling and Evaluation: Classification algorithms used were Decision Trees, Random Forest, and multi-nomial Logistic Regression, with evaluation metrics: F1 Score, PR AUC, ROC AUC and Accuracy scores. Sequential Feature Selection was used to select 5 features from among the 34 predictor variables.
 
 ## Outline of Project:
 
