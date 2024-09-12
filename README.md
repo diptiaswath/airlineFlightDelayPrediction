@@ -74,7 +74,7 @@ How can a multi-class classification model be developed to accurately predict fl
 
 **Unique Operational Factors:** The variation in delay trends suggests that delays may be influenced by distinct factors specific to each carrier and airport, rather than being caused by common issues across multiple locations. For instance, both Endeavor Air Inc and Comair Inc experienced higher-than-usual precipitation at the airports on their flight day, which could have contributed to their delays.
 
-![A screenshot of a graph Description automatically generated](fcb34c72898e35e1a0bfb19cd5d85403.jpeg)
+![A screenshot of a graph Description automatically generated](images/fcb34c72898e35e1a0bfb19cd5d85403.jpeg)
 
 ### ![A graph of a number of aircraft carrier names Description automatically generated](images/01857b3b3a37af99de404915b9763511.jpeg)
 
