@@ -72,9 +72,11 @@ How can a multi-class classification model be developed to accurately predict fl
 
 **Focus on median delays**: The use of median delays here helped identify typical delay experiences, filtering out the effect of extreme delays that skewed averages.
 
-**Unique Operational Factors**: The variation in delay trends suggests that delays may be influenced by unique factors for each carrier and airport rather than common issues across multiple locations.
+**Unique Operational Factors:** The variation in delay trends suggests that delays may be influenced by distinct factors specific to each carrier and airport, rather than being caused by common issues across multiple locations. For instance, both Endeavor Air Inc and Comair Inc experienced higher-than-usual precipitation at the airports on their flight day, which could have contributed to their delays.
 
-![A screenshot of a graph Description automatically generated](images/fcb34c72898e35e1a0bfb19cd5d85403.jpeg)
+![A screenshot of a graph Description automatically generated](fcb34c72898e35e1a0bfb19cd5d85403.jpeg)
+
+### ![A graph of a number of aircraft carrier names Description automatically generated](images/01857b3b3a37af99de404915b9763511.jpeg)
 
 ### Model Evaluation Summary and Performance Metrics:
 
@@ -158,7 +160,7 @@ Kaggle Dataset from [here](https://www.kaggle.com/datasets/threnjen/2019-airline
 
     ![A close-up of a document Description automatically generated](images/c2f445131a51350dbad395f03b0b4aad.png)![A close-up of a number Description automatically generated](images/7ce889c572198a3b6907833d26644d84.jpeg)
 
-    8.   Engineered features with their descriptions can be found [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/dataset_documentation.txt)
+    8.  Engineered features with their descriptions can be found [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/dataset_documentation.txt)
 
 3.  Data Pre-Processing: Missing values and outliers detected were removed. SMOTETomek was applied to just the training data-set. This combined SMOTE's oversampling of the minority classes (classes 1,2 and 3) and Tomek links' under-sampling. Categorical features were also target encoded and Numerical features were scaled.
 
