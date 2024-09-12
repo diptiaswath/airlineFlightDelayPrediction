@@ -48,17 +48,17 @@ How can a multi-class classification model be developed to accurately predict fl
 
 ![A graph showing the average arrival of passengers Description automatically generated](images/bed4de04b8db99bd5041395fbf01c60f.jpeg)
 
-2.  Top 20 congested airports in 2019 with flight delays
+1.  Top 30 congested airports in 2019 with flight delays
 
 ![A graph of the number of concordments Description automatically generated](images/df55706c97170783aca2bc9452162305.jpeg)
 
 ![A map of the united states with different colored spots Description automatically generated](images/b6cf1189a8363e9708a712a22171e35a.jpeg)
 
-3.  SMOTE Resampling on Training Data
+1.  SMOTE Resampling on Training Data
 
 ![A white background with black text Description automatically generated](images/f6d59c3a193cfd80aad2cd0a0252e569.jpeg)
 
-4.  By examining segment number trends across Distance Group descriptors, we gain valuable insights into how aircraft operational schedules and the number of daily flights contributed to 2019 delays.
+1.  **By examining segment number trends across Distance Group descriptors**, we gain valuable insights into how aircraft operational schedules and the number of daily flights contributed to 2019 delays.
 
 **Segment Number Decreases with Distance**: As flight distance increases, the number of segments (flights) decreases. Aircraft flying longer routes complete fewer flights in a day due to time constraints.
 
@@ -66,21 +66,15 @@ How can a multi-class classification model be developed to accurately predict fl
 
 ![A graph of different colored lines Description automatically generated with medium confidence](images/6972858dec585d485ce8ef20325ef477.jpeg)
 
-5.  **Average Departure Delay per Carrier**: Identified the top 10 carriers with the highest average departure delays. For each carrier, the top 5 airports with the most significant contribution to delays were identified.
+1.  **Median Departure and Arrival Delays per Carrier:** Identified the top 20 carriers with the highest median delays, considering both departure and arrival delays. For each carrier, the top 20 airports with the most significant contribution to delays were identified.
 
-**Carrier-Specific Delay Patterns**: No consistent delay patterns across multiple airports for individual carriers were observed.
+**Comprehensive Delay Analysis:** By considering both departure and arrival delays, this analysis provides a more holistic view of 2019 airline performance and airport efficiency. Endeavor Air Inc shows a highest delay at Miami International. Comair Inc follows with the next highest delay at Portland International Airport.
 
-**Airport-Specific Trends**: Airports contributing to delays varied significantly across carriers, with no clear pattern of repeated delays at specific airports for multiple carriers.
+**Focus on median delays**: The use of median delays here helped identify typical delay experiences, filtering out the effect of extreme delays that skewed averages.
 
 **Unique Operational Factors**: The variation in delay trends suggests that delays may be influenced by unique factors for each carrier and airport rather than common issues across multiple locations.
 
-![A screenshot of a graph Description automatically generated](images/430493f520578486e0181894d318ed8b.jpeg)
-
-![A screenshot of a graph Description automatically generated](images/ee47ccc289d47407e8ffece5e769e514.jpeg)
-
-![A screenshot of a graph Description automatically generated](images/2b6cfa2ab5a26bffaac702577d267764.jpeg)
-
-### 
+![A screenshot of a graph Description automatically generated](images/fcb34c72898e35e1a0bfb19cd5d85403.jpeg)
 
 ### Model Evaluation Summary and Performance Metrics:
 
@@ -152,23 +146,23 @@ Kaggle Dataset from [here](https://www.kaggle.com/datasets/threnjen/2019-airline
 
         ![A group of bars with numbers Description automatically generated with medium confidence](images/109e7b83d38d2bfe4e13dd5c67060ea6.jpeg)
 
--   Distance Based Features: Mapped distance groups to descriptive text
+    4.  Distance Based Features: Mapped distance groups to descriptive text
 
     ![A close-up of a graph Description automatically generated](images/30988bff062a1543f4a633070acbba1f.jpeg)
 
--   Delay Based Features: Created new features by combining actual departure and arrival times with planned times to create new delay features, ELAPSED_TIME_DIFF, DEP_DELAY, ARR_DELAY
+    5.  Delay Based Features: Created new features by combining actual departure and arrival times with planned times to create new delay features, ELAPSED_TIME_DIFF, DEP_DELAY, ARR_DELAY
 
--   Employee Features: Created employee statistics features FLT_ATTENDANTS_PER_PASS and PASSENGER_HANDLING for analyzing airline and carrier operations
+    6.  Employee Features: Created employee statistics features FLT_ATTENDANTS_PER_PASS and PASSENGER_HANDLING for analyzing airline and carrier operations
 
--   Removed highly correlated features with VIF
+    7.  Removed highly correlated features with VIF
 
     ![A close-up of a document Description automatically generated](images/c2f445131a51350dbad395f03b0b4aad.png)![A close-up of a number Description automatically generated](images/7ce889c572198a3b6907833d26644d84.jpeg)
 
--   Engineered features with their descriptions can be found [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/dataset_documentation.txt)
+    8.   Engineered features with their descriptions can be found [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/dataset_documentation.txt)
 
-1.  Data Pre-Processing: Missing values and outliers detected were removed. SMOTETomek was applied to just the training data-set. This combined SMOTE's oversampling of the minority classes (classes 1,2 and 3) and Tomek links' under-sampling. Categorical features were also target encoded and Numerical features were scaled.
+3.  Data Pre-Processing: Missing values and outliers detected were removed. SMOTETomek was applied to just the training data-set. This combined SMOTE's oversampling of the minority classes (classes 1,2 and 3) and Tomek links' under-sampling. Categorical features were also target encoded and Numerical features were scaled.
 
-2.  Modeling and Evaluation: Classification algorithms used were Decision Trees, Random Forest, and multi-nomial Logistic Regression, with evaluation metrics: F1 Score, PR AUC, ROC AUC and Accuracy scores. Sequential Feature Selection was used to select 5 features from among the 34 predictor variables.
+4.  Modeling and Evaluation: Classification algorithms used were Decision Trees, Random Forest, and multi-nomial Logistic Regression, with evaluation metrics: F1 Score, PR AUC, ROC AUC and Accuracy scores. Sequential Feature Selection was used to select 5 features from among the 34 predictor variables.
 
 ## Outline of Project:
 
