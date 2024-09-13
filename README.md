@@ -105,6 +105,22 @@ How can a multi-class classification model be developed to accurately predict fl
 
 ![A screenshot of a computer Description automatically generated](images/737e04ca9862678adb62a4506ec67c00.jpeg)
 
+### Interpretation of Model Evaluations:
+1. **Model Ranking**: Based on performance metrics, the models can be ranked as below, with Random Forest being a superior model for predicting flight delays, particularly in handling class imbalance and maintaing high performance across all classes. The Decision Tree classifier also handles class imbalance much better than Logistic Regression and performance is more consistent across classes compared to Logistic Regression.
+   Random Forest
+   Decision Tree
+   Logistic Regression
+
+2. **Simplicity vs. Performance**: Decision Tree performs nearly as well as Random Forest, despite being a simpler model. Its significantly better than Logistic Regression. This suggests that the decision boundaries in the data are relatively clear and can be captured by a single tree.
+
+3. **Interpretability**: Decision Trees offer better interpretability compared to Random Forest, while maintaining high performance. This could be valuable for understanding the key decision points in flight delay prediction.
+
+4. **Robustness**: The high performance of the Decision Tree suggests that the important patterns in the data are strong and consistent
+
+5. **Feature Importance**: Analyzing the structure of the Decision Tree could provide clear insights into the most critical factors for predicting flight delays.
+
+6. **Deployment**: Given its high performance and interpretability, the Decision Tree could be an excellent choice for deployment, especially if model explanation is important. 
+   
 ## Data Sources:
 
 Kaggle Dataset from [here](https://www.kaggle.com/datasets/threnjen/2019-airline-delays-and-cancellations/data), that is comprised of multiple csv's listed below.
@@ -185,8 +201,10 @@ Kaggle Dataset from [here](https://www.kaggle.com/datasets/threnjen/2019-airline
 
 ## Next Steps:
 
-1.  Use Dimensionality Reduction and Clustering to reduce dimensions, and cluster features together to reduce the count of 34 predictors. Relying on Sequential Feature Selection alone, takes a while to train any of the classification models.
+1.  Use Dimensionality Reduction and Clustering to reduce dimensions, and cluster features together to reduce the count of 34 predictors. Relying on Feature Selection techniques alone, takes a while to train any of the classification models.
 
-2.  Use SVC classifier to compare its performance with others
+2.  Investigate features and decision rules contributing the most to predicting flight delays with both the Decision Tree and the Random Forest classifier.
 
-3.  Use StreamLit and Fast API to serve flight prediction delays via an application interface
+3.  Explore ensemble methods that could combine Decision Tree with other models to potentially improve performance further.
+
+4.  Use StreamLit and Fast API to serve flight prediction delays via an application interface
