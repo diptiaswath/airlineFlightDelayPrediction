@@ -1,7 +1,6 @@
 # Optimizing Airline Operations: Predicting Delays for Smarter Routes & Resource Management
 
-Dipti Aswath
-[LinkedIn Profile](www.linkedin.com/in/dipti-aswath-60b9131)
+Dipti Aswath @ [LinkedIn](www.linkedin.com/in/dipti-aswath-60b9131)
 
 ## Executive Summary
 
