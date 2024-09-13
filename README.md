@@ -106,10 +106,7 @@ How can a multi-class classification model be developed to accurately predict fl
 ![A screenshot of a computer Description automatically generated](images/737e04ca9862678adb62a4506ec67c00.jpeg)
 
 ### Interpretation of Model Evaluations:
-1. **Model Ranking**: Based on performance metrics, the models can be ranked as below, with Random Forest being a superior model for predicting flight delays, particularly in handling class imbalance and maintaing high performance across all classes. The Decision Tree classifier also handles class imbalance much better than Logistic Regression and performance is more consistent across classes compared to Logistic Regression.
-   Random Forest
-   Decision Tree
-   Logistic Regression
+1. **Model Ranking**: Based on performance metrics, the models can be ranked as a) Random Forest, b) Decision Tree, c) Logistic Regression, with Random Forest being a superior model for predicting flight delays, particularly in handling class imbalance and maintaing high performance across all classes. The Decision Tree classifier also handles class imbalance much better than Logistic Regression and its performance is more consistent across classes compared to Logistic Regression.
 
 2. **Simplicity vs. Performance**: Decision Tree performs nearly as well as Random Forest, despite being a simpler model. Its significantly better than Logistic Regression. This suggests that the decision boundaries in the data are relatively clear and can be captured by a single tree.
 
