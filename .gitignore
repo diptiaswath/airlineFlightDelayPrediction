@@ -1,1 +1,2 @@
-notebooks/.ipynb_checkpoints/
+# Ignore all Jupyter Notebook checkpoints
+.ipynb_checkpoints/
