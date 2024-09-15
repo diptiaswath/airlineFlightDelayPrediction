@@ -3,3 +3,4 @@
 *.png filter=lfs diff=lfs merge=lfs -text
 *.txt filter=lfs diff=lfs merge=lfs -text
 images/decision_tree_graphviz filter=lfs diff=lfs merge=lfs -text
+notebooks/.ipynb_checkpoints/flight-delays-data-exploration_v1-checkpoint.ipynb filter=lfs diff=lfs merge=lfs -text
