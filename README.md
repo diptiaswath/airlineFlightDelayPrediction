@@ -89,7 +89,7 @@ How can a multi-class classification model be developed to accurately predict fl
 **Multinomial Logistic Regression Classifier:**
 ***Performance Summary:***
 - Class 0: Excellent precision (0.99), high recall (0.91), and top F1-score (0.95). The model performs very well on this majority class.
-- Classes 1 & 2: Low precision and F1-scores (0.49 and 0.35 for Class 1; 0.35 and 0.49 for Class 2) indicate many false positives. These classes have high recall, suggesting the model detects them but struggles with classification accuracy.
+- Classes 1 & 2: Low precision and F1-scores (0.50 and 0.37 for Class 1; 0.35 and 0.49 for Class 2) indicate many false positives. These classes have high recall, suggesting the model detects them but struggles with classification accuracy.
 - Class 3: Balanced performance with a good F1-score (0.79), showing moderate effectiveness.
 
 ***Bias vs. Variance Analysis Summary:***
