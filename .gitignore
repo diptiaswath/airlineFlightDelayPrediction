@@ -1,2 +1,2 @@
-# Ignore all Jupyter Notebook checkpoints
-.ipynb_checkpoints/
+#Ignore all Jupyter Notebook checkpoints
+echo "notebooks/.ipynb_checkpoints/" >> .gitignore
