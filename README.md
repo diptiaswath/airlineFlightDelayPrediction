@@ -87,12 +87,36 @@ How can a multi-class classification model be developed to accurately predict fl
 ![](images/7be16164f37e089d386ab62185feaa07.jpeg)
 
 **Multinomial Logistic Regression Classifier:**
+***Performance Summary:***
+- Class 0: Excellent precision (0.99), high recall (0.91), and top F1-score (0.95). The model performs very well on this majority class.
+- Classes 1 & 2: Low precision and F1-scores (0.49 and 0.35 for Class 1; 0.35 and 0.49 for Class 2) indicate many false positives. These classes have high recall, suggesting the model detects them but struggles with classification accuracy.
+- Class 3: Balanced performance with a good F1-score (0.79), showing moderate effectiveness.
+
+***Bias vs. Variance Analysis Summary:***
+- High Variance: The model exhibits high variance by overfitting to the majority class (Class 0) and performing poorly on minority classes (Classes 1 and 2). This discrepancy indicates overfitting, as the model captures the majority class well but generalizes poorly to others.
+- High Bias: The model exhibits high bias as well, as the model’s overall performance metrics (macro-averaged) are lower, reflecting that the model is too simplistic to handle the complexities of minority classes.
+  
+***Overall Summary:***
+This model exhibits high variance, as evidenced by its strong performance on the majority class but weaker performance on the minority classes. This indicates overfitting to the majority class. It also shows signs of high bias, with poor performance on minority classes. To address this, we will next evaluate ensemble bagging methods, such as Random Forest, using a Decision Tree as a base model to potentially improve generalization.
 
 ![A screenshot of a computer Description automatically generated](images/b2ad7f137a2c3862172b05c834951282.jpeg)
 
 ![A close-up of a graph Description automatically generated](images/d237759ac6cabbb60b6fdc4520186927.jpeg)
 
 **Decision Tree Classifier:**
+***Performance Summary:***
+- Class 0: Exceptional performance with perfect precision (1.00), high recall (0.99), and an excellent F1-score (0.99). This model is highly effective at identifying this majority class.
+- Class 1: Strong performance with high precision (0.93) and recall (0.94), resulting in a high F1-score (0.93). This model effectively identifies this class with a good balance of precision and recall.
+- Class 2: Good performance with a precision of 0.85 and recall of 0.90, yielding an F1-score of 0.87. This model shows strong ability to identify this class, though there is room for improvement in precision.
+- Class 3: Excellent performance with high precision (0.94) and recall (0.94), resulting in a high F1-score (0.94). This model effectively identifies this class as well.
+- Overall Metrics: The overall metrics suggest that the model has excellent overall performance, with very high accuracy (0.98) and strong ability to differentiate between classes. The high PR AUC and ROC AUC scores, both macro-averaged (PR AUC of 0.88 and ROC AUC of 0.97) and weighted (PR AUC of 0.97 and ROC AUC of 0.98), indicate that this model handles class imbalances effectively and maintains good performance across different metrics.
+
+***Bias vs. Variance Analysis Summary:***
+- Low Bias: The model shows low bias, as evidenced by high precision, recall, and F1-scores across all classes. It is effectively capturing the underlying patterns in the data.
+- Low Variance: The model exhibits low variance, as it generalizes well across all classes without overfitting. This is indicated by consistent performance metrics and high AUC scores.
+
+***Overall Summary:***
+This model demonstrates strong performance with low bias and variance, effectively handling all classes with high accuracy and robust AUC scores. However, to further enhance model robustness and generalization, exploring ensemble methods such as a bagging model like Random Forest Classifier could be beneficial. Bagging can improve performance by reducing potential overfitting and increasing stability, particularly if the base Decision Tree model has high depth as in this case. Given this model's already high performance, the addition of an ensemble method will be explored next to help fine-tune and further validate results.
 
 ![A screenshot of a computer Description automatically generated](images/82e8d7539e44461c7f9cc389798a5157.jpeg)
 
