@@ -1,2 +1,8 @@
-#Ignore all Jupyter Notebook checkpoints
+# Ignore all Jupyter Notebook checkpoints
 echo "notebooks/.ipynb_checkpoints/" >> .gitignore
+
+# Ignore the global .DS_Store file (macOS system file)
+.DS_Store
+
+# Ignore .DS_Store in a specific directory
+notebooks/utils/.DS_Store
