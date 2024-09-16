@@ -99,7 +99,7 @@ How can a multi-class classification model be developed to accurately predict fl
   
 ***Overall Summary:***
 
-This model exhibits high variance, as evidenced by its strong performance on the majority class but weaker performance on the minority classes. This indicates overfitting to the majority class. It also shows signs of high bias, with poor performance on minority classes. To address this, we will next evaluate ensemble bagging methods, such as Random Forest, using a Decision Tree as a base model to potentially improve generalization.
+- This model exhibits high variance, as evidenced by its strong performance on the majority class but weaker performance on the minority classes. This indicates overfitting to the majority class. It also shows signs of high bias, with poor performance on minority classes. To address this, we will next evaluate ensemble bagging methods, such as Random Forest, using a Decision Tree as a base model to potentially improve generalization.
 
 ![A screenshot of a computer Description automatically generated](images/b2ad7f137a2c3862172b05c834951282.jpeg)
 
@@ -121,7 +121,7 @@ This model exhibits high variance, as evidenced by its strong performance on the
 
 ***Overall Summary:***
 
-This model demonstrates strong performance with low bias and variance, effectively handling all classes with high accuracy and robust AUC scores. However, to further enhance model robustness and generalization, exploring ensemble methods such as a bagging model like Random Forest Classifier could be beneficial. Bagging can improve performance by reducing potential overfitting and increasing stability, particularly if the base Decision Tree model has high depth as in this case. Given this model's already high performance, the addition of an ensemble method will be explored next to help fine-tune and further validate results.
+- This model demonstrates strong performance with low bias and variance, effectively handling all classes with high accuracy and robust AUC scores. However, to further enhance model robustness and generalization, exploring ensemble methods such as a bagging model like Random Forest Classifier could be beneficial. Bagging can improve performance by reducing potential overfitting and increasing stability, particularly if the base Decision Tree model has high depth as in this case. Given this model's already high performance, the addition of an ensemble method will be explored next to help fine-tune and further validate results.
 
 ![A screenshot of a computer Description automatically generated](images/82e8d7539e44461c7f9cc389798a5157.jpeg)
 
