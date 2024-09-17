@@ -275,7 +275,7 @@ def analyze_feature_selection(pipeline):
 
 
 ###################################################################################################
-# Generic Function to plot feature importances from a trained classifier
+# Generic Function to plot built-in feature importances from a trained classifier
 ###################################################################################################
 def plot_feature_importances(classifier, selected_features):
     """
@@ -320,5 +320,90 @@ def plot_feature_importances(classifier, selected_features):
 # In[ ]:
 
 
+###################################################################################################
+# Generic Function to plot built-in feature importances from a trained classifier v.s. feature 
+# importances from permutation importance
+###################################################################################################
+from sklearn.inspection import permutation_importance
+import matplotlib.pyplot as plt
 
+def plot_feature_importances_w_permutation_importance_vs_built_in(pipeline, X_test, y_test):
+    """
+    Computes and plots permutation feature importance and a classifier's built-in feature importances.
+    
+    Parameters:
+    pipeline : sklearn.pipeline.Pipeline
+        The trained pipeline containing the preprocessor, feature selector, and classifier.
+    X_test : pandas.DataFrame or numpy.ndarray
+        The test dataset used for evaluating feature importances.
+    y_test : pandas.Series or numpy.ndarray
+        The true labels for the test dataset.
+    """
+    # Extract the trained Classifier model from the pipeline
+    model = pipeline.named_steps['classifier']
+    
+    # Extract the preprocessor from the pipeline
+    preprocessor = pipeline.named_steps['preprocessor']
+
+    # Get feature names after preprocessing
+    feature_names = []
+    for name, trans, columns in preprocessor.transformers_:
+        if name == 'num':
+            feature_names.extend(trans.get_feature_names_out(columns).tolist())
+        elif name == 'cat':
+            feature_names.extend(columns)
+    
+    # Transform X_test with the preprocessor
+    X_test_transformed = preprocessor.transform(X_test)
+    
+    # Get selected feature indices from the feature selector (RFE)
+    selected_features = pipeline.named_steps['feature_selection'].get_support()
+    
+    # Filter feature names based on selected features
+    selected_feature_names = [name for name, selected in zip(feature_names, selected_features) if selected]
+    
+    #################################################################################################
+    # Permutation Feature Importance
+    #################################################################################################
+    # Compute permutation importance
+    results = permutation_importance(model, X_test_transformed[:, selected_features], y_test, scoring='f1_weighted')
+    
+    # Print permutation feature importances
+    print("\nPermutation Feature Importances:")
+    for idx, name in enumerate(selected_feature_names):
+        print(f"{name}: {results.importances_mean[idx]:.4f} +/- {results.importances_std[idx]:.4f}")
+    
+    # Plot permutation feature importances
+    plt.figure(figsize=(15, 6))
+    sorted_idx = results.importances_mean.argsort()
+    plt.barh(range(len(results.importances_mean)), results.importances_mean[sorted_idx])
+    plt.yticks(range(len(results.importances_mean)), [selected_feature_names[i] for i in sorted_idx])
+    plt.xlabel("Permutation Importance")
+    plt.title("Permutation Importances (Classifier)")
+    plt.tight_layout()
+    plt.show()
+    
+    #################################################################################################
+    # Classifier's Built-in Feature Importances
+    #################################################################################################
+    # Get built-in feature importances from the Classifier
+    c_importances = model.feature_importances_
+    
+    # Print Classifier's built-in feature importances
+    print("\nClassifier's Built-in Feature Importances:")
+    for idx, name in enumerate(selected_feature_names):
+        print(f"{name}: {c_importances[idx]:.4f}")
+    
+    # Plot Classifier's built-in feature importances
+    plt.figure(figsize=(15, 6))
+    sorted_idx = ct_importances.argsort()
+    plt.barh(range(len(c_importances)), c_importances[sorted_idx])
+    plt.yticks(range(len(c_importances)), [selected_feature_names[i] for i in sorted_idx])
+    plt.xlabel("Feature Importance")
+    plt.title("Classifier's Built-in Feature Importances")
+    plt.tight_layout()
+    plt.show()
+
+# Example usage:
+# plot_feature_importances(pipeline, X_test, y_test)
 
