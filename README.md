@@ -127,12 +127,12 @@ Identified the top 20 carriers with the highest median delays. For each carrier,
 - Overall Metrics: The overall metrics suggest that the model has excellent overall performance, with very high accuracy (0.98) and strong ability to differentiate between classes. The high PR AUC and ROC AUC scores, both macro-averaged (PR AUC of 0.90 and ROC AUC of 0.97) and weighted (PR AUC of 0.97 and ROC AUC of 0.99), indicate that this model handles class imbalances effectively and maintains good performance across different metrics.
 
 ***Bias vs. Variance Analysis Summary:***
-- Low Bias: The model shows low bias, as evidenced by high precision, recall, and F1-scores across all classes. It is effectively capturing the underlying patterns in the data.
-- Low Variance: The model exhibits low variance, as it generalizes well across all classes without overfitting. This is indicated by consistent performance metrics and high AUC scores.
+- Low Bias: The model achieves high accuracy and F1-scores across all classes, particularly with the tuned parameters indicating that it captures complex patterns in the data effectively.
+- High Variance: With tuned parameters, a maximum depth of 15 and very low minimum samples for split and leaf nodes, the model might be overfitting the training data. This results in a model that performs exceptionally well on training data but could be less generalizable to new data.
 
 ***Summary:***
 
-- This model demonstrates strong performance with low bias and variance, effectively handling all classes with high accuracy and robust AUC scores. However, to further enhance model robustness and generalization, exploring ensemble methods such as a bagging model like Random Forest Classifier could be beneficial. Bagging can improve performance by reducing potential overfitting and increasing stability, particularly if the base Decision Tree model has high depth as in this case. Given this model's already high performance, the addition of an ensemble method will be explored next to help fine-tune and further validate results.
+- This model demonstrates a high performance with low bias and high variance. However, to further enhance model robustness and generalization, exploring ensemble methods such as a bagging model like Random Forest Classifier could be beneficial. Bagging with Random Forest can help reduce overfitting and improve generalization by averaging the predictions of multiple trees. This approach will be explored next to validate and potentially fine-tune results, ensuring that the model remains robust and reliable
 
 ![A screenshot of a computer Description automatically generated](images/82e8d7539e44461c7f9cc389798a5157.jpeg)
 
