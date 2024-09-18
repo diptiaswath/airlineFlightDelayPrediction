@@ -189,8 +189,8 @@ Involved cleaning and merging multiple raw CSV files to create a unified data-se
 
     ![A pie chart with numbers and percentages Description automatically generated](images/37466f6e1dd66bc41f26323971cadf9e.jpeg)![A graph showing different types of classes Description automatically generated with medium confidence](images/1c21c80d52ac3af3c5475634cc711073.jpeg)
 
-  - Aggregation Features: Created historical delay averages such as,
-
+  - Aggregation Features: Developed historical delay averages, to identify patterns and trends in airline operations.
+    ```
         CARRIER_HISTORICAL = captures the historical average delay rate of each carrier per month
 
         DEP_AIRPORT_HIST = captures historical average delay rates for flights departing from specific airports per month
@@ -200,20 +200,26 @@ Involved cleaning and merging multiple raw CSV files to create a unified data-se
         DAY_HISTORICAL = captures historical average delays associated with each day of the week, adjusted monthly
 
         DEP_BLOCK_HIST = captures historical average delay rate for different departure time blocks, aggregated by month
-
-  - Time Based Features: Extracted season from month and part of the day from departure and arrival time blocks
+    ```
+  - Time-Based Features: Extracted seasonal information from the month and categorized parts of the day using departure and arrival time blocks to enhance temporal analysis of flight data.
 
     ![A comparison of different colored bars Description automatically generated](images/c85203ce6491ccef94dedf1330bc73fd.jpeg)
 
     ![A group of bars with numbers Description automatically generated with medium confidence](images/109e7b83d38d2bfe4e13dd5c67060ea6.jpeg)
 
-  - Distance Based Features: Mapped distance groups to descriptive text
+  - Distance-Based Features: Mapped distance groups to descriptive labels, providing clearer insights into flight range categories for more intuitive analysis.
 
     ![A close-up of a graph Description automatically generated](images/30988bff062a1543f4a633070acbba1f.jpeg)
 
-  - Delay Based Features: Created new features by combining actual departure and arrival times with planned times to create new delay features, ELAPSED_TIME_DIFF, DEP_DELAY, ARR_DELAY
+  - Delay-Based Features: Created new features by combining actual departure and arrival times with scheduled times, generating detailed delay metrics to enhance analysis of flight performance and punctuality.
+    ```
+        ELAPSED_TIME_DIFF, DEP_DELAY, ARR_DELAY
+    ```
 
-  - Employee Features: Created employee statistics features FLT_ATTENDANTS_PER_PASS and PASSENGER_HANDLING for analyzing airline and carrier operations
+  - Employee Statistics Features: Developed features to analyze staffing and resourcing in airline and carrier operations, providing insights into workforce allocation, scheduling efficiency, and resource optimization.
+    ```
+        FLT_ATTENDANTS_PER_PASS, PASSENGER_HANDLING
+    ```
 
   - Removed highly correlated features with VIF
 
