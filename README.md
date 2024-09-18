@@ -124,19 +124,25 @@ Summary:
 
 Two distinct decision tree models were developed for comparison: the original decision tree and the hyperparameter-tuned decision tree.
 
-|                                 | **Original Decision Tree**                                                                                                                                                                                                                                                                                                  | **Hyperparameter-Tuned Decision Tree**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-|---------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Performance Analysis Comparison | - Accuracy: 98%  - Class 0: Exceptional precision (1.00) and recall (0.99)  - Class 1: High precision (0.93), good recall (0.94)  - Class 2: Good precision (0.85) and recall (0.90)  - Class 3: Strong precision (0.94) and recall (0.94)  - PR AUC: 0.88 (macro), 0.97(weighted) - ROC AUC: 0.97 (macro), 0.98 (weighted) | - Accuracy: 99%  - Class 0: Near-perfect precision (1.00) and recall (0.99)  - Class 1: Improved precision (0.95), recall (0.95)  - Class 2: Significant improvement in precision (0.92) and recall (0.91)  - Class 3: Higher precision (0.95) and recall (0.98)  - PR AUC: 0.94 (macro), 0.98 (weighted)  - ROC AUC: 0.99 (macro), 0.99 (weighted)                                                                                                                                                                                                                                                                                                 |
-| Bias vs. Variance Comparison    | - Low Bias: Captures patterns well with high performance across classes  - Moderate Variance: Shows signs of overfitting, especially in minority classes (lower precision for class 2)                                                                                                                                      | - Low Bias: Captures complex patterns well across classes  - Reduced Variance: Tuning helped balance performance between classes, especially for class 2 and class 3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| Summary                         | - Features such as 'DISTANCE' and 'DEP_DELAY' play a significant role in predictions - Good performance across majority and minority classes, but some overfitting on training data is noted.  - Ideal for quick insights with strong accuracy, but could benefit from further refinement                                   | - Tuned parameters improved performance, especially for minority classes like 2 and 3 - More balanced across all classes with enhanced generalization  - Features like 'ELAPSED_TIME_DIFF' and 'DEP_PART_OF_DAY' were instrumental in improving model performance - Tuned model shows high performance with low bias and high variance. To improve robustness and generalization, exploring ensemble methods like Random Forest is recommended. Random Forest can reduce overfitting and enhance generalization by averaging multiple decision trees. This approach will be tested next to further validate and fine-tune this model's performance. |
+|                                 | **Original Decision Tree**                                                                                                                                                                                                                                                                                    | **Hyperparameter-Tuned Decision Tree**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+|---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Performance Analysis Comparison | Accuracy: 98%  Class 0: Exceptional precision (1.00) and recall (0.99)  Class 1: High precision (0.93), good recall (0.94)  Class 2: Good precision (0.85) and recall (0.90)  Class 3: Strong precision (0.94) and recall (0.94)  PR AUC: 0.88 (macro), 0.97(weighted) ROC AUC: 0.97 (macro), 0.98 (weighted) | Accuracy: 99%  Class 0: Near-perfect precision (1.00) and recall (0.99)  Class 1: Improved precision (0.95), recall (0.95)  Class 2: Significant improvement in precision (0.92) and recall (0.91) Class 3: Higher precision (0.95) and recall (0.98)  PR AUC: 0.94 (macro), 0.98 (weighted)  ROC AUC: 0.99 (macro), 0.99 (weighted)                                                                                                                                                                                                                                                                                                        |
+| Bias vs. Variance Comparison    | Low Bias: Captures patterns well with high performance across classes  Moderate Variance: Shows signs of overfitting, especially in minority classes (lower precision for class 2)                                                                                                                            | Low Bias: Captures complex patterns well across classes  Reduced Variance: Tuning helped balance performance between classes, especially for class 2 and class 3                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Summary                         | Features such as 'DISTANCE' and 'DEP_DELAY' play a significant role in predictions Good performance across majority and minority classes, but some overfitting on training data is noted.  Ideal for quick insights with strong accuracy, but could benefit from further refinement                           | Tuned parameters improved performance, especially for minority classes like 2 and 3 More balanced across all classes with enhanced generalization  Features like 'ELAPSED_TIME_DIFF' and 'DEP_PART_OF_DAY' were instrumental in improving model performance Tuned model shows high performance with low bias and high variance. To improve robustness and generalization, exploring ensemble methods like Random Forest is recommended. Random Forest can reduce overfitting and enhance generalization by averaging multiple decision trees. This approach will be tested next to further validate and fine-tune this model's performance. |
 
 **Original Decision Tree Metrics:**
 
-![](images/09894edbd3a6c4069acfd57c53e202b9.jpeg)![](images/4ca62dff658b93b4c85e333504c139ed.jpeg)
+![](images/09894edbd3a6c4069acfd57c53e202b9.jpeg)![A graph of a graph Description automatically generated with medium confidence](images/7c9d6ac152b1ee1dccad371f07741f27.jpeg)
+
+![](images/ee6fd58461627afe328f31f6769d41c1.jpeg)![](images/f7770792090ff4217b7951243097c050.jpeg)
 
 **Hyperparameter-Tuned Decision Tree Metrics:**
 
-**![](images/58a1eff0020a42bd5b1c5f68eef8bc52.jpeg)![](images/e9dc354ffdb5822755830f19ce7cdf51.jpeg)**
+**![](images/469613d3fb244268e945b2071935a100.jpeg)**
+
+**![](images/58a1eff0020a42bd5b1c5f68eef8bc52.jpeg)![](images/b5e55d233d5c0a46e8eb5911acf298a5.jpeg)**
+
+![](images/99f6061ccf7c9fe5a33ec7de13a10e4c.jpeg)![](images/7d96cc70db530e65e353d285093f76d7.jpeg)
 
 **Random Forest Classifier:**
 
@@ -194,7 +200,7 @@ Kaggle Dataset from [here](https://www.kaggle.com/datasets/threnjen/2019-airline
 
 -   Aggregation Features: Developed historical delay averages, to identify patterns and trends in airline operations.
 
-    ```
+	```
     CARRIER_HISTORICAL = captures the historical average delay rate of each carrier per month
 
     DEP_AIRPORT_HIST = captures historical average delay rates for flights departing from specific airports per month
@@ -204,8 +210,7 @@ Kaggle Dataset from [here](https://www.kaggle.com/datasets/threnjen/2019-airline
     DAY_HISTORICAL = captures historical average delays associated with each day of the week, adjusted monthly
 
     DEP_BLOCK_HIST = captures historical average delay rate for different departure time blocks, aggregated by month
- 	```
-
+    ```
 
 -   Time-Based Features: Extracted seasonal information from the month and categorized parts of the day using departure and arrival time blocks to enhance temporal analysis of flight data.
 
@@ -219,16 +224,16 @@ Kaggle Dataset from [here](https://www.kaggle.com/datasets/threnjen/2019-airline
 
 -   Delay-Based Features: Created new features by combining actual departure and arrival times with scheduled times, generating detailed delay metrics to enhance analysis of flight performance and punctuality.
 
-    ```
+	```
     ELAPSED_TIME_DIFF, DEP_DELAY, ARR_DELAY
-    ```
+	```
 
 -   Employee Statistics Features: Developed features to analyze staffing and resourcing in airline and carrier operations, providing insights into workforce allocation, scheduling efficiency, and resource optimization.
 
 	```
     FLT_ATTENDANTS_PER_PASS, PASSENGER_HANDLING
     ```
-    
+
 -   Removed highly correlated features with VIF
 
     ![A close-up of a document Description automatically generated](images/c2f445131a51350dbad395f03b0b4aad.png)![A close-up of a number Description automatically generated](images/7ce889c572198a3b6907833d26644d84.jpeg)
