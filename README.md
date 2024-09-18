@@ -88,11 +88,14 @@ Identified the top 20 carriers with the highest median delays. For each carrier,
 
 ### ![A graph of a number of aircraft carrier names Description automatically generated](images/01857b3b3a37af99de404915b9763511.jpeg)
 
+
 ### Model Evaluation Summary and Performance Metrics:
+
 
 **Baseline Model with Dummy Classifier:**
 
 ![](images/7be16164f37e089d386ab62185feaa07.jpeg)
+
 
 **Multinomial Logistic Regression Classifier:**
 
@@ -105,7 +108,7 @@ Identified the top 20 carriers with the highest median delays. For each carrier,
 - High Variance: The model exhibits high variance by overfitting to the majority class (Class 0) and performing poorly on minority classes (Classes 1 and 2). This discrepancy indicates overfitting, as the model captures the majority class well but generalizes poorly to others.
 - High Bias: The model exhibits high bias as well, as the model’s overall performance metrics (macro-averaged) are lower, reflecting that the model is too simplistic to handle the complexities of minority classes.
   
-***Overall Summary:***
+***Summary:***
 
 - This model exhibits high variance, as evidenced by its strong performance on the majority class but weaker performance on the minority classes. This indicates overfitting to the majority class. It also shows signs of high bias, with poor performance on minority classes. To address this, we will next evaluate ensemble bagging methods, such as Random Forest, using a Decision Tree as a base model to potentially improve generalization.
 
@@ -127,7 +130,7 @@ Identified the top 20 carriers with the highest median delays. For each carrier,
 - Low Bias: The model shows low bias, as evidenced by high precision, recall, and F1-scores across all classes. It is effectively capturing the underlying patterns in the data.
 - Low Variance: The model exhibits low variance, as it generalizes well across all classes without overfitting. This is indicated by consistent performance metrics and high AUC scores.
 
-***Overall Summary:***
+***Summary:***
 
 - This model demonstrates strong performance with low bias and variance, effectively handling all classes with high accuracy and robust AUC scores. However, to further enhance model robustness and generalization, exploring ensemble methods such as a bagging model like Random Forest Classifier could be beneficial. Bagging can improve performance by reducing potential overfitting and increasing stability, particularly if the base Decision Tree model has high depth as in this case. Given this model's already high performance, the addition of an ensemble method will be explored next to help fine-tune and further validate results.
 
@@ -135,24 +138,25 @@ Identified the top 20 carriers with the highest median delays. For each carrier,
 
 ![A screenshot of a graph Description automatically generated](images/0e541f00ed4c5eec639015d2748b19dc.jpeg)
 
+
 **Random Forest Classifier:**
 
 ![A screenshot of a computer Description automatically generated](images/54ad56fdba07026f3a86f09457414d51.jpeg)
 
 ![A screenshot of a computer Description automatically generated](images/737e04ca9862678adb62a4506ec67c00.jpeg)
 
-### Interpretation of Model Evaluations:
-1. **Model Ranking**: Based on performance metrics, the models can be ranked as a) Random Forest, b) Decision Tree, c) Logistic Regression, with Random Forest being a superior model for predicting flight delays, particularly in handling class imbalance and maintaing high performance across all classes. The Decision Tree classifier also handles class imbalance much better than Logistic Regression and its performance is more consistent across classes compared to Logistic Regression.
+### Summary of Model Evaluations:
+**Model Ranking**: Based on performance metrics, the models can be ranked as a) Random Forest, b) Decision Tree, c) Logistic Regression, with Random Forest being a superior model for predicting flight delays, particularly in handling class imbalance and maintaing high performance across all classes. The Decision Tree classifier also handles class imbalance much better than Logistic Regression and its performance is more consistent across classes compared to Logistic Regression.
 
-2. **Simplicity vs. Performance**: Decision Tree performs nearly as well as Random Forest, despite being a simpler model. Its significantly better than Logistic Regression. This suggests that the decision boundaries in the data are relatively clear and can be captured by a single tree.
+**Simplicity vs. Performance**: Decision Tree performs nearly as well as Random Forest, despite being a simpler model. Its significantly better than Logistic Regression. This suggests that the decision boundaries in the data are relatively clear and can be captured by a single tree.
 
-3. **Interpretability**: Decision Trees offer better interpretability compared to Random Forest, while maintaining high performance. This could be valuable for understanding the key decision points in flight delay prediction.
+**Interpretability**: Decision Trees offer better interpretability compared to Random Forest, while maintaining high performance. This could be valuable for understanding the key decision points in flight delay prediction.
 
-4. **Robustness**: The high performance of the Decision Tree suggests that the important patterns in the data are strong and consistent
+**Robustness**: The high performance of the Decision Tree suggests that the important patterns in the data are strong and consistent
 
-5. **Feature Importance**: Analyzing the structure of the Decision Tree could provide clear insights into the most critical factors for predicting flight delays.
+**Feature Importance**: Analyzing the structure of the Decision Tree could provide clear insights into the most critical factors for predicting flight delays.
 
-6. **Deployment**: Given its high performance and interpretability, the Decision Tree could be an excellent choice for deployment, especially if model explanation is important. 
+**Deployment**: Given its high performance and interpretability, the Decision Tree could be an excellent choice for deployment, especially if model explanation is important. 
    
 ## Data Sources:
 
@@ -172,17 +176,20 @@ Kaggle Dataset from [here](https://www.kaggle.com/datasets/threnjen/2019-airline
 
 ## Methodology Used:
 
-1.  Data Preparation
+**Data Preparation:**
+Involved cleaning and merging multiple raw CSV files to create a unified data-set with \~4M entries (for training) and \~2M entries (for testing) with 34 predictor variables and 1 target variable. Raw data-set description is [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/raw_data/raw_data_documentation.txt).
 
-    Involved cleaning and merging multiple raw CSV files to create a unified data-set with \~4M entries (for training) and \~2M entries (for testing) with 34 predictor variables and 1 target variable. Raw data-set description is [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/raw_data/raw_data_documentation.txt).
+**Feature Engineering:**
 
-2.  Feature Engineering
+  - Delay Categories: Classified delays into four classes/categories.
+    a) On-time Departure and Arrival: Flights that depart and arrive within their scheduled times.
+    b) Delayed Departure, On-time Arrival: Flights that experience delays during departure but still arrive on time.
+    c) On-time Departure, Delayed Arrival: Flights that experience delays during arrival, but depart on time.
+    d) Delayed Departure and Arrival:Flights that experience delays both in departure and arrival times.
 
-    1.  Delay Categories: Classified delays into four classes/categories. a) **On-time Departure and Arrival:** Flights that depart and arrive within their scheduled times. b) **Delayed Departure, On-time Arrival:** Flights that experience delays during departure but still arrive on time or within a minimal delay window. c) **On-time Departure, Delayed Arrival**. d) **Delayed Departure and Arrival:** Flights that experience delays both in departure and arrival times.
+    ![A pie chart with numbers and percentages Description automatically generated](images/37466f6e1dd66bc41f26323971cadf9e.jpeg)![A graph showing different types of classes Description automatically generated with medium confidence](images/1c21c80d52ac3af3c5475634cc711073.jpeg)
 
-        ![A pie chart with numbers and percentages Description automatically generated](images/37466f6e1dd66bc41f26323971cadf9e.jpeg)![A graph showing different types of classes Description automatically generated with medium confidence](images/1c21c80d52ac3af3c5475634cc711073.jpeg)
-
-    2.  Aggregation Features: Created historical delay averages such as,
+  - Aggregation Features: Created historical delay averages such as,
 
         CARRIER_HISTORICAL = captures the historical average delay rate of each carrier per month
 
@@ -194,29 +201,31 @@ Kaggle Dataset from [here](https://www.kaggle.com/datasets/threnjen/2019-airline
 
         DEP_BLOCK_HIST = captures historical average delay rate for different departure time blocks, aggregated by month
 
-    3.  Time Based Features: Extracted season from month and part of the day from departure and arrival time blocks
+  - Time Based Features: Extracted season from month and part of the day from departure and arrival time blocks
 
-        ![A comparison of different colored bars Description automatically generated](images/c85203ce6491ccef94dedf1330bc73fd.jpeg)
+    ![A comparison of different colored bars Description automatically generated](images/c85203ce6491ccef94dedf1330bc73fd.jpeg)
 
-        ![A group of bars with numbers Description automatically generated with medium confidence](images/109e7b83d38d2bfe4e13dd5c67060ea6.jpeg)
+    ![A group of bars with numbers Description automatically generated with medium confidence](images/109e7b83d38d2bfe4e13dd5c67060ea6.jpeg)
 
-    4.  Distance Based Features: Mapped distance groups to descriptive text
+  - Distance Based Features: Mapped distance groups to descriptive text
 
-        ![A close-up of a graph Description automatically generated](images/30988bff062a1543f4a633070acbba1f.jpeg)
+    ![A close-up of a graph Description automatically generated](images/30988bff062a1543f4a633070acbba1f.jpeg)
 
-    5.  Delay Based Features: Created new features by combining actual departure and arrival times with planned times to create new delay features, ELAPSED_TIME_DIFF, DEP_DELAY, ARR_DELAY
+  - Delay Based Features: Created new features by combining actual departure and arrival times with planned times to create new delay features, ELAPSED_TIME_DIFF, DEP_DELAY, ARR_DELAY
 
-    6.  Employee Features: Created employee statistics features FLT_ATTENDANTS_PER_PASS and PASSENGER_HANDLING for analyzing airline and carrier operations
+  - Employee Features: Created employee statistics features FLT_ATTENDANTS_PER_PASS and PASSENGER_HANDLING for analyzing airline and carrier operations
 
-    7.  Removed highly correlated features with VIF
+  - Removed highly correlated features with VIF
 
-        ![A close-up of a document Description automatically generated](images/c2f445131a51350dbad395f03b0b4aad.png)![A close-up of a number Description automatically generated](images/7ce889c572198a3b6907833d26644d84.jpeg)
+    ![A close-up of a document Description automatically generated](images/c2f445131a51350dbad395f03b0b4aad.png)![A close-up of a number Description automatically generated](images/7ce889c572198a3b6907833d26644d84.jpeg)
 
-    8.  Engineered features with their descriptions can be found [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/dataset_documentation.txt)
+  - Engineered features with their descriptions can be found [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/dataset_documentation.txt)
 
-3. Data Pre-Processing: Missing values and outliers detected were removed. SMOTETomek was applied to just the training data-set. This combined SMOTE's oversampling of the minority classes (classes 1,2 and 3) and Tomek links' under-sampling. Categorical features were also target encoded and Numerical features were scaled.
+**Data Pre-Processing:** 
+Missing values and outliers detected were removed. SMOTETomek was applied to just the training data-set. This combined SMOTE's oversampling of the minority classes (classes 1,2 and 3) and Tomek links' under-sampling. Categorical features were also target encoded and Numerical features were scaled.
 
-4. Modeling and Evaluation: Classification algorithms used were Decision Trees, Random Forest, and multi-nomial Logistic Regression, with evaluation metrics: F1 Score, PR AUC, ROC AUC and Accuracy scores. Sequential Feature Selection was used to select 5 features from among the 34 predictor variables.
+**Modeling and Evaluation:** 
+Classification algorithms used were Decision Trees, Random Forest, and multi-nomial Logistic Regression, with evaluation metrics: F1 Score, PR AUC, ROC AUC and Accuracy scores. Feature Selection, specifically Recursive Feature Elimination (RFE) was used to select features from among the 34 predictor variables for Decision Treee and Logistic Regression Classifier.
 
 ## Project Structure
 **Data:**
