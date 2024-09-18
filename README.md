@@ -45,28 +45,28 @@ How can a multi-class classification model be developed to accurately predict fl
 
 ### Key Findings from Exploratory Data Analysis:
 
-1. **Highest Departure and Arrival delays by Carriers (2019):**
+**Highest Departure and Arrival delays by Carriers (2019):**
 Identifying the carriers with the highest delays directly relates to **Improved Customer Experience and Financial Impact**. By pinpointing these carriers, airlines can better manage customer expectations, offer targeted support, and address issues that could lead to costly disruptions and compensation claims.
 
 ![A graph showing the average departure of a flight Description automatically generated](images/bc7e179bc1861433458bf6810faa5295.jpeg)
 
 ![A graph showing the average arrival of passengers Description automatically generated](images/bed4de04b8db99bd5041395fbf01c60f.jpeg)
 
-2.  **Top 30 Congested Airports with Flight Delays (2019):**
+**Top 30 Congested Airports with Flight Delays (2019):**
 This finding supports **Enhanced Operational Efficiency and Operational Resilience**. By focusing on the most congested airports, airlines can optimize resource allocation and improve scheduling to alleviate delays at these critical points, leading to smoother operations and better crisis management.   
 
 ![A graph showing the number of airports Description automatically generated](images/2861aecffc78aed9ff14a1b9b60c99d4.jpeg)
 
 ![A map of the united states with different colored spots Description automatically generated](images/b6cf1189a8363e9708a712a22171e35a.jpeg)
 
-3.  **SMOTE Resampling on Training Data:**
+**SMOTE Resampling on Training Data:**
 Demonstrates the importance of **Data-Driven Decision Making**. By improving model performance through resampling, airlines can make more accurate predictions about delays, leading to better strategic planning and performance monitoring.
 
 ![A white background with black text Description automatically generated](images/f6d59c3a193cfd80aad2cd0a0252e569.jpeg)
 
 ![A blue and purple circle with white text Description automatically generated](images/aa0551b11ca73ae5fb6c1eda05220caf.jpeg)
 
-4.  **Delay Trends Across Distance Groups and Flight Segments (2019):**
+**Delay Trends Across Distance Groups and Flight Segments (2019):**
 This finding helps provide valuable insights into how aircraft operational schedules and the number of daily flights contributed to 2019 delays, effectively addressing **Operational Efficiency and Contingency Planning**. Understanding how delay patterns vary with flight distance and segment numbers helps airlines plan better turnaround times and manage operational schedules more effectively to prevent delays.
 
 - **Segment Number Decreases with Distance**: As flight distance increases, the number of segments (flights) decreases. Aircraft flying longer routes complete fewer flights in a day due to time constraints.
@@ -75,7 +75,7 @@ This finding helps provide valuable insights into how aircraft operational sched
 
 ![A graph of different colored lines Description automatically generated with medium confidence](images/6972858dec585d485ce8ef20325ef477.jpeg)
 
-5.  **Median Departure and Arrival Delays per Carrier (2019):**
+**Median Departure and Arrival Delays per Carrier (2019):**
 Identified the top 20 carriers with the highest median delays. For each carrier, the top 20 airports with the most significant contribution to delays were also identified. By examining median delays, airlines can gain insights into typical delay experiences and ensure compliance with regulations. Focussing on specific carriers and airports with high delays can enhance **Overall Safety and Customer Satisfaction**.
 
 - **Comprehensive Delay Analysis:** By considering both departure and arrival delays, we provide a more holistic view of 2019 airline performance and airport efficiency. Endeavor Air Inc shows a highest delay at Miami International Airport. Comair Inc follows with the next highest delay at Portland International Airport.
@@ -219,8 +219,6 @@ Involved cleaning and merging multiple raw CSV files to create a unified data-se
 
     ![A close-up of a document Description automatically generated](images/c2f445131a51350dbad395f03b0b4aad.png)![A close-up of a number Description automatically generated](images/7ce889c572198a3b6907833d26644d84.jpeg)
 
-  - Engineered features with their descriptions can be found [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/dataset_documentation.txt)
-
 **Data Pre-Processing:** 
 Missing values and outliers detected were removed. SMOTETomek was applied to just the training data-set. This combined SMOTE's oversampling of the minority classes (classes 1,2 and 3) and Tomek links' under-sampling. Categorical features were also target encoded and Numerical features were scaled.
 
@@ -278,10 +276,10 @@ This project utilized Google Colab Pro to handle computationally intensive noteb
 
 ## Next Steps:
 
-1.  Use Dimensionality Reduction and Clustering to reduce dimensions, and cluster features together to reduce the count of 34 predictors. Relying on Feature Selection techniques alone, takes a while to train any of the classification models.
+- Use Dimensionality Reduction and Clustering to reduce dimensions, and cluster features together to reduce the count of 34 predictors. Relying on Feature Selection techniques alone, takes a while to train any of the classification models.
 
-2.  Investigate features and decision rules contributing the most to predicting flight delays with both the Decision Tree and the Random Forest classifier.
+- Investigate features and decision rules contributing the most to predicting flight delays with both the Decision Tree and the Random Forest classifier.
 
-3.  Explore ensemble methods that could combine Decision Tree with other models to potentially improve performance further.
+- Explore ensemble methods that could combine Decision Tree with other models to potentially improve performance further.
 
-4.  Use StreamLit and Fast API to serve flight prediction delays via an application interface
+- Use StreamLit and Fast API to serve flight prediction delays via an application interface
