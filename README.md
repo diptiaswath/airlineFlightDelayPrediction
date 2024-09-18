@@ -218,23 +218,54 @@ Kaggle Dataset from [here](https://www.kaggle.com/datasets/threnjen/2019-airline
 
 4. Modeling and Evaluation: Classification algorithms used were Decision Trees, Random Forest, and multi-nomial Logistic Regression, with evaluation metrics: F1 Score, PR AUC, ROC AUC and Accuracy scores. Sequential Feature Selection was used to select 5 features from among the 34 predictor variables.
 
-## Outline of Project:
+## Project Structure
+**Data:**
+  - [Engineered Features Documentation](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/dataset_documentation.txt)
+  - Merged Datasets: [Train](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/train.pkl) | [Test](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/test.pkl)
+  - [Raw Data](https://github.com/diptiaswath/airlineFlightDelayPrediction/tree/main/raw_data)
+  - [Raw Data Documentation](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/raw_data/raw_data_documentation.txt)
 
-1.  Engineered Features and description [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/dataset_documentation.txt)
+**Analysis and Visualization:**
+  - [AutoViz Plots](https://github.com/diptiaswath/airlineFlightDelayPrediction/tree/main/plots) (Credit: [AutoViML/AutoViz](https://github.com/AutoViML/AutoViz))
+  - [README Images](https://github.com/diptiaswath/airlineFlightDelayPrediction/tree/main/images)
 
-2.  Merged Data for [train](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/train.pkl) and [test](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/test.pkl) is [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/tree/main/combined_data)
+**Notebooks:**
+  - [Data Preparation and Feature Engineering](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/notebooks/flight-delays-data-prep-and-eda_v1.ipynb)
+  - [Additional Data Exploration](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/notebooks/flight-delays-data-exploration_v1.ipynb)
+  - [Data Pre-processing, Modeling, and Evaluation](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/notebooks/flight-delays-data-preproc-and-modeling_v1.ipynb)
+  - [Utility Functions](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/notebooks/utils/common_functions.ipynb)
 
-3.  Raw Data used for creating merged data is [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/tree/main/raw_data)
+**Git Large File Storage(LFS):**
 
-4.  Exploratory Data Analysis plots from Auto Viz Visualization Library is [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/tree/main/plots). Credits: Seshadri, Ram (2020). GitHub - AutoViML/AutoViz: Automatically Visualize any dataset, any size with a single line of code. source code: https://github.com/AutoViML/AutoViz)
+This project uses Git Large File Storage (LFS) to handle large files efficiently. Git LFS replaces large files with text pointers inside Git, while storing the file contents on a remote server.
 
-5.  Images captured in this README are located [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/tree/main/images)
+#### To work with this repository:
+- Ensure you have Git LFS installed. If not, install it from [git-lfs.com](https://git-lfs.com).
+- After cloning the repository, run:
+      ```
+         git lfs install
+         git lfs pull
+       ```
+- When adding new large files, track them with:
+      ```
+        git lfs track "path/to/large/file"
+      ```
+- Commit and push as usual. Git LFS will handle the large files automatically. For more information on Git LFS, refer to the [official documentation](https://git-lfs.com/).
 
-6.  Jupyter notebooks, 
-a) Notebook for data preparation, merges and feature engineering from raw data-set [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/notebooks/flight-delays-data-prep-and-eda_v1.ipynb), 
-b) Notebook for data-explorations in addition to AutoViz is [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/notebooks/flight-delays-data-exploration_v1-checkpoint.ipynb), 
-c) Notebook for data pre-processing, modeling and evaluation is [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/notebooks/flight-delays-data-preproc-and-modeling_v1.ipynb)
-d) Common Utility functions used across notebooks is [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/notebooks/utils/)
+## Project Infrastructure
+This project utilized Google Colab Pro to handle computationally intensive notebook operations for data exploration and modeling. Key components include:
+
+**Notebooks:**
+- Data exploration and modeling results from Colab Pro are captured in notebooks available in this GitHub repository.
+- Direct links to key external notebooks for results: [Exploration Notebook](https://drive.google.com/file/d/136lYzQDpJ9rODL6nGHwUe3S37fY8L1c_/view?usp=drive_link), [Modeling Notebook](https://drive.google.com/file/d/1wR0uXhx9T_DXFRhNy-dKAz7XZkCIQQdy/view?usp=drive_link)
+
+**AutoViz Visualizations:**
+- Comprehensive AutoViz plots generated during data exploration are externally stored [here](https://drive.google.com/drive/folders/1N_Drv8Gvx0ANEk3fiaMAguF1JY8ptAd3?usp=drive_link) due to size constraints on GitHub.
+
+**Decision Tree Artifacts:**
+- Decision tree structures and rule sets are available in two locations:
+  - Externally: View [here](https://drive.google.com/drive/folders/1qXDYyuo2lqJBwFTBoI7KCV45SZC-w163?usp=drive_link)
+  - Locally: In the [images](https://github.com/diptiaswath/airlineFlightDelayPrediction/tree/main/images) folder of this repository
 
 ## Next Steps:
 
