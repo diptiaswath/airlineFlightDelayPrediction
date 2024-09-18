@@ -162,17 +162,17 @@ Identified the top 20 carriers with the highest median delays. For each carrier,
 
 Kaggle Dataset from [here](https://www.kaggle.com/datasets/threnjen/2019-airline-delays-and-cancellations/data), that is comprised of multiple csv's listed below.
 
-1.  Air Carrier Summary
+  - Air Carrier Summary
 
-2.  Aircraft Inventory
+  - Aircraft Inventory
 
-3.  Air Carrier employee support (Ground Crew, Flight Attendants)
+  - Air Carrier employee support (Ground Crew, Flight Attendants)
 
-4.  Flight On Time Reporting Status with Air Carrier info for 2019-2020
+  - Flight On Time Reporting Status with Air Carrier info for 2019-2020
 
-5.  Airport Weather
+  - Airport Weather
 
-6.  Airport and Carrier look-up codes
+  - Airport and Carrier look-up codes
 
 ## Methodology Used:
 
@@ -181,11 +181,15 @@ Involved cleaning and merging multiple raw CSV files to create a unified data-se
 
 **Feature Engineering:**
 
-  - Delay Categories: Classified delays into four classes/categories.
-    a) On-time Departure and Arrival: Flights that depart and arrive within their scheduled times.
-    b) Delayed Departure, On-time Arrival: Flights that experience delays during departure but still arrive on time.
-    c) On-time Departure, Delayed Arrival: Flights that experience delays during arrival, but depart on time.
-    d) Delayed Departure and Arrival:Flights that experience delays both in departure and arrival times.
+  - Delay Categories: Classified delays into four distinct categories for more granular analysis of flight performance:
+
+      Class0: On-time Departure and Arrival - Flights that depart and arrive within their scheduled times.
+
+      Class1: On-time Departure, Delayed Arrival - Flights that experience delays during arrival, but depart on time.
+    
+      Class2: Delayed Departure, On-time Arrival - Flights that experience delays during departure but still arrive on time.
+    
+      Class3: Delayed Departure and Arrival - Flights that experience delays both in departure and arrival times.
 
     ![A pie chart with numbers and percentages Description automatically generated](images/37466f6e1dd66bc41f26323971cadf9e.jpeg)![A graph showing different types of classes Description automatically generated with medium confidence](images/1c21c80d52ac3af3c5475634cc711073.jpeg)
 
