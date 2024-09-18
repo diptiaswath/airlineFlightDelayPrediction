@@ -5,7 +5,7 @@
 # ## Utility Functions used in Notebooks
 # 
 
-# In[4]:
+# In[2]:
 
 
 from sklearn.metrics import auc, classification_report, confusion_matrix, accuracy_score, recall_score, precision_score, make_scorer, average_precision_score, precision_recall_curve, roc_curve, f1_score, roc_auc_score, ConfusionMatrixDisplay,make_scorer, RocCurveDisplay, PrecisionRecallDisplay
@@ -22,7 +22,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.inspection import permutation_importance
 
 
-# In[5]:
+# In[3]:
 
 
 ####################################################################################################################################################
@@ -46,7 +46,7 @@ def cap_outliers(df_cleaned, column, lower_bound, upper_bound):
     return df_cleaned
 
 
-# In[6]:
+# In[4]:
 
 
 ####################################################################################################################################################
@@ -81,7 +81,7 @@ def handle_duplicates(df):
     return df_cleaned
 
 
-# In[7]:
+# In[5]:
 
 
 ###################################################################################################
@@ -271,7 +271,7 @@ def analyze_feature_selection(pipeline):
     return feature_ranking, selected_feature_names
 
 
-# In[9]:
+# In[6]:
 
 
 ###################################################################################################
@@ -317,7 +317,7 @@ def plot_feature_importances(classifier, selected_features):
     plt.show()
 
 
-# In[ ]:
+# In[1]:
 
 
 ###################################################################################################
@@ -356,18 +356,27 @@ def plot_feature_importances_w_permutation_importance_vs_built_in(pipeline, X_te
     # Transform X_test with the preprocessor
     X_test_transformed = preprocessor.transform(X_test)
     
-    # Get selected feature indices from the feature selector (RFE)
-    selected_features = pipeline.named_steps['feature_selection'].get_support()
-    
-    # Filter feature names based on selected features
-    selected_feature_names = [name for name, selected in zip(feature_names, selected_features) if selected]
-    
+    # Check if the pipeline has a feature selection step
+    if 'feature_selection' in pipeline.named_steps:
+        # Get selected feature indices from the feature selector (RFE)
+        selected_features = pipeline.named_steps['feature_selection'].get_support()
+
+        # Filter feature names based on selected features
+        selected_feature_names = [name for name, selected in zip(feature_names, selected_features) if selected]
+        
+        # Compute permutation importance for the selected features
+        X_test_transformed_selected = X_test_transformed[:, selected_features]
+        results = permutation_importance(model, X_test_transformed_selected, y_test, scoring='f1_weighted')
+    else:
+        # If there is no feature selection, all features are used
+        selected_feature_names = feature_names
+        
+        # Compute permutation importance for all features
+        results = permutation_importance(model, X_test_transformed, y_test, scoring='f1_weighted')
+        
     #################################################################################################
     # Permutation Feature Importance
-    #################################################################################################
-    # Compute permutation importance
-    results = permutation_importance(model, X_test_transformed[:, selected_features], y_test, scoring='f1_weighted')
-    
+    #################################################################################################    
     # Print permutation feature importances
     print("\nPermutation Feature Importances:")
     for idx, name in enumerate(selected_feature_names):
@@ -396,7 +405,7 @@ def plot_feature_importances_w_permutation_importance_vs_built_in(pipeline, X_te
     
     # Plot Classifier's built-in feature importances
     plt.figure(figsize=(15, 6))
-    sorted_idx = ct_importances.argsort()
+    sorted_idx = c_importances.argsort()
     plt.barh(range(len(c_importances)), c_importances[sorted_idx])
     plt.yticks(range(len(c_importances)), [selected_feature_names[i] for i in sorted_idx])
     plt.xlabel("Feature Importance")
@@ -404,6 +413,9 @@ def plot_feature_importances_w_permutation_importance_vs_built_in(pipeline, X_te
     plt.tight_layout()
     plt.show()
 
-# Example usage:
-# plot_feature_importances(pipeline, X_test, y_test)
+
+# In[ ]:
+
+
+
 
