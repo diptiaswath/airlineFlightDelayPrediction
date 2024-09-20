@@ -50,7 +50,7 @@ By addressing these areas, airlines can significantly improve operational effici
 
 How can a multi-class classification model be developed to accurately predict flight delays by assessing multiple factors, including departure and arrival delays, using data related to flight status, weather conditions, air traffic, aircraft specifics, and ground operations?
 
-### Key Findings from Exploratory Data Analysis:
+### Key Findings from Exploratory Data Analysis
 
 **Highest Departure and Arrival delays by Carriers (2019):** Identifying the carriers with the highest delays directly relates to **improved customer experience and financial impact**. By pinpointing these carriers, airlines can better manage customer expectations, offer targeted support, and address issues that could lead to costly disruptions and compensation claims.
 
@@ -97,7 +97,7 @@ How can a multi-class classification model be developed to accurately predict fl
 [TODO]
 
 
-### Model Evaluation Summary and Performance Metrics:
+### Model Evaluation Summary and Performance Metrics
 
 The following classification models were evaluated for predicting flight delays, listed in order:
 
@@ -183,7 +183,7 @@ Below is a comparison of the feature importances of the top 5 features across th
 
 #### Detailed evaluation metrics for each model can be found in the Appendix.
 
-## Data Sources:
+## Data Sources
 
 Kaggle Dataset from [here](https://www.kaggle.com/datasets/threnjen/2019-airline-delays-and-cancellations/data), that is comprised of multiple csv's listed below.
 
@@ -199,7 +199,7 @@ Kaggle Dataset from [here](https://www.kaggle.com/datasets/threnjen/2019-airline
 
 -   Airport and Carrier look-up codes
 
-## Methodology Used:
+## Methodology Used
 
 **Data Preparation:** Involved cleaning and merging multiple raw CSV files to create a unified data-set with \~4M entries (for training) and \~2M entries (for testing) with 34 predictor variables and 1 target variable. Raw data-set description is [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/raw_data/raw_data_documentation.txt).
 
@@ -337,11 +337,11 @@ This project utilized Google Colab Pro to handle computationally intensive noteb
 
 -   [TODO for Random Forest Artifacts]
 
-## Key Insights from Phase 1 to Phase 2 of Project:
+## Key Insights from Phase 1 to Phase 2 of Project
 
 [TODO]
 
-## Next Steps:
+## Next Steps
 
 -   Feature Engineering: Use Dimensionality Reduction and Clustering to reduce dimensions, and cluster features together to reduce the count of 34 predictors. Relying on Feature Selection techniques alone, takes a while to train any of the classification models.
 
@@ -351,7 +351,7 @@ This project utilized Google Colab Pro to handle computationally intensive noteb
 
 ## 
 
-## Appendix:
+## Appendix
 
 ### Baseline Dummy Classifier
 
@@ -435,6 +435,6 @@ This project utilized Google Colab Pro to handle computationally intensive noteb
 
 ![A graph with different colored lines Description automatically generated](images/1d114229f6f79bc9f6ff6955cb6cdc09.jpeg)
 
-## References:
+## References
 
 TODO
