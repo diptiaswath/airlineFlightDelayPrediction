@@ -350,7 +350,7 @@ This project utilized Google Colab Pro to handle computationally intensive noteb
 
 ##### Baseline Dummy Classifier
 
-![A close up of text Description automatically generated](2aec35d27247a8af89c469f4ccdf742b.jpeg)
+![A close up of text Description automatically generated](images/2aec35d27247a8af89c469f4ccdf742b.jpeg)
 
 ##### Multinomial Logistic Regression Classifier
 
