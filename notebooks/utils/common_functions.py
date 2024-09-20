@@ -81,7 +81,7 @@ def handle_duplicates(df):
     return df_cleaned
 
 
-# In[5]:
+# In[1]:
 
 
 ###################################################################################################
@@ -89,7 +89,7 @@ def handle_duplicates(df):
 ###################################################################################################
 
 # Generic Function to get additional metrics given an estimator, test feature set and target labels
-def evaluate_model(estimator, Xt_test, yt_test, threshold=0.5):
+def evaluate_model(estimator, Xt_test, yt_test, X_val, y_val, threshold=0.5):
     """
     Evaluates a fitted decision tree pipeline using various performance metrics, including
     Precision-Recall, ROC AUC curves, and confusion matrix, and displays plots.
@@ -102,6 +102,14 @@ def evaluate_model(estimator, Xt_test, yt_test, threshold=0.5):
     Returns:
     dict: A dictionary with various evaluation metrics and confusion matrix details.
     """
+    # Evaluate on validation set
+    val_pred = estimator.predict(X_val)
+    val_f1 = f1_score(y_val, val_pred, average='weighted')
+    val_accuracy = accuracy_score(y_val, val_pred)
+    
+    print(f"Validation F1 Score: {val_f1}")
+    print(f"Validation Accuracy: {val_accuracy}")
+    
     # Predict class labels for multiclass prediction
     y_pred = estimator.predict(Xt_test)
 
@@ -203,8 +211,10 @@ def evaluate_model(estimator, Xt_test, yt_test, threshold=0.5):
 
     # Return evaluation metrics in a dictionary
     results = {
-        'f1_score_macro'   : test_f1,
-        'f1_score_weighted': test_f1_weighted,
+        'val_f1_score'      : val_f1,
+        'val_accuracy_score': val_accuracy,
+        'f1_score_macro'    : test_f1,
+        'f1_score_weighted' : test_f1_weighted,
         'accuracy_score'  : test_accuracy,
         'pr_auc_macro'    : pr_auc_macro,
         'roc_auc_macro'   : roc_auc_macro,

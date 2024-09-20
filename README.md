@@ -1,6 +1,6 @@
 # SkyFlow: AI-Powered Flight Delay Prediction for Optimized Airline Operations
 
-Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| [Email](mailto:dipti.aswath@gmail.com)
+Dipti Aswath | [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) | [Email](mailto:dipti.aswath@gmail.com)
 
 ## Executive Summary
 
@@ -66,9 +66,9 @@ How can a multi-class classification model be developed to accurately predict fl
 
 **SMOTE Resampling on Training Data:** Demonstrates the importance of **data-driven decision making**. By improving model performance through resampling, airlines can make more accurate predictions about delays, leading to better strategic planning and performance monitoring.
 
-![A white background with black text Description automatically generated](images/f6d59c3a193cfd80aad2cd0a0252e569.jpeg)
+![A screenshot of a computer program Description automatically generated](images/7c15fd0c16055e95bdd20642651cba48.jpeg)
 
-![A blue and purple circle with white text Description automatically generated](images/aa0551b11ca73ae5fb6c1eda05220caf.jpeg)
+![A diagram of a color scheme Description automatically generated with medium confidence](images/32b8b2fb96200ded01effd80e1fd6eea.jpeg)
 
 **Delay Trends Across Distance Groups and Flight Segments (2019):** This finding helps provide valuable insights into how aircraft operational schedules and the number of daily flights contributed to 2019 delays, effectively addressing **operational efficiency and contingency planning**. Understanding how delay patterns vary with flight distance and segment numbers helps airlines plan better turnaround times and manage operational schedules more effectively to prevent delays.
 
@@ -90,79 +90,93 @@ How can a multi-class classification model be developed to accurately predict fl
 
 ### ![A graph of a number of aircraft carrier names Description automatically generated](images/01857b3b3a37af99de404915b9763511.jpeg)
 
+### 
+
 ### Model Evaluation Summary and Performance Metrics:
 
-#### Baseline Model with Dummy Classifier:
+The following classification models were evaluated for predicting flight delays, listed in order:
 
-![](images/7be16164f37e089d386ab62185feaa07.jpeg)
+-   Dummy Classifier (baseline)
 
-#### Multinomial Logistic Regression Classifier:
+-   Multinomial Logistic Regression
 
-Performance Summary:
+-   Decision Trees with hyperparameter tuning
 
--   Class 0: Excellent precision (0.99), high recall (0.92), and top F1-score (0.95). The model performs very well on this majority class.
+-   Random Forest
 
--   Classes 1 & 2: Low precision and F1-scores (0.50 and 0.64 for Class 1; 0.37 and 0.59 for Class 2) indicate many false positives. These classes have high recall, suggesting the model detects them but struggles with classification accuracy.
+-   XGBoost
 
--   Class 3: Balanced performance with a good F1-score (0.81), showing moderate effectiveness.
+-   CatBoost
 
-Bias vs. Variance Analysis Summary:
+-   Voting Classifier (ensemble of XGBoost and Random Forest)
 
--   High Variance: The model exhibits high variance by overfitting to the majority class (Class 0) and performing poorly on minority classes (Classes 1 and 2). This discrepancy indicates overfitting, as the model captures the majority class well but generalizes poorly to others.
+-   Bagging Classifier (with XGBoost as the base estimator)
 
--   High Bias: The model exhibits high bias as well, as the model’s overall performance metrics (macro-averaged) are lower, reflecting that the model is too simplistic to handle the complexities of minority classes.
+#### Model Evaluation Metrics
 
-Summary:
+The bagging, boosting, and ensemble models outperformed the baseline, Logistic Regression, and Decision Tree models. Below is a comparison table highlighting their key metrics.
 
--   This model exhibits high variance, as evidenced by its strong performance on the majority class but weaker performance on the minority classes. This indicates overfitting to the majority class. It also shows signs of high bias, with poor performance on minority classes. To address this, we will next evaluate ensemble bagging methods, such as Random Forest, using a Decision Tree as a base model to potentially improve generalization.
+![A screenshot of a table Description automatically generated](images/982ba2e0dc6cdf775b20735da22f6571.jpeg)
 
-![A screenshot of a computer Description automatically generated](images/b2ad7f137a2c3862172b05c834951282.jpeg)
+##### Key Observations:
 
-![A close-up of a graph Description automatically generated](images/d237759ac6cabbb60b6fdc4520186927.jpeg)
+-   High Accuracy: All models achieve accuracy above 75%, with XGBoost and Bagging Classifier reaching 78.23%.
 
-#### Decision Tree Classifier
+-   Good F1 Scores: F1 scores are consistently above 0.70, which is solid for a multi-class problem.
 
-Two distinct decision tree models were developed for comparison: the original decision tree and the hyperparameter-tuned decision tree.
+-   Ensemble Methods: Voting Classifier and Bagging Classifier show improvements over individual models, demonstrating effective use of ensemble techniques.
 
-|                                 | **Original Decision Tree**                                                                                                                                                                                                                                                                                    | **Hyperparameter-Tuned Decision Tree**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-|---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Performance Analysis Comparison | Accuracy: 98%. Class 0: Exceptional precision (1.00) and recall (0.99).  Class 1: High precision (0.93), good recall (0.94).  Class 2: Good precision (0.85) and recall (0.90).  Class 3: Strong precision (0.94) and recall (0.94).  PR AUC: 0.88 (macro), 0.97(weighted). ROC AUC: 0.97 (macro), 0.98 (weighted) | Accuracy: 99%.  Class 0: Near-perfect precision (1.00) and recall (0.99).  Class 1: Improved precision (0.95), recall (0.95).  Class 2: Significant improvement in precision (0.92) and recall (0.91). Class 3: Higher precision (0.95) and recall (0.98).  PR AUC: 0.94 (macro), 0.98 (weighted).  ROC AUC: 0.99 (macro), 0.99 (weighted)                                                                                                                                                                                                                                                                                                        |
-| Bias vs. Variance Comparison    | Low Bias: Captures patterns well with high performance across classes.  Moderate Variance: Shows signs of overfitting, especially in minority classes (lower precision for class 2).                                                                                                                            | Low Bias: Captures complex patterns well across classes.  Reduced Variance: Tuning helped balance performance between classes, especially for class 2 and class 3.                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| Summary Comparison              | Features such as 'DISTANCE' and 'DEP_DELAY' play a significant role in predictions. Good performance across majority and minority classes, but some overfitting on training data is noted.  Ideal for quick insights with strong accuracy, but could benefit from further refinement.                          | Tuned parameters improved performance, especially for minority classes like 2 and 3 More balanced across all classes with enhanced generalization.  Features like 'ELAPSED_TIME_DIFF' and 'DEP_PART_OF_DAY' were instrumental in improving model performance. Tuned model shows high performance with low bias and high variance. To improve robustness and generalization, exploring ensemble methods like Random Forest is recommended. Random Forest can reduce overfitting and enhance generalization by averaging multiple decision trees. This approach will be tested next to further validate and fine-tune this model's performance. |
+-   Consistent Feature Importance: There's consistency in important features across models.
 
-**Original Decision Tree Metrics:**
+-   Weather Integration: The importance of PRCP (precipitation) shows successful integration of weather data into the models.
 
-![](images/09894edbd3a6c4069acfd57c53e202b9.jpeg)![A graph of a graph Description automatically generated with medium confidence](images/7c9d6ac152b1ee1dccad371f07741f27.jpeg)
+-   Temporal Features: The models effectively utilize time-based features (DEP_PART_OF_DAY, ARR_PART_OF_DAY, DAY_OF_WEEK), which are crucial for flight delay prediction.
 
-![](images/ee6fd58461627afe328f31f6769d41c1.jpeg)![](images/f7770792090ff4217b7951243097c050.jpeg)
+-   Class Imbalance: All models struggle with classes 1 and 2 (delayed departure or delayed arrivals) because of the class imbalance.
 
-**Hyperparameter-Tuned Decision Tree Metrics:**
+##### Model Deployment Recommendations:
 
-**![](images/469613d3fb244268e945b2071935a100.jpeg)**
+**Primary Model:** XGBoost is recommended as the primary choice for deployment due to its overall superior performance:
 
-**![](images/58a1eff0020a42bd5b1c5f68eef8bc52.jpeg)![](images/b5e55d233d5c0a46e8eb5911acf298a5.jpeg)**
+1.  Highest accuracy (0.7823)
 
-![](images/99f6061ccf7c9fe5a33ec7de13a10e4c.jpeg)![](images/7d96cc70db530e65e353d285093f76d7.jpeg)
+2.  Best weighted ROC AUC (0.69)
 
-**Random Forest Classifier:**
+3.  Strong performance in weighted PR AUC (0.73)
 
-![A screenshot of a computer Description automatically generated](images/54ad56fdba07026f3a86f09457414d51.jpeg)
+4.  Good balance between bias and variance
 
-![A screenshot of a computer Description automatically generated](images/737e04ca9862678adb62a4506ec67c00.jpeg)
+**Backup/Ensemble Model:** Voting Classifier (XGBoost + Random Forest) – This model should be considered as a backup or complementary model:
 
-### Summary of Model Evaluations:
+1.  Nearly matches XGBoost's performance (accuracy: 0.7806)
 
-**Model Ranking**: Based on performance metrics, the models can be ranked as a) Random Forest, b) Decision Tree, c) Logistic Regression, with Random Forest being a superior model for predicting flight delays, particularly in handling class imbalance and maintaing high performance across all classes. The Decision Tree classifier also handles class imbalance much better than Logistic Regression and its performance is more consistent across classes compared to Logistic Regression.
+2.  Provides robustness through ensemble learning
 
-**Simplicity vs. Performance**: Decision Tree performs nearly as well as Random Forest, despite being a simpler model. Its significantly better than Logistic Regression. This suggests that the decision boundaries in the data are relatively clear and can be captured by a single tree.
+#### Feature Importances across Models
 
-**Interpretability**: Decision Trees offer better interpretability compared to Random Forest, while maintaining high performance. This could be valuable for understanding the key decision points in flight delay prediction.
+Below is a comparison of the feature importances of the top 5 features across the three models (Random Forest, XGBoost, and CatBoost) using both permutation importance and built-in feature importance methods. Note, that the Voting Classifier and Bagging Classifier did not have separate feature importances as they are ensemble methods.
 
-**Robustness**: The high performance of the Decision Tree suggests that the important patterns in the data are strong and consistent
+![A table with numbers and letters Description automatically generated](images/776433fe867aa03d244182db8f6659ee.jpeg)
 
-**Feature Importance**: Analyzing the structure of the Decision Tree could provide clear insights into the most critical factors for predicting flight delays.
+##### Key Observations:
 
-**Deployment**: Given its high performance and interpretability, the Decision Tree could be an excellent choice for deployment, especially if model explanation is important.
+-   DEP_PART_OF_DAY and PRCP are consistently important across all models and methods.
+
+-   Temporal features (DEP_PART_OF_DAY, ARR_PART_OF_DAY, DAY_OF_WEEK) are crucial for all models.
+
+-   Built-in importances tend to favor categorical features more than permutation importances.
+
+-   CatBoost's built-in importances show much larger values compared to other models.
+
+##### Feature Selection Recommendations:
+
+-   Prioritize temporal features (DEP_PART_OF_DAY, ARR_PART_OF_DAY, DAY_OF_WEEK) and weather data (PRCP).
+
+-   Consider SEGMENT_NUMBER and PREVIOUS_AIRPORT as potentially important features.
+
+-   Interactions between high-importance features, especially temporal and weather features play a key role.
+
+#### Detailed evaluation metrics for each model can be found in the Appendix.
 
 ## Data Sources:
 
@@ -200,16 +214,16 @@ Kaggle Dataset from [here](https://www.kaggle.com/datasets/threnjen/2019-airline
 
 -   Aggregation Features: Developed historical delay averages, to identify patterns and trends in airline operations.
 
-	```
-    CARRIER_HISTORICAL = captures the historical average delay rate of each carrier per month
+    ```
+        CARRIER_HISTORICAL = captures the historical average delay rate of each carrier per month
 
-    DEP_AIRPORT_HIST = captures historical average delay rates for flights departing from specific airports per month
+        DEP_AIRPORT_HIST = captures historical average delay rates for flights departing from specific airports per month
 
-    PREV_AIRPORT_HIST = captures historical average delay rate for the airport from which the aircraft arrived before the current departure
+        PREV_AIRPORT_HIST = captures historical average delay rate for the airport from which the aircraft arrived before the current departure
 
-    DAY_HISTORICAL = captures historical average delays associated with each day of the week, adjusted monthly
+        DAY_HISTORICAL = captures historical average delays associated with each day of the week, adjusted monthly
 
-    DEP_BLOCK_HIST = captures historical average delay rate for different departure time blocks, aggregated by month
+        DEP_BLOCK_HIST = captures historical average delay rate for different departure time blocks, aggregated by month
     ```
 
 -   Time-Based Features: Extracted seasonal information from the month and categorized parts of the day using departure and arrival time blocks to enhance temporal analysis of flight data.
@@ -224,21 +238,22 @@ Kaggle Dataset from [here](https://www.kaggle.com/datasets/threnjen/2019-airline
 
 -   Delay-Based Features: Created new features by combining actual departure and arrival times with scheduled times, generating detailed delay metrics to enhance analysis of flight performance and punctuality.
 
-	```
-    ELAPSED_TIME_DIFF, DEP_DELAY, ARR_DELAY
-	```
-
+    ```
+        ELAPSED_TIME_DIFF, DEP_DELAY, ARR_DELAY
+    ```
 -   Employee Statistics Features: Developed features to analyze staffing and resourcing in airline and carrier operations, providing insights into workforce allocation, scheduling efficiency, and resource optimization.
 
-	```
-    FLT_ATTENDANTS_PER_PASS, PASSENGER_HANDLING
-	```
+    ```
+        FLT_ATTENDANTS_PER_PASS, PASSENGER_HANDLING
+    ```
 
 -   Removed highly correlated features with VIF
 
     ![A close-up of a document Description automatically generated](images/c2f445131a51350dbad395f03b0b4aad.png)![A close-up of a number Description automatically generated](images/7ce889c572198a3b6907833d26644d84.jpeg)
 
 **Data Pre-Processing:** Missing values and outliers detected were removed. SMOTETomek was applied to just the training data-set. This combined SMOTE's oversampling of the minority classes (classes 1,2 and 3) and Tomek links' under-sampling. Categorical features were also target encoded and Numerical features were scaled.
+
+**Train, Validation and Test Split:** TODO
 
 **Modeling and Evaluation:** Classification algorithms used were Decision Trees, Random Forest, and multi-nomial Logistic Regression, with evaluation metrics: F1 Score, PR AUC, ROC AUC and Accuracy scores. Feature Selection, specifically Recursive Feature Elimination (RFE) was used to select features from among the 34 predictor variables for Decision Treee and Logistic Regression Classifier.
 
@@ -270,7 +285,7 @@ Kaggle Dataset from [here](https://www.kaggle.com/datasets/threnjen/2019-airline
 
 -   [Utility Functions](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/notebooks/utils/common_functions.ipynb)
 
-**Git Large File Storage(LFS):**
+**Git Large File Storage (LFS):**
 
 This project uses Git Large File Storage (LFS) to handle large files efficiently. Git LFS replaces large files with text pointers inside Git, while storing the file contents on a remote server.
 
@@ -278,9 +293,21 @@ This project uses Git Large File Storage (LFS) to handle large files efficiently
 
 -   Ensure you have Git LFS installed. If not, install it from [git-lfs.com](https://git-lfs.com).
 
--   After cloning the repository, run: `        git lfs install        git lfs pull      `
+-   After cloning the repository, run: 
 
--   When adding new large files, track them with: `       git lfs track "path/to/large/file"     `
+     ```
+        git lfs install 
+     ```        
+
+     ``` 
+        git lfs pull 
+     ```       
+
+-   When adding new large files, track them with: 
+
+    ``` 
+        git lfs track "path/to/large/file" 
+    ```     
 
 -   Commit and push as usual. Git LFS will handle the large files automatically. For more information on Git LFS, refer to the [official documentation](https://git-lfs.com/).
 
@@ -298,7 +325,7 @@ This project utilized Google Colab Pro to handle computationally intensive noteb
 
 -   Comprehensive AutoViz plots generated during data exploration are externally stored [here](https://drive.google.com/drive/folders/1N_Drv8Gvx0ANEk3fiaMAguF1JY8ptAd3?usp=drive_link) due to size constraints on GitHub.
 
-**Decision Tree Artifacts:**
+**Decision Tree and Random Forest Artifacts**
 
 -   Decision tree structures and rule sets are available in two locations:
 
@@ -306,12 +333,106 @@ This project utilized Google Colab Pro to handle computationally intensive noteb
 
     -   Locally: In the [images](https://github.com/diptiaswath/airlineFlightDelayPrediction/tree/main/images) folder of this repository
 
+-   [TODO for Random Forest Artifacts]
+
+## Key Insights from Phase 1 to Phase 2 of Project:
+
+[TODO]
+
 ## Next Steps:
 
--   Use Dimensionality Reduction and Clustering to reduce dimensions, and cluster features together to reduce the count of 34 predictors. Relying on Feature Selection techniques alone, takes a while to train any of the classification models.
+-   Feature Engineering: Use Dimensionality Reduction and Clustering to reduce dimensions, and cluster features together to reduce the count of 34 predictors. Relying on Feature Selection techniques alone, takes a while to train any of the classification models.
 
--   Investigate features and decision rules contributing the most to predicting flight delays with both the Decision Tree and the Random Forest classifier.
-
--   Explore ensemble methods that could combine Decision Tree with other models to potentially improve performance further.
+-   Explore Neural Network models to see if performance can be improved further.
 
 -   Use StreamLit and Fast API to serve flight prediction delays via an application interface
+
+## 
+
+## Appendix:
+
+##### Baseline Dummy Classifier
+
+![A close up of text Description automatically generated](2aec35d27247a8af89c469f4ccdf742b.jpeg)
+
+##### Multinomial Logistic Regression Classifier
+
+[TODO]
+
+##### Decision Tree – Original vs. Hyper-Parameter tuned Decision Tree
+
+###### Original Decision Tree
+
+[Plot Tree](https://drive.google.com/file/d/1AvAqaliIrgzmXr1LmOCu2uv6v6OrsQI2/view?usp=sharing)
+
+![A white background with black text Description automatically generated](images/77ab7f3e5ef8d36ed993e15f11e7226e.jpeg)![A graph with numbers and lines Description automatically generated](images/d0f13a55a92f0376086088325196e7d5.jpeg)
+
+![A graph with blue bars Description automatically generated with medium confidence](images/a9b349364f50c4d2f665d6a214590012.jpeg)
+
+![A graph with blue bars Description automatically generated](images/11ba2e72c2422566a02869972f772039.jpeg)
+
+###### Hyper-Parameter tuned Decision Tree
+
+[Decision Tree Rules](https://drive.google.com/file/d/1-6eoRoPugySwIHnwEcrTfpa8EjB3Xszw/view?usp=sharing) and [Plot Tree](https://drive.google.com/file/d/1mqMruSxPR5IsCufHfEU3r7Ub3R5cfNXJ/view?usp=sharing)
+
+![A white screen with black text Description automatically generated](images/0f44b18d0cb398b119362290c86b1114.jpeg)
+
+![A white background with black text Description automatically generated](images/aafab2976f08077b4014b20907262762.jpeg)
+
+![A graph with numbers and lines Description automatically generated with medium confidence](images/d697216b2004a5ff95060ebc3bb3ff2f.jpeg)
+
+![A graph with blue and white bars Description automatically generated](images/7ca78baddc60550730961bbeeeb95d04.jpeg)
+
+![A graph of blue and white bars Description automatically generated](images/d97feba3aef5d8542319dbefe5e4588c.jpeg)
+
+##### Comparison of Baseline, Logistic Regression and Decision Tree Models
+
+[TODO]
+
+##### Random Forest Classifier
+
+[TODO – PDP plots]
+
+![A white background with black text Description automatically generated](images/e6de2f9a1e1a6f8912fb4ab041af2632.jpeg)
+
+![A graph of a function Description automatically generated with medium confidence](images/9bf88c314e07a595ca565b23eb092b97.jpeg)
+
+##### ![A graph with blue and white bars Description automatically generated](images/c086a3ca4aa026d85d1d0e38620f60fd.jpeg)
+
+![A graph showing a blue line Description automatically generated with medium confidence](images/8aecfeb9f46121197f064db6ed5a18d6.jpeg)
+
+##### XGBoost Classifier
+
+![A white rectangular object with black text Description automatically generated](images/2492e4ae3697ec2dc042d81563959a0e.jpeg)
+
+##### ![A graph of different colored lines Description automatically generated](images/2e0bbae1d5a59326d93c8edc84f2a64b.jpeg)
+
+##### ![A graph showing the number of permutation Description automatically generated](images/53b4bf4dc28e1cc30d3215d1590a481e.jpeg)
+
+![A graph with blue and white bars Description automatically generated](images/6cd31b8898e421e6d820afa098e0ac81.jpeg)
+
+##### CatBoost Classifier
+
+![A white background with black text Description automatically generated](images/7322e9426f6ab8cced6f808f35cd4c7c.jpeg)
+
+![A graph of a line Description automatically generated with medium confidence](images/d12fa06e5e9f7c0f698c283f06683cda.jpeg)
+
+![A graph showing a number of permutation Description automatically generated](images/f9f7727ca863b07399c8e7990ab53ea3.jpeg)
+
+##### ![A graph with blue and white stripes Description automatically generated with medium confidence](images/6e2dab857efe347a027c0e7eebbab5d1.jpeg)
+
+##### Voting Classifier (ensemble of XGBoost and Random Forest)
+
+![A screenshot of a computer Description automatically generated](images/a3ac9dbc99e4e37616ea55a6f5aad927.jpeg)
+
+##### ![A graph of a function Description automatically generated with medium confidence](images/9ed1f4fe95fc91ec07ed558abfbb37b9.jpeg)
+
+##### Bagging Classifier (with XGBoost as the base estimator)
+
+![A screenshot of a computer Description automatically generated](images/53177516b24b88a1db76e5748aac4088.jpeg)
+
+![A graph with different colored lines Description automatically generated](images/1d114229f6f79bc9f6ff6955cb6cdc09.jpeg)
+
+## References:
+
+TODO
