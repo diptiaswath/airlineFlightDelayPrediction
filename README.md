@@ -92,7 +92,7 @@ How can a multi-class classification model be developed to accurately predict fl
 
 [TODO - Add more key findings]
 
-#### From Data Exploration to Action: Key Recommendations: 
+### Actionable Insights: Recommendations from Exploratory Data Analysis 
 
 [TODO]
 
