@@ -118,11 +118,11 @@ The bagging, boosting, and ensemble models outperformed the baseline, Logistic R
 
 ![A screenshot of a table Description automatically generated](images/982ba2e0dc6cdf775b20735da22f6571.jpeg)
 
-##### Key Observations:
+##### Key Observations with Model Evaluations:
 
 -   High Accuracy: All models achieve accuracy above 75%, with XGBoost and Bagging Classifier reaching 78.23%.
 
--   Good F1 Scores: F1 scores are consistently above 0.70, which is solid for a multi-class problem.
+-   Good F1 Scores: F1 scores are consistently above 0.70.
 
 -   Ensemble Methods: Voting Classifier and Bagging Classifier show improvements over individual models, demonstrating effective use of ensemble techniques.
 
@@ -136,7 +136,7 @@ The bagging, boosting, and ensemble models outperformed the baseline, Logistic R
 
 ##### Model Deployment Recommendations:
 
-**Primary Model:** XGBoost is recommended as the primary choice for deployment due to its overall superior performance:
+Primary Model: XGBoost is recommended as the primary choice for deployment due to its overall superior performance:
 
 1.  Highest accuracy (0.7823)
 
@@ -146,7 +146,7 @@ The bagging, boosting, and ensemble models outperformed the baseline, Logistic R
 
 4.  Good balance between bias and variance
 
-**Backup/Ensemble Model:** Voting Classifier (XGBoost + Random Forest) – This model should be considered as a backup or complementary model:
+Backup/Ensemble Model: Voting Classifier (XGBoost + Random Forest) – This model should be considered as a backup or complementary model:
 
 1.  Nearly matches XGBoost's performance (accuracy: 0.7806)
 
@@ -158,7 +158,7 @@ Below is a comparison of the feature importances of the top 5 features across th
 
 ![A table with numbers and letters Description automatically generated](images/776433fe867aa03d244182db8f6659ee.jpeg)
 
-##### Key Observations:
+##### Key Observations with Features used by models:
 
 -   DEP_PART_OF_DAY and PRCP are consistently important across all models and methods.
 
@@ -297,9 +297,6 @@ This project uses Git Large File Storage (LFS) to handle large files efficiently
 
      ```
         git lfs install 
-     ```        
-
-     ``` 
         git lfs pull 
      ```       
 
