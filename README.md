@@ -348,17 +348,17 @@ This project utilized Google Colab Pro to handle computationally intensive noteb
 
 ## Appendix:
 
-##### Baseline Dummy Classifier
+### Baseline Dummy Classifier
 
 ![A close up of text Description automatically generated](images/2aec35d27247a8af89c469f4ccdf742b.jpeg)
 
-##### Multinomial Logistic Regression Classifier
+### Multinomial Logistic Regression Classifier
 
 [TODO]
 
-##### Decision Tree – Original vs. Hyper-Parameter tuned Decision Tree
+### Decision Tree – Original vs. Hyper-Parameter tuned Decision Tree
 
-###### Original Decision Tree
+#### Original Decision Tree
 
 [Plot Tree](https://drive.google.com/file/d/1AvAqaliIrgzmXr1LmOCu2uv6v6OrsQI2/view?usp=sharing)
 
@@ -368,7 +368,7 @@ This project utilized Google Colab Pro to handle computationally intensive noteb
 
 ![A graph with blue bars Description automatically generated](images/11ba2e72c2422566a02869972f772039.jpeg)
 
-###### Hyper-Parameter tuned Decision Tree
+#### Hyper-Parameter tuned Decision Tree
 
 [Decision Tree Rules](https://drive.google.com/file/d/1-6eoRoPugySwIHnwEcrTfpa8EjB3Xszw/view?usp=sharing) and [Plot Tree](https://drive.google.com/file/d/1mqMruSxPR5IsCufHfEU3r7Ub3R5cfNXJ/view?usp=sharing)
 
@@ -382,11 +382,11 @@ This project utilized Google Colab Pro to handle computationally intensive noteb
 
 ![A graph of blue and white bars Description automatically generated](images/d97feba3aef5d8542319dbefe5e4588c.jpeg)
 
-##### Comparison of Baseline, Logistic Regression and Decision Tree Models
+### Comparison of Baseline, Logistic Regression and Decision Tree Models
 
 [TODO]
 
-##### Random Forest Classifier
+### Random Forest Classifier
 
 [TODO – PDP plots]
 
@@ -394,21 +394,21 @@ This project utilized Google Colab Pro to handle computationally intensive noteb
 
 ![A graph of a function Description automatically generated with medium confidence](images/9bf88c314e07a595ca565b23eb092b97.jpeg)
 
-##### ![A graph with blue and white bars Description automatically generated](images/c086a3ca4aa026d85d1d0e38620f60fd.jpeg)
+![A graph with blue and white bars Description automatically generated](images/c086a3ca4aa026d85d1d0e38620f60fd.jpeg)
 
 ![A graph showing a blue line Description automatically generated with medium confidence](images/8aecfeb9f46121197f064db6ed5a18d6.jpeg)
 
-##### XGBoost Classifier
+### XGBoost Classifier
 
 ![A white rectangular object with black text Description automatically generated](images/2492e4ae3697ec2dc042d81563959a0e.jpeg)
 
-##### ![A graph of different colored lines Description automatically generated](images/2e0bbae1d5a59326d93c8edc84f2a64b.jpeg)
+![A graph of different colored lines Description automatically generated](images/2e0bbae1d5a59326d93c8edc84f2a64b.jpeg)
 
-##### ![A graph showing the number of permutation Description automatically generated](images/53b4bf4dc28e1cc30d3215d1590a481e.jpeg)
+![A graph showing the number of permutation Description automatically generated](images/53b4bf4dc28e1cc30d3215d1590a481e.jpeg)
 
 ![A graph with blue and white bars Description automatically generated](images/6cd31b8898e421e6d820afa098e0ac81.jpeg)
 
-##### CatBoost Classifier
+### CatBoost Classifier
 
 ![A white background with black text Description automatically generated](images/7322e9426f6ab8cced6f808f35cd4c7c.jpeg)
 
@@ -416,15 +416,15 @@ This project utilized Google Colab Pro to handle computationally intensive noteb
 
 ![A graph showing a number of permutation Description automatically generated](images/f9f7727ca863b07399c8e7990ab53ea3.jpeg)
 
-##### ![A graph with blue and white stripes Description automatically generated with medium confidence](images/6e2dab857efe347a027c0e7eebbab5d1.jpeg)
+![A graph with blue and white stripes Description automatically generated with medium confidence](images/6e2dab857efe347a027c0e7eebbab5d1.jpeg)
 
-##### Voting Classifier (ensemble of XGBoost and Random Forest)
+### Voting Classifier (ensemble of XGBoost and Random Forest)
 
 ![A screenshot of a computer Description automatically generated](images/a3ac9dbc99e4e37616ea55a6f5aad927.jpeg)
 
-##### ![A graph of a function Description automatically generated with medium confidence](images/9ed1f4fe95fc91ec07ed558abfbb37b9.jpeg)
+![A graph of a function Description automatically generated with medium confidence](images/9ed1f4fe95fc91ec07ed558abfbb37b9.jpeg)
 
-##### Bagging Classifier (with XGBoost as the base estimator)
+### Bagging Classifier (with XGBoost as the base estimator)
 
 ![A screenshot of a computer Description automatically generated](images/53177516b24b88a1db76e5748aac4088.jpeg)
 
