@@ -88,9 +88,14 @@ How can a multi-class classification model be developed to accurately predict fl
 
 ![A screenshot of a graph Description automatically generated](images/fcb34c72898e35e1a0bfb19cd5d85403.jpeg)
 
-### ![A graph of a number of aircraft carrier names Description automatically generated](images/01857b3b3a37af99de404915b9763511.jpeg)
+![A graph of a number of aircraft carrier names Description automatically generated](images/01857b3b3a37af99de404915b9763511.jpeg)
 
-### 
+[TODO - Add more key findings]
+
+#### From Data Exploration to Action: Key Recommendations: 
+
+[TODO]
+
 
 ### Model Evaluation Summary and Performance Metrics:
 
