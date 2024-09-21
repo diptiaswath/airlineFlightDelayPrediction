@@ -121,7 +121,26 @@ The following classification models were evaluated for predicting flight delays,
 
 The bagging, boosting, and ensemble models outperformed the baseline, Logistic Regression, and Decision Tree models. Below is a comparison table highlighting their key metrics.
 
-![A screenshot of a table Description automatically generated](images/982ba2e0dc6cdf775b20735da22f6571.jpeg)
+| Aspect | Random Forest | XGBoost | CatBoost | Voting Classifier | Bagging Classifier |
+|--------|---------------|---------|----------|-------------------|-------------------|
+| **Performance Analysis** |
+| Accuracy | 0.7648 | 0.7823 | 0.7516 | 0.7806 | 0.7823 |
+| F1 Score | 0.7163 | 0.7122 | 0.6980 | 0.7170 | 0.7118 |
+| Macro-avg PR AUC | 0.32 | 0.33 | 0.30 | 0.33 | 0.34 |
+| Macro-avg ROC AUC | 0.64 | 0.67 | 0.62 | 0.67 | 0.67 |
+| **Bias and Variance Analysis** |
+| Bias | Low | Low | Slightly higher | Low | Low |
+| Variance | Moderate to High | Controlled | Controlled | Reduced | Reduced |
+| **Top Feature Importances** |
+| 1 | PREVIOUS_AIRPORT | DEP_PART_OF_DAY | DEP_PART_OF_DAY | N/A | N/A |
+| 2 | ARR_PART_OF_DAY | PRCP | DAY_OF_WEEK | N/A | N/A |
+| 3 | DEP_PART_OF_DAY | ARR_PART_OF_DAY | ARR_PART_OF_DAY | N/A | N/A |
+| 4 | DAY_OF_WEEK | DAY_OF_WEEK | PRCP | N/A | N/A |
+| 5 | DISTANCE | SEGMENT_NUMBER | SEASON | N/A | N/A |
+| **Overall Summary** |
+| Strengths | Good balance of bias-variance, captures complex patterns | Highest accuracy, good at reducing bias and variance | Handles categorical variables well | Combines strengths of RF and XGBoost | Reduces variance of XGBoost |
+| Weaknesses | Slightly lower accuracy than XGBoost | May overfit if not tuned properly | Slightly underperforms compared to others | No significant improvement over XGBoost | No significant improvement over XGBoost |
+| Best for | Baseline model, feature importance | Overall best performer | Handling categorical data | Robust predictions | Reducing variance in XGBoost |
 
 ##### Key Observations with Model Evaluations:
 
@@ -161,7 +180,20 @@ Backup/Ensemble Model: Voting Classifier (XGBoost + Random Forest) – This mode
 
 Below is a comparison of the feature importances of the top 5 features across the three models (Random Forest, XGBoost, and CatBoost) using both permutation importance and built-in feature importance methods. Note, that the Voting Classifier and Bagging Classifier did not have separate feature importances as they are ensemble methods.
 
-![A table with numbers and letters Description automatically generated](images/776433fe867aa03d244182db8f6659ee.jpeg)
+| Rank | Random Forest |  XGBoost  |  CatBoost  |
+|------|---------------|-----------|------------|
+| **Permutation Importance** |
+| 1 | PREVIOUS_AIRPORT (0.0528) | PRCP (0.0127) | DEP_PART_OF_DAY (0.0097) |
+| 2 | SEGMENT_NUMBER (0.0200) | DEP_PART_OF_DAY (0.0081) | PRCP (0.0090) |
+| 3 | DEP_PART_OF_DAY (0.0184) | DEP_AIRPORT_HIST (0.0069) | ARR_PART_OF_DAY (0.0090) |
+| 4 | PRCP (0.0149) | SEGMENT_NUMBER (0.0044) | PREVIOUS_AIRPORT (0.0055) |
+| 5 | ARR_PART_OF_DAY (0.0059) | DEP_BLOCK_HIST (0.0046) | SEGMENT_NUMBER (0.0054) |
+| **Built-in Feature Importance** |
+| 1 | ARR_PART_OF_DAY (0.0700) | DEP_PART_OF_DAY (0.2657) | DEP_PART_OF_DAY (25.6763) |
+| 2 | DEP_PART_OF_DAY (0.0653) | PRCP (0.1854) | DAY_OF_WEEK (24.5003) |
+| 3 | DAY_OF_WEEK (0.0517) | ARR_PART_OF_DAY (0.1109) | ARR_PART_OF_DAY (23.9617) |
+| 4 | PREVIOUS_AIRPORT (0.0467) | DAY_OF_WEEK (0.0979) | PRCP (10.2009) |
+| 5 | DISTANCE (0.0466) | SEGMENT_NUMBER (0.0376) | SEASON (3.3861) |
 
 ##### Key Observations with Features used by models:
 
