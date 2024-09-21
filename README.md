@@ -390,9 +390,26 @@ This project utilized Google Colab Pro to handle computationally intensive noteb
 
 ![A graph of blue and white bars Description automatically generated](images/d97feba3aef5d8542319dbefe5e4588c.jpeg)
 
-### Comparison of Baseline, Logistic Regression and Decision Tree Models
+### Comparison of Logistic Regression and Decision Tree Models
 
-[TODO]
+| Aspect | Decision Tree | Hyper-Parameter Tuned Decision Tree | Logistic Regression |
+|--------|---------------|-------------------------------------|---------------------|
+| **Performance Analysis** |
+| F1 Score | 0.6561 | 0.6577 | 0.5637 |
+| Accuracy | 0.6486 | 0.6480 | 0.4922 |
+| Macro Avg F1 | 0.28 | 0.28 | 0.28 |
+| Weighted Avg F1 | 0.64 | 0.64 | 0.59 |
+| Macro-averaged ROC AUC | 0.53 | 0.53 | 0.60 |
+| Weighted ROC AUC | 0.55 | 0.55 | 0.62 |
+| **Bias vs. Variance** |
+| Bias | Moderate | Moderate | High |
+| Variance | High | High | Low |
+| **Selected Features** | Top 5 by permutation importance:<br>1. DEP_AIRPORT_HIST<br>2. DEP_PART_OF_DAY<br>3. AIRLINE_AIRPORT_FLIGHTS_MONTH<br>4. AIRLINE_FLIGHTS_MONTH<br>5. CONCURRENT_FLIGHTS<br><br>Top 5 by built-in importance:<br>1. DAY_OF_WEEK<br>2. DEP_PART_OF_DAY<br>3. DISTANCE<br>4. AIRLINE_FLIGHTS_MONTH<br>5. AIRLINE_AIRPORT_FLIGHTS_MONTH | Top 5 by permutation importance:<br>1. DEP_PART_OF_DAY<br>2. ARR_PART_OF_DAY<br>3. PREVIOUS_AIRPORT<br>4. DEP_AIRPORT_HIST<br>5. AIRLINE_FLIGHTS_MONTH<br><br>Top 5 by built-in importance:<br>1. DEP_PART_OF_DAY<br>2. DISTANCE<br>3. DAY_OF_WEEK<br>4. AIRLINE_FLIGHTS_MONTH<br>5. AIRLINE_AIRPORT_FLIGHTS_MONTH | Selected features:<br>1. SEGMENT_NUMBER<br>2. PREV_AIRPORT_HIST<br>3. DEP_BLOCK_HIST<br>4. MONTH<br>5. DAY_OF_WEEK<br>6. CARRIER_NAME<br>7. PREVIOUS_AIRPORT<br>8. DEP_PART_OF_DAY<br>9. ARR_PART_OF_DAY<br>10. DISTANCE_GROUP_DESC |
+| **Feature Importance Analysis** | - DEP_AIRPORT_HIST and DEP_PART_OF_DAY are consistently important<br>- AIRLINE_FLIGHTS_MONTH and AIRLINE_AIRPORT_FLIGHTS_MONTH show high importance<br>- DAY_OF_WEEK has high built-in importance but lower permutation importance | - DEP_PART_OF_DAY and ARR_PART_OF_DAY are highly important<br>- PREVIOUS_AIRPORT and DEP_AIRPORT_HIST are significant<br>- DISTANCE is important in built-in metrics but less so in permutation importance | - Includes unique features like SEGMENT_NUMBER and DEP_BLOCK_HIST<br>- Emphasizes categorical features (CARRIER_NAME, DISTANCE_GROUP_DESC)<br>- Includes both departure and arrival related features |
+| **Overall Summary** |
+| Strengths | - Good overall accuracy<br>- Balanced performance across classes<br>- Interpretable<br>- Relies heavily on historical and time-based features<br>- Considers airline and airport-specific metrics | - Slightly improved F1 score<br>- Similar performance to base DT<br>- Potential for better generalization<br>- Emphasizes time of day features<br>- Balances historical, geographical, and time-based features<br>- Includes weather features | - Better at identifying minority classes<br>- Lower variance<br>- Good ROC AUC scores<br>- Uses a mix of flight-specific and general features<br>- Includes categorical features not present in tree models<br>- Focuses on historical patterns and time-based features |
+| Weaknesses | - Poor performance on minority classes<br>- Potential overfitting<br>- DAY_OF_WEEK importance varies between methods | - Still struggles with minority classes<br>- Complex model | - Lower overall accuracy<br>- Struggles with imbalanced data |
+| Best suited for | - When interpretability is important<br>- When historical and time-based features are crucial | - When slightly better performance is needed<br>- When some overfitting is acceptable<br>- When a balance of various feature types is desired | - When probabilistic outputs are needed<br>- When a simpler model is preferred<br>- When categorical features are important |
 
 ### Random Forest Classifier
 
