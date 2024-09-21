@@ -119,7 +119,7 @@ The following classification models were evaluated for predicting flight delays,
 
 #### Model Evaluation Metrics
 
-The bagging, boosting, and ensemble models outperformed the baseline, Logistic Regression, and Decision Tree models. Below is a comparison table highlighting their key metrics.
+The bagging, boosting, and ensemble models outperformed the baseline, Logistic Regression, and Decision Tree models, as observed [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/README.md#comparison-of-logistic-regression-and-decision-tree-models). Below is a comparison table highlighting the key metrics of the ensemble models.
 
 | Aspect | Random Forest | XGBoost | CatBoost | Voting Classifier | Bagging Classifier |
 |--------|---------------|---------|----------|-------------------|-------------------|
