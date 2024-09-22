@@ -146,7 +146,7 @@ The bagging, boosting, and ensemble models outperformed the baseline, Logistic R
 
 ##### Key Observations with Model Evaluations:
 
--   High Accuracy: All models achieve accuracy above 75%, with XGBoost and Bagging Classifier reaching 78.23%.
+-   High Accuracy: All models achieve accuracy above 75%, with XGBoost and Voting Classifier reaching 78%.
 
 -   Good F1 Scores: F1 scores are consistently above 0.70.
 
