@@ -115,7 +115,7 @@ The following classification models were evaluated for predicting flight delays,
 
 -   Voting Classifier (ensemble of XGBoost and Random Forest)
 
--   Bagging Classifier (with XGBoost as the base estimator)
+-   Bagging Classifier (with hyper parameter tuned Decision Tree as the base estimator)
 
 #### Model Evaluation Metrics
 
@@ -124,12 +124,12 @@ The bagging, boosting, and ensemble models outperformed the baseline, Logistic R
 | Aspect | Random Forest | XGBoost | CatBoost | Voting Classifier | Bagging Classifier |
 |--------|---------------|---------|----------|-------------------|-------------------|
 | **Performance Analysis** |
-| Validation Accuracy | 0.7648 | 0.7823 | 0.7516 | 0.7806 | 0.7823 |
-| Accuracy | 0.7668 | 0.7820 | 0.7577 | 0.7809 | 0.7808 | 0.7822
-| Validation F1 Score | 0.7163 | 0.7122 | 0.6980 | 0.7170 | 0.7118 |
-| Weighted F1 score | 0.7142 | 0.7094 | 0.6967 | 0.7139 | 0.7088 |
-| Weighted PR AUC   | 0.7180 | 0.7313 | 0.7014 | 0.7305 | 0.7322 | 
-| Weighted ROC AUC | 0.66 | 0.69 | 0.63 | 0.68 | 0.69 |
+| Validation Accuracy | 0.7648 | 0.7823 | 0.7516 | 0.7806 | 0.7635 |
+| Accuracy | 0.7668 | 0.7820 | 0.7577 | 0.7809 | 0.7808 | 0.7633
+| Validation F1 Score | 0.7163 | 0.7122 | 0.6980 | 0.7170 | 0.7158 |
+| Weighted F1 score | 0.7142 | 0.7094 | 0.6967 | 0.7139 | 0.7102 |
+| Weighted PR AUC   | 0.7180 | 0.7313 | 0.7014 | 0.7305 | 0.7159 | 
+| Weighted ROC AUC | 0.66 | 0.69 | 0.63 | 0.68 | 0.66 |
 | **Bias and Variance Analysis** |
 | Bias | Low | Low | Slightly higher | Low | Low |
 | Variance | Moderate to High | Controlled | Controlled | Reduced | Reduced |
