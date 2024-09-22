@@ -140,9 +140,9 @@ The bagging, boosting, and ensemble models outperformed the baseline, Logistic R
 | 4 | DAY_OF_WEEK | DAY_OF_WEEK | PRCP | N/A | N/A |
 | 5 | DISTANCE | SEGMENT_NUMBER | SEASON | N/A | N/A |
 | **Overall Summary** |
-| Strengths | Good balance of bias-variance, captures complex patterns | Highest accuracy, good at reducing bias and variance | Handles categorical variables well | Combines strengths of RF and XGBoost | Reduces variance of XGBoost |
-| Weaknesses | Slightly lower accuracy than XGBoost | May overfit if not tuned properly | Slightly underperforms compared to others | No significant improvement over XGBoost | No significant improvement over XGBoost |
-| Best for | Baseline model, feature importance | Overall best performer | Handling categorical data | Robust predictions | Reducing variance in XGBoost |
+| Strengths | Good balance of bias-variance, captures complex patterns | Highest accuracy, good at reducing bias and variance | Handles categorical variables well | Combines strengths of RF and XGBoost | Reduces variance of Decision Trees |
+| Weaknesses | Slightly lower accuracy than XGBoost | May overfit if not tuned properly | Slightly underperforms compared to others | No significant improvement over XGBoost | Lower accuracy than XGBoost and Voting Classifier |
+| Best for | Baseline model, feature importance | Overall best performer | Handling categorical data | Robust predictions | Reducing variance in DecisionTrees |
 
 ##### Key Observations with Model Evaluations:
 
