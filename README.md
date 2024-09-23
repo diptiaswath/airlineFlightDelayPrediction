@@ -429,12 +429,12 @@ This project utilized Google Colab Pro to handle computationally intensive noteb
 | Aspect | Decision Tree | Hyper-Parameter Tuned Decision Tree | Logistic Regression |
 |--------|---------------|-------------------------------------|---------------------|
 | **Performance Analysis** |
-| F1 Score | 0.6561 | 0.6577 | 0.5637 |
-| Accuracy | 0.6486 | 0.6480 | 0.4922 |
-| Macro Avg F1 | 0.28 | 0.28 | 0.28 |
-| Weighted Avg F1 | 0.64 | 0.64 | 0.59 |
-| Macro-averaged ROC AUC | 0.53 | 0.53 | 0.60 |
-| Weighted ROC AUC | 0.55 | 0.55 | 0.62 |
+| Validation Accuracy | 0.6486 | 0.6480 | 0.4922 |
+| Accuracy | 0.63 | 0.6225 | 0.5258 |
+| Validation F1 Score | 0.6561 | 0.6577 | 0.5637 |
+| Weighted F1 Score | 0.6436 | 0.6403 | 0.5875 |
+| Weighted PR AUC | 0.6453 | 0.6460 | 0.6881 |
+| Weighted ROC AUC | 0.5468 | 0.5487 | 0.6216 |
 | **Bias vs. Variance** |
 | Bias | Moderate | Moderate | High |
 | Variance | High | High | Low |
