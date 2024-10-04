@@ -1013,6 +1013,47 @@ def adjust_class_2_threshold(classifier, X_test, y_test):
     return class_2_f1_adjusted, class_2_f1
 
 
+# In[8]:
+
+
+###################################################################################################
+# Generic functions to persist and load models with joblib
+###################################################################################################
+get_ipython().system('pip install joblib')
+from joblib import dump, load
+
+
+def save_model(model, filename):
+    """
+    Save a model to a .pkl file using joblib.
+
+    Parameters:
+        model: Trained model to be saved.
+        filename: Name of the file to save the model to (should end with .pkl).
+    """
+    dump(model, filename)
+    print(f"Model saved to {filename}")
+
+
+def load_model(filename):
+    """
+    Load a model from a .pkl file using joblib.
+
+    Parameters:
+        filename: Name of the file to load the model from (should end with .pkl).
+
+    Returns:
+        Loaded model.
+    """
+    model = load(filename)
+    print(f"Model loaded from {filename}")
+    return model
+
+# Example usage:
+# save_model(your_model, 'model.pkl')
+# loaded_model = load_model('model.pkl')
+
+
 # In[ ]:
 
 
