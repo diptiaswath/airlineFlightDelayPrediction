@@ -6,7 +6,6 @@ import warnings
 warnings.filterwarnings("ignore")
 import os
 
-
 # SkyFlow is a StreamLit Application deployed on EC2 instance
 # http://ec2-18-219-112-73.us-east-2.compute.amazonaws.com:8501
 st.set_page_config(page_title="SkyFlow: AI-Powered Flight Delay Predictor", page_icon="✈️", layout="wide")
@@ -65,7 +64,6 @@ with left_column:
     categorical_fields = {
         'MONTH': ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
         'DAY_OF_WEEK': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-       # 'CARRIER_NAME': ['American Airlines', 'Delta', 'United', 'Southwest', 'JetBlue', 'Alaska Airlines', 'Spirit Airlines', 'Frontier Airlines'],
         'SEASON': ['Winter', 'Spring', 'Summer', 'Fall'],
         'DEP_PART_OF_DAY': ['Early Morning & Late Night', 'Morning', 'Afternoon', 'Evening', 'Night'],
         'ARR_PART_OF_DAY': ['Early Morning & Late Night', 'Morning', 'Afternoon', 'Evening', 'Night'],
@@ -126,20 +124,6 @@ with right_column:
 
     if predict_button:
         try:
-            #user_inputs_dict_temp = dict()
-
-            #for field in ['MONTH', 'DAY_OF_WEEK', 'DISTANCE', 'DISTANCE_GROUP_DESC', 'SEGMENT_NUMBER',
-            #  'CONCURRENT_FLIGHTS', 'NUMBER_OF_SEATS', 'CARRIER_NAME', 'AIRLINE_FLIGHTS_MONTH',
-            #  'AIRLINE_AIRPORT_FLIGHTS_MONTH', 'AVG_MONTHLY_PASS_AIRPORT', 'FLT_ATTENDANTS_PER_PASS',
-            #  'GROUND_SERV_PER_PASS', 'PLANE_AGE', 'DEPARTING_AIRPORT', 'LATITUDE', 'LONGITUDE',
-            #  'PREVIOUS_AIRPORT', 'PREVIOUS_DURATION', 'PRCP', 'SNOW', 'SNWD', 'TMAX', 'AWND',
-            #  'CARRIER_HISTORICAL', 'DEP_AIRPORT_HIST', 'PREV_AIRPORT_HIST', 'DAY_HISTORICAL', 
-            #  'DEP_BLOCK_HIST', 'SEASON', 'DEP_PART_OF_DAY', 'ARR_PART_OF_DAY', 'FLIGHT_DURATION', 
-            #  'FLIGHT_DURATION_CATEGORY', 'PREVIOUS_DURATION_CATEGORY', 
-            #  'PREVIOUS_ARR_DELAY', 'PREVIOUS_DISTANCE']:
-            #    user_inputs_dict_temp[field] = 0.0
-
-            # print(json.dumps(user_inputs_dict, indent=2))
             # FastAPI server deployed to local instance
             # response = requests.post("http://127.0.0.1:8000/predict", json=user_inputs_dict)
 
@@ -166,4 +150,12 @@ with right_column:
         st.info("Share your Flight Journey and click 'Predict Flight Delay' to see results.")
 
 st.markdown("---")
-st.markdown("Developed by [Dipti Aswath]. GitHub Repo [https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/README.md].")
+st.markdown(
+    """
+    <div style="text-align: center; font-size: 16px; color: #4CAF50;">
+        <p>✨ Developed with passion by <strong>Dipti Aswath</strong></p>
+        <p>🔗 Explore the code on my <a href="https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/README.md" style="color: #1E90FF;">GitHub Repository</a></p>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
