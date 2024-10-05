@@ -92,33 +92,30 @@ with left_column:
     for field in numeric_fields:
         user_inputs_dict[field] = st.number_input(field, step=0.1)
 
-    # Add airport selection
-    # Get the directory of the current script
+    # Get directory of the current script
     current_dir = os.path.dirname(os.path.abspath(__file__))
 
-    # Get the parent directory
+    # Get parent directory
     parent_dir = os.path.abspath(os.path.join(current_dir, '..'))
 
-    # Add airports selection
+    # Add airports and airlines selection
     airports_csv_path = os.path.join(parent_dir, 'raw_data', 'airports_list.csv')
     print(f"Attempting to read CSV from: {airports_csv_path}")
-
-    # Try to load the CSV file
+    airlines_csv_path = os.path.join(parent_dir, 'raw_data', 'CARRIER_DECODE.csv')
+    print(f"Attempting to read CSV from: {airlines_csv_path}")
+    
+    # Load csvs
     try:
         airports = pd.read_csv(airports_csv_path)
+        airlines = pd.read_csv(airlines_csv_path) 
         print("Columns in airports DataFrame:", airports.columns)
+        print("Columns in airlines DataFrame:", airlines.columns)
     except FileNotFoundError as e:
-        st.error(f"Error: Could not find the airports_list.csv file. {str(e)}")
+        st.error(f"Error: Could not find either airlines or airports_list.csv file. {str(e)}")
         st.stop()
    
-    print(airports.columns)
     user_inputs_dict['DEPARTING_AIRPORT'] = st.selectbox('DEPARTING_AIRPORT', airports['DISPLAY_AIRPORT_NAME'])
     user_inputs_dict['PREVIOUS_AIRPORT'] = st.selectbox('PREVIOUS_AIRPORT', airports['DISPLAY_AIRPORT_NAME'])
-
-    # Add airline selection
-    airlines_csv_path = os.path.join(parent_dir, 'raw_data', 'CARRIER_DECODE.csv')
-    airlines = pd.read_csv(airlines_csv_path) 
-    print(airlines.columns)
     user_inputs_dict['CARRIER_NAME'] = st.selectbox('CARRIER_NAME', airlines['CARRIER_NAME'])
 
     predict_button = st.button("Predict Flight Delay")
