@@ -1013,11 +1013,11 @@ def adjust_class_2_threshold(classifier, X_test, y_test):
     return class_2_f1_adjusted, class_2_f1
 
 
-# In[8]:
+# In[9]:
 
 
 ###################################################################################################
-# Generic functions to persist and load models with joblib
+# Generic functions to persist and load models and category encoders with joblib
 ###################################################################################################
 get_ipython().system('pip install joblib')
 from joblib import dump, load
@@ -1049,9 +1049,18 @@ def load_model(filename):
     print(f"Model loaded from {filename}")
     return model
 
-# Example usage:
-# save_model(your_model, 'model.pkl')
-# loaded_model = load_model('model.pkl')
+
+def save_cat_encoder(encoder, filename):
+    """
+    Save the category encoder to a .pkl file using joblib.
+    
+    Parameters:
+        cat_encoder: Category Encoder to be saved.
+        filename: Name of the file to save the encoder to (should end with .pkl).
+    
+    """
+    dump(encoder, filename)
+    print(f"Category encoder saved to {filename}")
 
 
 # In[ ]:

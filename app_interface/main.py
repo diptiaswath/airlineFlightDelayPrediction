@@ -4,33 +4,38 @@ from pydantic import BaseModel
 import joblib
 import pandas as pd
 
+import category_encoders as ce
+import warnings
+warnings.filterwarnings("ignore")
+
 import os
 # print(f'Current directory: {os.getcwd()}')
 
 
 # FastAPI endpoint accessible on EC2 instance: http://ec2-18-219-112-73.us-east-2.compute.amazonaws.com:8000/docs#
 skyflow_model = joblib.load("../model_artifacts/best_xg_pipeline.pkl")
+skyflow_encoder = joblib.load("../model_artifacts/target_encoder.pkl")
 skyflow = FastAPI()
 
 class InputVars(BaseModel):
-    MONTH: float
-    DAY_OF_WEEK: float
+    MONTH: str
+    DAY_OF_WEEK: str
     DISTANCE: float
-    DISTANCE_GROUP_DESC: float
+    DISTANCE_GROUP_DESC: str
     SEGMENT_NUMBER: int
     CONCURRENT_FLIGHTS: int
     NUMBER_OF_SEATS: int
-    CARRIER_NAME: float
+    CARRIER_NAME: str
     AIRLINE_FLIGHTS_MONTH: int
     AIRLINE_AIRPORT_FLIGHTS_MONTH: int
     AVG_MONTHLY_PASS_AIRPORT: int
     FLT_ATTENDANTS_PER_PASS: float
     GROUND_SERV_PER_PASS: float
     PLANE_AGE: int
-    DEPARTING_AIRPORT: float
+    DEPARTING_AIRPORT: str
     LATITUDE: float
     LONGITUDE: float
-    PREVIOUS_AIRPORT: float
+    PREVIOUS_AIRPORT: str
     PREVIOUS_DURATION: float
     PRCP: float
     SNOW: float
@@ -42,13 +47,13 @@ class InputVars(BaseModel):
     PREV_AIRPORT_HIST: float
     DAY_HISTORICAL: float
     DEP_BLOCK_HIST: float
-    SEASON: float
-    DEP_PART_OF_DAY: float
-    ARR_PART_OF_DAY: float
+    SEASON: str
+    DEP_PART_OF_DAY: str
+    ARR_PART_OF_DAY: str
     FLIGHT_DURATION: float
-    FLIGHT_DURATION_CATEGORY: float
+    FLIGHT_DURATION_CATEGORY: str
     PREVIOUS_DURATION: float
-    PREVIOUS_DURATION_CATEGORY: float
+    PREVIOUS_DURATION_CATEGORY: str
     PREVIOUS_ARR_DELAY: float
     PREVIOUS_DISTANCE: float
 
@@ -112,9 +117,24 @@ def prime_skyflow():
 def predict_flight_delays(predictors: InputVars):
     pred_input = predictors.model_dump()
     print(pred_input)
-    prediction = skyflow_model.predict(pd.DataFrame([pred_input]))
+    
+    # Convert to DataFrame
+    input_df = pd.DataFrame([pred_input])
+    
+    # Apply target encoding to string variables
+    string_columns = ['MONTH', 'DAY_OF_WEEK', 'CARRIER_NAME', 'DEPARTING_AIRPORT', 'PREVIOUS_AIRPORT', 'PREVIOUS_DURATION_CATEGORY',
+                      'SEASON', 'DEP_PART_OF_DAY', 'ARR_PART_OF_DAY', 'DISTANCE_GROUP_DESC', 'FLIGHT_DURATION_CATEGORY']
+    # Filter string_columns to include only those present in input_df
+    columns_to_encode = [col for col in string_columns if col in input_df.columns]
+        
+    # Apply encoding to all relevant columns 
+    input_df[columns_to_encode] = skyflow_encoder.transform(input_df[columns_to_encode])
+    
+    # Make prediction
+    prediction = skyflow_model.predict(input_df)
     print(prediction)
-    return int(prediction)
+    
+    return int(prediction[0])
 
 
 
