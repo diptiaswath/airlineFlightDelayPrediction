@@ -154,7 +154,7 @@ with right_column:
             if response.text == '2':
                 st.error("⚠️ Both departure and arrival time of the flight are likely to be delayed.")
             elif response.text == '1':
-                st.warning("🕒 Flight departure might be delayed, but arrival is expected to be on-time.")
+                st.warning("🕒 Either Flight departure or Flight arrival is predicted to be delayed.")
             else:
                 st.success("✅ Flight is predicted to be on-time for both departure and arrival.")
             
