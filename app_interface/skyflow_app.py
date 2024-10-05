@@ -1,6 +1,8 @@
 import streamlit as st
 import requests
 
+# SkyFlow is a StreamLit Application deployed on EC2 instance ec2-18-219-112-73.us-east-2.compute.amazonaws.com
+# Access SkyFlow at http://ec2-18-219-112-73.us-east-2.compute.amazonaws.com:8051
 st.title("SkyFlow: AI-Powered Flight Delay Predictor")
 
 # HTML content

@@ -5,8 +5,10 @@ import joblib
 import pandas as pd
 
 import os
-print(f'Current directory: {os.getcwd()}')
+# print(f'Current directory: {os.getcwd()}')
 
+
+# FastAPI endpoint accessible on EC2 instance: http://ec2-18-219-112-73.us-east-2.compute.amazonaws.com:8000/docs#
 skyflow_model = joblib.load("../model_artifacts/best_xg_pipeline.pkl")
 skyflow = FastAPI()
 
@@ -91,7 +93,7 @@ def prime_skyflow():
             }
             p {
                 color: #0066cc;
-                font-size: 1.5rem; /* Increased size for better readability */
+                font-size: 1.5rem;
             }
         </style>
     </head>
