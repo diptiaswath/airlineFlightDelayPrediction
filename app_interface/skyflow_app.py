@@ -153,7 +153,7 @@ st.markdown("---")
 st.markdown(
     """
     <div style="text-align: center; font-size: 16px; color: #4CAF50;">
-        <p>✨ Developed with passion by <strong>Dipti Aswath</strong></p>
+        <p>✨ Developed by <a href="https://www.linkedin.com/in/dipti-aswath-60b9131/"><strong>Dipti Aswath</strong></a></p>
         <p>🔗 Explore the code on my <a href="https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/README.md" style="color: #1E90FF;">GitHub Repository</a></p>
     </div>
     """,
