@@ -95,12 +95,14 @@ with left_column:
 
     # Add airport selection
     airports = pd.read_csv('../raw_data/airports_list.csv') 
-    user_inputs_dict['DEPARTING_AIRPORT'] = st.selectbox('Departing Airport', airports['DISPLAY_AIRPORT_NAME'])
-    user_inputs_dict['PREVIOUS_AIRPORT'] = st.selectbox('Previous Airport', airports['DISPLAY_AIRPORT_NAME'])
+    print(airports.columns)
+    user_inputs_dict['DEPARTING_AIRPORT'] = st.selectbox('DEPARTING_AIRPORT', airports['DISPLAY_AIRPORT_NAME'])
+    user_inputs_dict['PREVIOUS_AIRPORT'] = st.selectbox('PREVIOUS_AIRPORT', airports['DISPLAY_AIRPORT_NAME'])
 
     # Add airline selection
     airlines = pd.read_csv('../raw_data/CARRIER_DECODE.csv') 
-    user_inputs_dict['CARRIER_NAME'] = st.selectbox('Airline', airlines['CARRIER_NAME'])
+    print(airlines.columns)
+    user_inputs_dict['CARRIER_NAME'] = st.selectbox('CARRIER_NAME', airlines['CARRIER_NAME'])
 
     predict_button = st.button("Predict Flight Delay")
 
