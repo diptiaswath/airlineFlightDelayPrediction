@@ -4,9 +4,8 @@ import pandas as pd
 import json
 import warnings
 warnings.filterwarnings("ignore")
-
 import os
-print(f'Current directory: {os.getcwd()}')
+
 
 # SkyFlow is a StreamLit Application deployed on EC2 instance
 # http://ec2-18-219-112-73.us-east-2.compute.amazonaws.com:8501
@@ -94,13 +93,31 @@ with left_column:
         user_inputs_dict[field] = st.number_input(field, step=0.1)
 
     # Add airport selection
-    airports = pd.read_csv('../raw_data/airports_list.csv') 
+    # Get the directory of the current script
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # Get the parent directory
+    parent_dir = os.path.abspath(os.path.join(current_dir, '..'))
+
+    # Add airports selection
+    airports_csv_path = os.path.join(parent_dir, 'raw_data', 'airports_list.csv')
+    print(f"Attempting to read CSV from: {airports_csv_path}")
+
+    # Try to load the CSV file
+    try:
+        airports = pd.read_csv(airports_csv_path)
+        print("Columns in airports DataFrame:", airports.columns)
+    except FileNotFoundError as e:
+        st.error(f"Error: Could not find the airports_list.csv file. {str(e)}")
+        st.stop()
+   
     print(airports.columns)
     user_inputs_dict['DEPARTING_AIRPORT'] = st.selectbox('DEPARTING_AIRPORT', airports['DISPLAY_AIRPORT_NAME'])
     user_inputs_dict['PREVIOUS_AIRPORT'] = st.selectbox('PREVIOUS_AIRPORT', airports['DISPLAY_AIRPORT_NAME'])
 
     # Add airline selection
-    airlines = pd.read_csv('../raw_data/CARRIER_DECODE.csv') 
+    airlines_csv_path = os.path.join(parent_dir, 'raw_data', 'CARRIER_DECODE.csv')
+    airlines = pd.read_csv(airlines_csv_path) 
     print(airlines.columns)
     user_inputs_dict['CARRIER_NAME'] = st.selectbox('CARRIER_NAME', airlines['CARRIER_NAME'])
 
