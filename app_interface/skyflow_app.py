@@ -5,6 +5,9 @@ import json
 import warnings
 warnings.filterwarnings("ignore")
 
+import os
+print(f'Current directory: {os.getcwd()}')
+
 # SkyFlow is a StreamLit Application deployed on EC2 instance
 # http://ec2-18-219-112-73.us-east-2.compute.amazonaws.com:8501
 st.set_page_config(page_title="SkyFlow: AI-Powered Flight Delay Predictor", page_icon="✈️", layout="wide")
@@ -54,7 +57,7 @@ left_column, right_column = st.columns([1, 2])
 
 # Left column for inputs
 with left_column:
-    st.header("✈️ Share Your Flight Journey!")
+    st.header("Share Your Flight Journey!")
 
     # Define input fields with appropriate types and ranges
     user_inputs_dict = {}
@@ -103,7 +106,7 @@ with left_column:
 
 # Right column for results
 with right_column:
-    st.header("✨ Flight Delay Insights Just for You!")
+    st.header("Flight Delay Insights Just for You!")
 
     if predict_button:
         try:
@@ -125,6 +128,7 @@ with right_column:
             # response = requests.post("http://127.0.0.1:8000/predict", json=user_inputs_dict)
 
             # FastAPI server deployed on EC2 instance 
+            print(json.dumps(user_inputs_dict, indent=2))
             response = requests.post("http://ec2-18-219-112-73.us-east-2.compute.amazonaws.com:8000/predict", json=user_inputs_dict)
             
             response.raise_for_status()  # Raises an HTTPError if the HTTP request returned an unsuccessful status code

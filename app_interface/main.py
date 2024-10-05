@@ -9,7 +9,7 @@ import warnings
 warnings.filterwarnings("ignore")
 
 import os
-# print(f'Current directory: {os.getcwd()}')
+print(f'Current directory: {os.getcwd()}')
 
 
 # FastAPI endpoint accessible on EC2 instance: http://ec2-18-219-112-73.us-east-2.compute.amazonaws.com:8000/docs#
