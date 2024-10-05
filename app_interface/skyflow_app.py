@@ -39,7 +39,11 @@ for field in ['MONTH', 'DAY_OF_WEEK', 'DISTANCE', 'DISTANCE_GROUP_DESC', 'SEGMEN
               'PREVIOUS_ARR_DELAY', 'PREVIOUS_DISTANCE']:
     user_inputs_dict[field] = st.number_input(field)
 
-response = requests.post("http://127.0.0.1:8000/predict", json = user_inputs_dict)
+# FastAPI server deployed locally
+# response = requests.post("http://127.0.0.1:8000/predict", json = user_inputs_dict)
+
+# FastAPI server deployed on EC2 instance 
+response = requests.post("http://18.219.112.73:8000/predict", json = user_inputs_dict)
 
 if st.button("Submit"):
     if response.text == '2':
