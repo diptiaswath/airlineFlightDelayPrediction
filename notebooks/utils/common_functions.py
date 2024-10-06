@@ -455,6 +455,7 @@ def evaluate_model_with_adjusted_threshold_for_class2(estimator, Xt_test, yt_tes
     results = {
         'val_f1_score': val_f1,
         'val_accuracy_score': val_accuracy,
+        'f1_score_per_class': f1_per_class,
         'f1_score_macro': test_f1,
         'f1_score_weighted': test_f1_weighted,
         'accuracy_score': test_accuracy,
@@ -1055,7 +1056,7 @@ def save_cat_encoder(encoder, filename):
     Save the category encoder to a .pkl file using joblib.
     
     Parameters:
-        cat_encoder: Category Encoder to be saved.
+        encoder: Category Encoder to be saved.
         filename: Name of the file to save the encoder to (should end with .pkl).
     
     """

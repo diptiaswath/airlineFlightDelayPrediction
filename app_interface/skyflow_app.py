@@ -98,16 +98,16 @@ with left_column:
 
     # Add airports and airlines selection
     airports_csv_path = os.path.join(parent_dir, 'raw_data', 'airports_list.csv')
-    print(f"Attempting to read CSV from: {airports_csv_path}")
+   # print(f"Attempting to read CSV from: {airports_csv_path}")
     airlines_csv_path = os.path.join(parent_dir, 'raw_data', 'CARRIER_DECODE.csv')
-    print(f"Attempting to read CSV from: {airlines_csv_path}")
+   # print(f"Attempting to read CSV from: {airlines_csv_path}")
     
     # Load csvs
     try:
         airports = pd.read_csv(airports_csv_path)
         airlines = pd.read_csv(airlines_csv_path) 
-        print("Columns in airports DataFrame:", airports.columns)
-        print("Columns in airlines DataFrame:", airlines.columns)
+    #    print("Columns in airports DataFrame:", airports.columns)
+    #    print("Columns in airlines DataFrame:", airlines.columns)
     except FileNotFoundError as e:
         st.error(f"Error: Could not find either airlines or airports_list.csv file. {str(e)}")
         st.stop()
