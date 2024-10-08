@@ -96,19 +96,19 @@ During the data preparation phase, significant feature engineering was conducted
 
 To improve model performance in Phase2, new features were engineered by tracking flight segment sequences for each tail number on a given day (e.g., SEGMENT_NUMBER). **Historical flight information**, such as previous airports (PREVIOUS_AIRPORT), prior delays (PREVIOUS_ARR_DELAY), and flight durations (PREVIOUS_DURATION), was incorporated. This was done by merging **current flight records** with its own FLIGHT_DURATION with the corresponding previous segment data, providing a richer and more comprehensive dataset for predicting delays.
 
-# Enhanced Feature Engineering Algorithm
+##### Enhanced Feature Engineering Algorithm
 
-## Input:
+###### Input:
 - Raw flight data
 - Aircraft data
 - Weather data
 - Airport data
 - Airline data
 
-## Output:
+###### Output:
 - Enriched dataset with engineered features for flight delay prediction
 
-## Algorithm:
+###### Algorithm:
 
 1. Initialize empty dataset D for engineered features
 
@@ -263,49 +263,35 @@ The ensemble, and hybrid ensemble models outperformed the baseline, Logistic Reg
 
 ![A graph showing different types of flight delay Description automatically generated](images/5eff024ec6a16cf7aa739cbf7291dccf.jpeg)
 
-\| Model \| Strengths \| Weaknesses \| Key Observations \| Important Features \|
-
-\|-------\|-----------\|------------\|-------------------\|---------------------\|
-
- \| \*\*Baseline\*\* \| - Simple and fast \| - Very poor weighted F1 score (0.0373)\<br\>- Low weighted PR AUC (0.63)\<br\>- Poor weighted ROC AUC (0.50)\<br\>- Low accuracy (0.1461)\<br\>- Unable to distinguish between classes effectively \| - Performs poorly across all metrics\<br\>- Not suitable for this classification task \| N/A \|
-
-\| \*\*Multinomial Logistic Regression\*\* \| - Best overall performance\<br\>- Highest weighted F1 score (0.7329)\<br\>- Highest weighted PR AUC (0.77)\<br\>- Best weighted ROC AUC (0.74)\<br\>- Best accuracy (0.7051)\<br\>- Good balance between precision and recall \| - Still struggles with minority class (class 1)\<br\>- Slightly lower interpretability compared to Decision Tree \| - Shows the best overall performance\<br\>- Outperforms other models in most weighted metrics\<br\>- Provides a good balance across different metrics and classes \| Positive influence on class 2:\<br\>- DAY_OF_WEEK\<br\>- CARRIER_NAME\<br\>- PREVIOUS_ARR_DELAY\<br\>- MONTH\<br\>- ARR_PART_OF_DAY\<br\>- DEP_PART_OF_DAY\<br\>- SEASON\<br\>\<br\>Negative influence on class 2:\<br\>- PREVIOUS_DURATION_CATEGORY\<br\>- FLIGHT_DURATION_CATEGORY\<br\>- DISTANCE_GROUP_DESC \|
-
- \| \*\*Hyperparameter-tuned Decision Tree\*\* \| - Competitive weighted F1 score (0.7422)\<br\>- Good weighted PR AUC (0.74)\<br\>- Decent weighted ROC AUC (0.70)\<br\>- Highest accuracy (0.7359)\<br\>- Better interpretability than Logistic Regression \| - Slightly lower weighted F1 score than Logistic Regression\<br\>- Lower weighted PR AUC and ROC AUC compared to Logistic Regression\<br\>- Poorer performance on minority class (class 1) \| - Performs competitively, close to Logistic Regression\<br\>- Offers better interpretability\<br\>- Slightly higher accuracy than Logistic Regression \| Top features (permutation importance):\<br\>1. PREVIOUS_ARR_DELAY\<br\>2. DEP_PART_OF_DAY\<br\>3. PREVIOUS_DURATION\<br\>4. DISTANCE\<br\>5. FLIGHT_DURATION\<br\>\<br\>Top features (built-in importance):\<br\>1. PREVIOUS_ARR_DELAY\<br\>2. DEP_PART_OF_DAY\<br\>3. DAY_OF_WEEK\<br\>4. PRCP\<br\>5. AIRLINE_AIRPORT_FLIGHTS_MONTH \|
+| **Model** | **Strengths** | **Weaknesses** | **Key Observations** | **Important Features** |
+|-----------|---------------|----------------|----------------------|------------------------|
+| **Baseline** | - Simple and fast | - Very poor weighted F1 score (0.0373)<br>- Low weighted PR AUC (0.63)<br>- Poor weighted ROC AUC (0.50)<br>- Low accuracy (0.1461)<br>- Unable to distinguish between classes effectively | - Performs poorly across all metrics<br>- Not suitable for this classification task | N/A |
+| **Multinomial Logistic Regression** | - Best overall performance<br>- Highest weighted F1 score (0.7329)<br>- Highest weighted PR AUC (0.77)<br>- Best weighted ROC AUC (0.74)<br>- Best accuracy (0.7051)<br>- Good balance between precision and recall | - Still struggles with minority class (class 1)<br>- Slightly lower interpretability compared to Decision Tree | - Shows the best overall performance<br>- Outperforms other models in most weighted metrics<br>- Provides a good balance across different metrics and classes | Positive influence on class 2:<br>- DAY_OF_WEEK<br>- CARRIER_NAME<br>- PREVIOUS_ARR_DELAY<br>- MONTH<br>- ARR_PART_OF_DAY<br>- DEP_PART_OF_DAY<br>- SEASON<br><br>Negative influence on class 2:<br>- PREVIOUS_DURATION_CATEGORY<br>- FLIGHT_DURATION_CATEGORY<br>- DISTANCE_GROUP_DESC |
+| **Hyperparameter-tuned Decision Tree** | - Competitive weighted F1 score (0.7422)<br>- Good weighted PR AUC (0.74)<br>- Decent weighted ROC AUC (0.70)<br>- Highest accuracy (0.7359)<br>- Better interpretability than Logistic Regression | - Slightly lower weighted F1 score than Logistic Regression<br>- Lower weighted PR AUC and ROC AUC compared to Log
 
 ##### Performance comparison across Ensemble Bagging and Boosting Classifiers:
 
 ![A graph showing different colored bars Description automatically generated with medium confidence](images/67bdce3d387a3cab8d8400179e93aa93.jpeg)
 
-\| Model \| Strengths \| Weaknesses \| Key Observations \| Important Features \|
-
-\|-------------------------------------\|-----------------------------------------------------------------------------------------------\|-----------------------------------------------------------------------------------------------------\|------------------------------------------------------------------------------------------------------\|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\|
-
-\| \*\*BaggingClassifier (Decision Tree)\*\* \| - High weighted F1 score (0.7888)\<br\>- High weighted PR AUC (0.81)\<br\>- Good weighted ROC AUC (0.78) \| - Slightly lower weighted ROC AUC compared to some other models \| - Balanced performance across weighted metrics\<br\>- Good overall predictive power \| Top 5 (Permutation Importance):\<br\>1. PREVIOUS_ARR_DELAY: 0.1340\<br\>2. PREVIOUS_DURATION: 0.0802\<br\>3. SEGMENT_NUMBER: 0.0766\<br\>4. DEP_PART_OF_DAY: 0.0597\<br\>5. ARR_PART_OF_DAY: 0.0199 \|
-
-\| \*\*Random Forest Classifier\*\* \| - High weighted F1 score (0.7887)\<br\>- High weighted PR AUC (0.81)\<br\>- Best weighted ROC AUC (0.79) \| - Marginally lower weighted F1 score than BaggingClassifier \| - Very similar performance to BaggingClassifier\<br\>- Slightly better at handling class imbalance \| Top 5 (Built-in Importance):\<br\>1. PREVIOUS_ARR_DELAY: 0.1370\<br\>2. DISTANCE: -0.0006\<br\>3. TMAX: -0.0000\<br\>4. FLIGHT_DURATION: -0.0005\<br\>5. AWND: 0.0001 \|
-
-\| \*\*XGBoost Classifier\*\* \| - High weighted PR AUC (0.81)\<br\>- High weighted ROC AUC (0.79) \| - Lower weighted F1 score (0.7682) compared to BaggingClassifier and Random Forest \| - Good balance between precision and recall\<br\>- Strong performance in AUC metrics \| Top 5 (Built-in Importance):\<br\>1. PREVIOUS_ARR_DELAY: 0.1718\<br\>2. DEP_PART_OF_DAY: 0.0503\<br\>3. PREVIOUS_DURATION_CATEGORY: -0.0040\<br\>4. PRCP: 4.3230\<br\>5. ARR_PART_OF_DAY: 4.4493 \|
-
-\| \*\*LightGBM\*\* \| - High weighted PR AUC (0.81)\<br\>- High weighted ROC AUC (0.79) \| - Lower weighted F1 score (0.7182) \| - Underperforms in F1 score compared to other models\<br\>- Maintains strong AUC performance \| Top 5 (Built-in Importance):\<br\>1. AIRLINE_AIRPORT_FLIGHTS_MONTH: 1207.0000\<br\>2. AIRLINE_FLIGHTS_MONTH: 996.0000\<br\>3. PREVIOUS_ARR_DELAY: 1031.0000\<br\>4. DISTANCE: 915.0000\<br\>5. DEP_AIRPORT_HIST: 856 \|
-
-\| \*\*CatBoost\*\* \| - Relatively high weighted PR AUC (0.78) \| - Lowest weighted F1 score (0.5134)\<br\>- Lowest weighted ROC AUC (0.75) \| - Significantly underperforms compared to other models\<br\>- Struggles with overall predictive power \| Top 5 (Built-in Importance):\<br\>1. PREVIOUS_ARR_DELAY: 64.3610\<br\>2. DEP_PART_OF_DAY: 11.9855\<br\>3. ARR_PART_OF_DAY: 4.4493\<br\>4. PRCP: 4.3230\<br\>5. SEGMENT_NUMBER: 2.8930 \|
+| **Model**                          | **Strengths**                                                                                     | **Weaknesses**                                                | **Key Observations**                                            | **Important Features**                                                                                                                                                                                                                                           |
+|------------------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------|----------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **BaggingClassifier (Decision Tree)** | - High weighted F1 score (0.7888)<br>- High weighted PR AUC (0.81)<br>- Good weighted ROC AUC (0.78) | - Slightly lower weighted ROC AUC compared to some other models | - Balanced performance across weighted metrics<br>- Good overall predictive power | Top 5 (Permutation Importance):<br>1. PREVIOUS_ARR_DELAY: 0.1340<br>2. PREVIOUS_DURATION: 0.0802<br>3. SEGMENT_NUMBER: 0.0766<br>4. DEP_PART_OF_DAY: 0.0597<br>5. ARR_PART_OF_DAY: 0.0199 |
+| **Random Forest Classifier**          | - High weighted F1 score (0.7887)<br>- High weighted PR AUC (0.81)<br>- Best weighted ROC AUC (0.79) | - Marginally lower weighted F1 score than BaggingClassifier     | - Very similar performance to BaggingClassifier<br>- Slightly better at handling class imbalance | Top 5 (Built-in Importance):<br>1. PREVIOUS_ARR_DELAY: 0.1370<br>2. DISTANCE: -0.0006<br>3. TMAX: -0.0000<br>4. FLIGHT_DURATION: -0.0005<br>5. AWND: 0.0001 |
+| **XGBoost Classifier**                | - High weighted PR AUC (0.81)<br>- High weighted ROC AUC (0.79)                             | - Lower weighted F1 score (0.7682) compared to BaggingClassifier and Random Forest | - Good balance between precision and recall<br>- Strong performance in AUC metrics | Top 5 (Built-in Importance):<br>1. PREVIOUS_ARR_DELAY: 0.1718<br>2. DEP_PART_OF_DAY: 0.0503<br>3. PREVIOUS_DURATION_CATEGORY: -0.0040<br>4. PRCP: 4.3230<br>5. ARR_PART_OF_DAY: 4.4493 |
+| **LightGBM**                          | - High weighted PR AUC (0.81)<br>- High weighted ROC AUC (0.79)                             | - Lower weighted F1 score (0.7182)                             | - Underperforms in F1 score compared to other models<br>- Maintains strong AUC performance | Top 5 (Built-in Importance):<br>1. AIRLINE_AIRPORT_FLIGHTS_MONTH: 1207.0000<br>2. AIRLINE_FLIGHTS_MONTH: 996.0000<br>3. PREVIOUS_ARR_DELAY: 1031.0000<br>4. DISTANCE: 915.0000<br>5. DEP_AIRPORT_HIST: 856 |
+| **CatBoost**                          | - Relatively high weighted PR AUC (0.78)                                                    | - Lowest weighted F1 score (0.5134)<br>- Lowest weighted ROC AUC (0.75) | - Significantly underperforms compared to other models<br>- Struggles with overall predictive power | Top 5 (Built-in Importance):<br>1. PREVIOUS_ARR_DELAY: 64.3610<br>2. DEP_PART_OF_DAY: 11.9855<br>3. ARR_PART_OF_DAY: 4.4493<br>4. PRCP: 4.3230<br>5 SEGMENT_NUMBER: 2.8930 |
 
 ##### Performance comparison across Hybrid Ensemble Classifiers:
 
 ![A graph of different colored bars Description automatically generated with medium confidence](images/0b25c75c267ad64ac604422e29a8079a.jpeg)
 
-\| Model \| Strengths \| Weaknesses \| Key Observations \| Important Features \|
-
-\|-------------------------------------\|-----------------------------------------------------------------------------------------------\|-----------------------------------------------------------------------------------------------------\|------------------------------------------------------------------------------------------------------\|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\|
-
-\| \*\*Voting Classifier\*\* \| - Highest weighted F1 score (0.7944)\<br\>- Highest accuracy (0.8290)\<br\>- Best weighted PR AUC (0.82)\<br\>- Best weighted ROC AUC (0.80) \| - Low F1 score for class 1 (0.0677) \| - Best overall performance\<br\>- Strong in identifying on-time flights (class 0)\<br\>- Good balance between precision and recall \| Top 5 (Permutation Importance):\<br\>1. PREVIOUS_ARR_DELAY: 0.1311\<br\>2. SEGMENT_NUMBER: 0.0552\<br\>3. PREVIOUS_AIRPORT: 0.0476\<br\>4. PREVIOUS_DURATION: 0.0429\<br\>5. DEP_PART_OF_DAY: 0.0184 \|
-
-\| \*\*Stacking Classifier\*\* \| - Good weighted F1 score (0.7896)\<br\>- Good accuracy (0.8118)\<br\>- High weighted PR AUC (0.81)\<br\>- High weighted ROC AUC (0.79) \| - Lower performance on class 1 (F1 score: 0.0936) compared to other classes \| - Slightly lower performance than Voting Classifier\<br\>- Better performance on class 1 compared to Voting Classifier \| Top 5 (Permutation Importance):\<br\>1. PREVIOUS_ARR_DELAY: 0.1059\<br\>2. PREVIOUS_AIRPORT: 0.0247\<br\>3. SEGMENT_NUMBER: 0.0200\<br\>4. PREVIOUS_DURATION: 0.0192\<br\>5. DEP_PART_OF_DAY: 0.0173 \|
-
-\| \*\*Tuned Stacking Classifier\*\* \| - Improved weighted F1 score (0.7921)\<br\>- Improved accuracy (0.8180)\<br\>- High weighted PR AUC (0.81)\<br\>- High weighted ROC AUC (0.79) \| - Still struggles with class 1 (F1 score: 0.0901) \| - Performance improvement over base Stacking Classifier\<br\>- Better balance across all classes \| Top 5 (Permutation Importance):\<br\>1. PREVIOUS_ARR_DELAY: 0.1320\<br\>2. PREVIOUS_AIRPORT: 0.0734\<br\>3. SEGMENT_NUMBER: 0.0530\<br\>4. PREVIOUS_DURATION: 0.0472\<br\>5. DEP_PART_OF_DAY: 0.0256 \|
-
-\| \*\*Hybrid Ensemble Classifier\*\* \| - High weighted F1 score (0.7935)\<br\>- Good accuracy (0.8234)\<br\>- High weighted PR AUC (0.82)\<br\>- High weighted ROC AUC (0.80) \| - Struggles with class 1 (F1 score: 0.0813) \| - Performance comparable to other ensemble methods\<br\>- Good balance between precision and recall for class 0 and 2 \| Top 5 (Permutation Importance):\<br\>1. PREVIOUS_ARR_DELAY: 0.1324\<br\>2. PREVIOUS_AIRPORT: 0.0495\<br\>3. PREVIOUS_DURATION: 0.0458\<br\>4. SEGMENT_NUMBER: 0.0431\<br\>5. DEP_PART_OF_DAY: 0.0216 \|
+| **Model**                          | **Strengths**                                                                                     | **Weaknesses**                                                | **Key Observations**                                            | **Important Features**                                                                                                                                                                                                                                           |
+|------------------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------|----------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Voting Classifier**              | - Highest weighted F1 score (0.7944)<br>- Highest accuracy (0.8290)<br>- Best weighted PR AUC (0.82)<br>- Best weighted ROC AUC (0.80) | - Low F1 score for class 1 (0.0677)                          | - Best overall performance<br>- Strong in identifying on-time flights (class 0)<br>- Good balance between precision and recall | Top 5 (Permutation Importance):<br>1. PREVIOUS_ARR_DELAY: 0.1311<br>2. SEGMENT_NUMBER: 0.0552<br>3. PREVIOUS_AIRPORT: 0.0476<br>4. PREVIOUS_DURATION: 0.0429<br>5. DEP_PART_OF_DAY: 0.0184 |
+| **Stacking Classifier**            | - Good weighted F1 score (0.7896)<br>- Good accuracy (0.8118)<br>- High weighted PR AUC (0.81)<br>- High weighted ROC AUC (0.79) | - Lower performance on class 1 (F1 score: 0.0936) compared to other classes | - Slightly lower performance than Voting Classifier<br>- Better performance on class 1 compared to Voting Classifier | Top 5 (Permutation Importance):<br>1. PREVIOUS_ARR_DELAY: 0.1059<br>2. PREVIOUS_AIRPORT: 0.0247<br>3. SEGMENT_NUMBER: 0.0200<br>4. PREVIOUS_DURATION: 0.0192<br>5. DEP_PART_OF_DAY: 0.0173 |
+| **Tuned Stacking Classifier**      | - Improved weighted F1 score (0.7921)<br>- Improved accuracy (0.8180)<br>- High weighted PR AUC (0.81)<br>- High weighted ROC AUC (0.79) | - Still struggles with class 1 (F1 score: 0.0901)            | - Performance improvement over base Stacking Classifier<br>- Better balance across all classes | Top 5 (Permutation Importance):<br>1. PREVIOUS_ARR_DELAY: 0.1320<br>2. PREVIOUS_AIRPORT: 0.0734<br>3. SEGMENT_NUMBER: 0.0530<br>4. PREVIOUS_DURATION: 0.0472<br>5. DEP_PART_OF_DAY: 0.0256 |
+| **Hybrid Ensemble Classifier**     | - High weighted F1 score (0.7935)<br>- Good accuracy (0.8234)<br>- High weighted PR AUC (0.82)<br>- High weighted ROC AUC (0.80) | - Struggles with class 1 (F1 score: 0.0813)                  | - Performance comparable to other ensemble methods<br>- Good balance between precision and recall for class 0 and 2 | Top 5 (Permutation Importance):<br>1. PREVIOUS_ARR_DELAY: 0.1324<br>2. PREVIOUS_AIRPORT: 0.0495<br>3. PREVIOUS_DURATION: 0.0458<br>4. SEGMENT_NUMBER: 0.0431<br>5. DEP_PART_OF_DAY: 0.0216 |
+| 
 
 ##### Recommendations for Model Selection and Deployment for Flight Delay Predictions:
 
@@ -363,25 +349,25 @@ The Hybrid Ensemble Classifier is an alternate choice:
 
 Based on the feature importance results from across these models, the following features are consistently influential in flight delay predictions – ref: [feature descriptions](https://media.githubusercontent.com/media/diptiaswath/airlineFlightDelayPrediction/refs/heads/main/combined_data/dataset_documentation_v2.txt):
 
-1.  PREVIOUS_ARR_DELAY: This is consistently the most important feature across all models. It represents the arrival delay of the previous flight for the same aircraft.
+-   PREVIOUS_ARR_DELAY: This is consistently the most important feature across all models. It represents the arrival delay of the previous flight for the same aircraft.
 
-2.  SEGMENT_NUMBER: This feature, which represents the order of flights for an aircraft on a given day, is highly influential in several models.
+-   SEGMENT_NUMBER: This feature, which represents the order of flights for an aircraft on a given day, is highly influential in several models.
 
-3.  PREVIOUS_DURATION: The duration of the previous flight is an important factor in predicting delays.
+-   PREVIOUS_DURATION: The duration of the previous flight is an important factor in predicting delays.
 
-4.  DEP_PART_OF_DAY: The time of day when the current flight departs is a significant predictor of delays.
+-   DEP_PART_OF_DAY: The time of day when the current flight departs is a significant predictor of delays.
 
-5.  PREVIOUS_AIRPORT: The departing airport from where the aircraft on its previous segment last came seems to have a notable impact on delay predictions.
+-   PREVIOUS_AIRPORT: The departing airport from where the aircraft on its previous segment last came seems to have a notable impact on delay predictions.
 
-6.  DISTANCE: The flight distance appears to be moderately important in several models.
+-   DISTANCE: The flight distance appears to be moderately important in several models.
 
-7.  DEP_BLOCK_HIST: Historical average delay for different departure time blocks is influential.
+-   DEP_BLOCK_HIST: Historical average delay for different departure time blocks is influential.
 
-8.  CARRIER_NAME: The airline operating the flight is a relevant factor in some models.
+-   CARRIER_NAME: The airline operating the flight is a relevant factor in some models.
 
-9.  PRCP: Precipitation at the airport on the day of the flight is a notable weather-related feature.
+-   PRCP: Precipitation at the airport on the day of the flight is a notable weather-related feature.
 
-10. DAY_OF_WEEK: The day of the week when the flight occurs has some influence on delay predictions.
+-   DAY_OF_WEEK: The day of the week when the flight occurs has some influence on delay predictions.
 
 These features consistently appear among the top influential factors across different models (Bagging Classifier, Random Forest, XGBoost, LightGBM, and ensemble methods like Voting and Stacking Classifiers). While the exact order and magnitude of importance varies between the models, these features represent a mix of temporal factors (previous delays and time of day), operational aspects (segment number and carrier), geographical elements (distance and previous airport), and weather conditions (precipitation).
 
