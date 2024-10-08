@@ -42,7 +42,7 @@ Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| 
 
     - [Recommendations based on influential features in Flight Delay Predictions](#recommendations-based-on-influential-features-in-flight-delay-predictions)
 
-    - [Partial Dependence Plots: Analyzing Feature Impact on Flight Delay Predictions for each Delay Class](#partial-dependence-plots-analyzing-feature-impact-on-flight-delay-predictions-for-each-delay-class)
+    - [Partial Dependence Plots: Visualize Feature Impact on Flight Delay Predictions for each Delay Class](#partial-dependence-plots-analyzing-feature-impact-on-flight-delay-predictions-for-each-delay-class)
 
 2. [Data Sources](#data-sources)
 
@@ -483,7 +483,7 @@ These features consistently appear among the top influential factors across diff
 | **DAY_OF_WEEK** | - Adjust resources and schedules based on weekly patterns.<br>- Implement dynamic pricing strategies to manage demand across different days. |
 
 
-### Partial Dependence Plots: Analyzing Feature Impact on Flight Delay Predictions for each Delay Class
+### Partial Dependence Plots: Visualize Feature Impact on Flight Delay Predictions for each Delay Class
 
 ![A group of graphs showing the results of a performance Description automatically generated with medium confidence](images/6f95f3865ee6296b7e2ef6272d2b4c0c.jpeg)![A group of graphs showing the results of a graph Description automatically generated with medium confidence](images/287a3e4dd2cbd714dbf457681b515df5.jpeg)![A group of graphs showing the results of a test Description automatically generated with medium confidence](images/007e8eca9afcce2cc912829109df378c.jpeg)
 
