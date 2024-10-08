@@ -44,9 +44,9 @@ Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| 
 
     - [Performance Comparison Across Hybrid Ensemble Classifiers](#performance-comparison-across-hybrid-ensemble-classifiers)
   
-    - [Features influencing model recommendation](#features-influencing-model-recommendation)
+    - [Features influencing Flight Delay Predictions](#features-influencing-flight-delay-predictions)
   
-    - [Partial Dependence Plots: Visualize Feature Impact on Flight Delay Predictions for each Delay Class](#partial-dependence-plots-visualize-feature-impact-on-flight-delay-predictions-for-each-delay-class)   
+    - [Partial Dependence Plots: Visualize Feature Impact on Flight Delay Predictions for each Delay Class](#partial-dependence-plots---visualize-feature-impact-on-flight-delay-predictions-for-each-delay-class)   
 
 4. [Data Sources](#data-sources)
 
