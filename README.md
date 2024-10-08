@@ -16,13 +16,13 @@ Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| 
 
     - [Research Question](#research-question)
 
-    - [Evaluation Criteria](#evaluation-criteria)
+    - [Flight Delay Predictions - Key Metrics](#flight-delay-predictions-key-metrics)
 
     - [Approach](#approach)
 
         - [CRISP-DM Framework](#crisp-dm-framework)
      
-        - [Feature Engineering Approach](#feature-engineering-approach)
+        - [Feature Engineering](#feature-engineering)
 
     - [Key Findings from Exploratory Data Analysis](#key-findings-from-exploratory-data-analysis)
 
@@ -122,9 +122,9 @@ By addressing these areas, airlines can significantly improve operational effici
 
 ### Research Question:
 
-How can a classification model be developed to accurately predict flight delays by assessing multiple factors, that include departure and arrival delays, using data related to flight status, weather conditions, air traffic, aircraft specifics, and ground operations?
+How can we develop an AI and machine learning-powered smart system to accurately predict flight delays by assessing multiple factors, including departure and arrival times, flight status, weather conditions, air traffic, aircraft specifics, and ground operations?
 
-### SkyFlow Prediction Accuracy - Key Metrics:
+### Flight Delay Predictions - Key Metrics:
 
 SkyFlow is an advanced tool that helps predict how flights might perform. It looks at many factors like weather, how busy the airport is, and how well the airline usually does. Then, it puts each flight into one of three groups:
 "On Time": These flights are expected to leave and arrive as scheduled.
@@ -155,8 +155,11 @@ We look at five main things to evaluate SkyFlow's performance:
     
     - Receiver Operating Characteristic Area Under the Curve (ROC AUC): How well SkyFlow distinguishes between delayed and on-time flights.
 
+
 Our goal is to make SkyFlow as accurate as possible, so everyone can rely on its predictions to make their travel smoother and more predictable. 
+
 To monitor overall performance, we use the Precision-Recall Area Under the Curve (PR AUC) and Receiver Operating Characteristic Area Under the Curve (ROC AUC). 
+
 For evaluating the balance between correctly identifying delays and avoiding false alarms, we rely on the F1 Score as the primary metric, which combines precision and recall into a single value.
 
 ### Approach:
@@ -175,11 +178,11 @@ For the Flight Delay Prediction problem, the CRISP-DM (Cross Industry Standard P
 
 5.  **Deployment:** The best-performing model was integrated into **SkyFlow’s** prototype application, enabling real-time flight delay predictions. Future iterations aim to further enhance the operational decision-making.
 
-#### Feature Engineering Approach: 
+#### Feature Engineering: 
 
 During the data preparation phase, significant feature engineering was conducted as outlined in a later Methodology section. Initially, features that captured the relationship between departure and arrival delays were found to introduce data leakage, leading to overly optimistic predictions. As a result, these features were excluded in Phase 2.
 
-To improve model performance in Phase2, new features were engineered by tracking flight segment sequences for each tail number on a given day (e.g., SEGMENT_NUMBER). **Historical flight information**, such as previous airports (PREVIOUS_AIRPORT), prior delays (PREVIOUS_ARR_DELAY), and flight durations (PREVIOUS_DURATION), was incorporated. This was done by merging **current flight records** with its own FLIGHT_DURATION with the corresponding previous segment data, providing a richer and more comprehensive dataset for predicting delays. Please refer to this section for details on the enhanced feature engineering algorithm.
+To improve prediction delays in Phase2, new features were engineered by tracking flight segment sequences for each tail number on a given day (e.g., SEGMENT_NUMBER). **Historical flight information**, such as previous airports (PREVIOUS_AIRPORT), prior delays (PREVIOUS_ARR_DELAY), and flight durations (PREVIOUS_DURATION), was incorporated. This was done by merging **current flight records** with its own FLIGHT_DURATION with the corresponding previous segment data, providing a richer and more comprehensive dataset for predicting delays. Please refer to this section for details on the enhanced feature engineering algorithm.
 
 
 ### Key Findings from Exploratory Data Analysis:
