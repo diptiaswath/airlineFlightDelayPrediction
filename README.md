@@ -1,6 +1,8 @@
 # SkyFlow: AI-Powered Flight Delay Prediction for Optimized Airline Operations
 
-Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| [Email](mailto:dipti.aswath@gmail.com) \| Early [SkyFlow](http://18.219.112.73:8501/) Prototype\|
+Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| [Email](mailto:dipti.aswath@gmail.com) \ 
+
+Early [SkyFlow](http://18.219.112.73:8501/) Prototype\
 
 ## Executive Summary
 
@@ -94,29 +96,64 @@ During the data preparation phase, significant feature engineering was conducted
 
 To improve model performance in Phase2, new features were engineered by tracking flight segment sequences for each tail number on a given day (e.g., SEGMENT_NUMBER). **Historical flight information**, such as previous airports (PREVIOUS_AIRPORT), prior delays (PREVIOUS_ARR_DELAY), and flight durations (PREVIOUS_DURATION), was incorporated. This was done by merging **current flight records** with its own FLIGHT_DURATION with the corresponding previous segment data, providing a richer and more comprehensive dataset for predicting delays.
 
-**Enhanced Feature Engineering:**
+# Enhanced Feature Engineering Algorithm
 
-1.  Segment Number:
+## Input:
+- Raw flight data
+- Aircraft data
+- Weather data
+- Airport data
+- Airline data
 
-    -   Track flight number sequence for each tail number on a given day based on the combination of raw features TAIL_NUM, DAY_OF_MONTH, and DEP_TIME
+## Output:
+- Enriched dataset with engineered features for flight delay prediction
 
-2. Previous Airports:
+## Algorithm:
 
-    -   Capture previous segment (if any) of a current flight and its departing airport as PREVIOUS_AIRPORT
+1. Initialize empty dataset D for engineered features
 
-3. Previous Delays and Durations:
+2. For each flight record F in raw flight data:
+    2.1. Extract basic flight information (date, origin, destination, etc.)
+    2.2. Compute SEGMENT_NUMBER:
+        a. Group flights by TAIL_NUM and DAY_OF_MONTH
+        b. Sort by DEP_TIME within each group
+        c. Assign sequential numbers starting from 1
+    2.3. Add SEGMENT_NUMBER to D
 
-    -   Include previous flight’s arrival delay, departure delay and duration from ACTUAL_ELAPSED_TIME, ARR_DELAY and DEP_DELAY
+3. For each flight record F in D:
+    3.1. Identify previous flight P with same TAIL_NUM
+    3.2. If P exists:
+        a. Set PREVIOUS_AIRPORT = P.DESTINATION
+        b. Set PREVIOUS_ARR_DELAY = P.ARR_DELAY
+        c. Set PREVIOUS_DEP_DELAY = P.DEP_DELAY
+        d. Set PREVIOUS_DURATION = P.ACTUAL_ELAPSED_TIME
+    3.3. Else:
+        Set all PREVIOUS_* features to null or appropriate default values
+    3.4. Add PREVIOUS_* features to D
 
-4. Current Flight Duration:
+4. Compute FLIGHT_DURATION:
+    4.1. FLIGHT_DURATION = CRS_ARR_TIME - CRS_DEP_TIME
+    4.2. Add FLIGHT_DURATION to D
 
-    -   Include current flight duration using planned arrival, planned departure and scheduled elapsed times, CRS_ARR_TIME, CRS_DEP_TIME, and CRS_ELAPSED_TIME
+5. Merge weather data with D based on date and airport
 
-**Methodology:**
+6. Compute temporal features:
+    6.1. Extract MONTH, DAY_OF_WEEK from date
+    6.2. Compute SEASON based on MONTH
+    6.3. Compute DEP_PART_OF_DAY based on CRS_DEP_TIME
+    6.4. Add temporal features to D
 
--   Merge current flight records with previous segment data to create a richer dataset.
+7. Merge airport and airline data with D
 
--   Analyze historical features to understand their impact on current flight departure and arrival performance.
+8. Compute historical performance metrics:
+    8.1. Calculate CARRIER_HISTORICAL (average delay by carrier and month)
+    8.2. Calculate DEP_AIRPORT_HIST (average delay by departure airport and month)
+    8.3. Calculate DEP_BLOCK_HIST (average delay by departure time block and month)
+    8.4. Add historical metrics to D
+
+9. Handle missing values and perform necessary data type conversions
+
+10. Return enriched dataset D
 
 
 ### Key Findings from Exploratory Data Analysis:
@@ -195,21 +232,14 @@ There was no significant trend observed in the average values of the selected we
 
 ### Actionable Insights - Recommendations from Exploratory Data Analysis:
 
-\| \*\*Finding\*\* \| \*\*Recommendation\*\* \|
-
-\|-----------------------------------------------------\|---------------------------------------------------------------------------------------------------------\|
-
-\| \*\*Highest Departure and Arrival Delays by Carriers\*\* \| - Implement targeted training and support programs for high-delay carriers to improve operational efficiency. \<br\>- Use delay data to manage customer communications proactively. \|
-
-\| \*\*Top 30 Congested Airports with Flight Delays\*\* \| - Allocate more resources and staff during peak times at congested airports to minimize delays. \<br\>- Develop contingency plans for high-traffic airports to handle surges in passenger volume effectively. \|
-
-\| \*\*Delay Trends Across Distance Groups and Flight Segments\*\* \| - Analyze operational schedules to optimize turnaround times for flights, especially those with multiple segments. \<br\>- Review scheduling for short and moderate-distance flights to reduce potential delays. \|
-
-\| \*\*Seasonal Trends\*\* \| - Increase staffing and operational resources during summer months to manage higher delay rates effectively. \<br\>- Monitor weather patterns and adjust scheduling in advance to minimize disruptions during winter months. \|
-
-\| \*\*Time of Day\*\* \| - Consider adjusting flight schedules to reduce the number of early morning and late-night flights that experience high arrival delays. \<br\>- Increase capacity and resources during afternoon and evening hours to mitigate departure delays. \|
-
-\| \*\*Weekly Patterns\*\* \| - Evaluate operational strategies to understand the factors contributing to increased delays on specific days. \<br\>- Promote Saturday travel incentives to balance the load and improve operational efficiency. \|
+| **Finding** | **Recommendation** |
+|-------------|---------------------|
+| **Highest Departure and Arrival Delays by Carriers** | - Implement targeted training and support programs for high-delay carriers to improve operational efficiency.<br>- Use delay data to manage customer communications proactively. |
+| **Top 30 Congested Airports with Flight Delays** | - Allocate more resources and staff during peak times at congested airports to minimize delays.<br>- Develop contingency plans for high-traffic airports to handle surges in passenger volume effectively. |
+| **Delay Trends Across Distance Groups and Flight Segments** | - Analyze operational schedules to optimize turnaround times for flights, especially those with multiple segments.<br>- Review scheduling for short and moderate-distance flights to reduce potential delays. |
+| **Seasonal Trends** | - Increase staffing and operational resources during summer months to manage higher delay rates effectively.<br>- Monitor weather patterns and adjust scheduling in advance to minimize disruptions during winter months. |
+| **Time of Day** | - Consider adjusting flight schedules to reduce the number of early morning and late-night flights that experience high arrival delays.<br>- Increase capacity and resources during afternoon and evening hours to mitigate departure delays. |
+| **Weekly Patterns** | - Evaluate operational strategies to understand the factors contributing to increased delays on specific days.<br>- Promote Saturday travel incentives to balance the load and improve operational efficiency. |
 
 ### Model Evaluation Summary and Performance Metrics:
 
