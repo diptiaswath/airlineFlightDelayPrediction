@@ -14,8 +14,6 @@ Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| 
 
         - [Business Case 2: Improving Customer Experience](#business-case-2-improving-customer-experience)
 
-        - [Example Usage]:(#example-usage-an-ai-system-that-predicts-flight-delays-could-also)
-
     - [Research Question](#research-question)
 
     - [Evaluation Criteria](#evaluation-criteria)
@@ -62,7 +60,7 @@ Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| 
 
     - [StreamLit and FastAPI interface](#streamlit-and-fastapi-interface)
 
-    - [Working with repository with GitLFS](#git-large-file-storage)
+    - [Repository with GitLFS](#git-large-file-storage)
 
 5. [Project Infrastructure](#project-infrastructre)
 
