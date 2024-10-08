@@ -10,9 +10,11 @@ Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| 
 
     - [Rationale](#rationale)
 
-        - [Business Case 1: Enhancing Operational Efficiency](#business-case-1)
+        - [Business Case 1: Enhancing Operational Efficiency](#business-case-1-enhancing-operational-efficiency)
 
-        - [Business Case 2: Improving Customer Experience](#business-case-2)
+        - [Business Case 2: Improving Customer Experience](#business-case-2-improving-customer-experience)
+
+        - [Example Usage]:(#example-usage-an-ai-system-that-predicts-flight-delays-could-also)
 
     - [Research Question](#research-question)
 
@@ -30,7 +32,7 @@ Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| 
 
     - [Model Evaluation Summary and Performance Metrics](#model-evaluation-summary-and-performance-metrics)
 
-        - [Performance Comparison Across Baseline, Logistic Regression and Decision Tree](#performance-comparison-across-baseline-logistic-regression-and-decision-tree)
+        - [Performance Comparison Across Baseline, Logistic Regression and Decision Tree Classifiers](#performance-comparison-across-baseline-logistic-regression-and-decision-tree)
 
         - [Performance Comparison Across Ensemble Bagging and Boosting Classifiers](#performance-comparison-across-ensemble-bagging-and-boosting-classifiers)
 
