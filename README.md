@@ -127,36 +127,40 @@ How can we develop an AI and machine learning-powered smart system to accurately
 ### Flight Delay Predictions - Key Metrics:
 
 SkyFlow is an advanced tool that helps predict how flights might perform. It looks at many factors like weather, how busy the airport is, and how well the airline usually does. Then, it puts each flight into one of three groups:
+
 "On Time": These flights are expected to leave and arrive as scheduled.
+
 "Partial Delay": These flights might be delayed leaving or arriving.
+
 "Full Delay": These flights are likely to be delayed both leaving and arriving.
 
 #### Why is this important? 
 
 It helps everyone plan better:
-    - Airlines can manage their schedules more effectively.
+
+Airlines can manage their schedules more effectively.
     
-    - Airports can prepare for busy times. 
+Airports can prepare for busy times. 
     
-    - Passengers can adjust their plans if needed.
+Passengers can adjust their plans if needed.
 
 #### How do we know if SkyFlow is doing a good job? 
 
 We look at five main things to evaluate SkyFlow's performance:
-    - Precision: How often SkyFlow correctly identifies delay groups when it predicts a delay.
+
+Precision: How often SkyFlow correctly identifies delay groups when it predicts a delay.
     
-    - Recall: How often SkyFlow correctly identifies actual delays out of all delayed flights.
+Recall: How often SkyFlow correctly identifies actual delays out of all delayed flights.
     
-    - F1 Score: How well SkyFlow balances precision and recall.
+F1 Score: How well SkyFlow balances precision and recall.
     
-    - Precision-Recall Area Under the Curve (PR AUC): How well SkyFlow performs across different thresholds for classifying delays.
+Precision-Recall Area Under the Curve (PR AUC): How well SkyFlow performs across different thresholds for classifying delays.
     
-    - Receiver Operating Characteristic Area Under the Curve (ROC AUC): How well SkyFlow distinguishes between delayed and on-time flights.
+Receiver Operating Characteristic Area Under the Curve (ROC AUC): How well SkyFlow distinguishes between delayed and on-time flights.
 
 Our goal is to make SkyFlow as accurate as possible, so everyone can rely on its predictions to make their travel smoother and more predictable. 
 
 To monitor overall performance, we use the Precision-Recall Area Under the Curve (PR AUC) and Receiver Operating Characteristic Area Under the Curve (ROC AUC). 
-
 For evaluating the balance between correctly identifying delays and avoiding false alarms, we rely on the F1 Score as the primary metric, which combines precision and recall into a single value.
 
 ### Approach
