@@ -26,7 +26,7 @@ Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| 
 
     - [Key Findings from Exploratory Data Analysis](#key-findings-from-exploratory-data-analysis)
 
-    - [Actionable Insights - Recommendations from Exploratory Data Analysis](#actionable-insights-recommendations-from-exploratory-data-analysis)
+    - [Actionable Insights - Recommendations from Exploratory Data Analysis](#actionable-insights---recommendations-from-exploratory-data-analysis)
 
     - [Model Evaluation Summary and Performance Metrics](#model-evaluation-summary-and-performance-metrics)
 
