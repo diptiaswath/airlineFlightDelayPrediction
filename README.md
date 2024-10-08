@@ -1,8 +1,6 @@
 # SkyFlow: AI-Powered Flight Delay Prediction for Optimized Airline Operations
 
-Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| [Email](mailto:dipti.aswath@gmail.com) 
-
-Early [SkyFlow](http://18.219.112.73:8501/) Prototype
+Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| [Email](mailto:dipti.aswath@gmail.com) \| Early [SkyFlow](http://18.219.112.73:8501/) Prototype
 
 ## Executive Summary
 
@@ -117,6 +115,7 @@ To improve model performance in Phase2, new features were engineered by tracking
     2.1. Extract basic flight information (date, origin, destination, etc.)
 
     2.2. Compute SEGMENT_NUMBER:
+
         a. Group flights by TAIL_NUM and DAY_OF_MONTH
 
         b. Sort by DEP_TIME within each group
@@ -126,9 +125,11 @@ To improve model performance in Phase2, new features were engineered by tracking
     2.3. Add SEGMENT_NUMBER to D
 
 3. For each flight record F in D:
+
     3.1. Identify previous flight P with same TAIL_NUM
 
     3.2. If P exists:
+
         a. Set PREVIOUS_AIRPORT = P.DESTINATION
 
         b. Set PREVIOUS_ARR_DELAY = P.ARR_DELAY
@@ -138,11 +139,13 @@ To improve model performance in Phase2, new features were engineered by tracking
         d. Set PREVIOUS_DURATION = P.ACTUAL_ELAPSED_TIME
 
     3.3. Else:
+
         Set all PREVIOUS_* features to null or appropriate default values
 
     3.4. Add PREVIOUS_* features to D
 
 4. Compute FLIGHT_DURATION:
+
     4.1. FLIGHT_DURATION = CRS_ARR_TIME - CRS_DEP_TIME
 
     4.2. Add FLIGHT_DURATION to D
@@ -150,6 +153,7 @@ To improve model performance in Phase2, new features were engineered by tracking
 5. Merge weather data with D based on date and airport
 
 6. Compute temporal features:
+
     6.1. Extract MONTH, DAY_OF_WEEK from date
 
     6.2. Compute SEASON based on MONTH
@@ -161,6 +165,7 @@ To improve model performance in Phase2, new features were engineered by tracking
 7. Merge airport and airline data with D
 
 8. Compute historical performance metrics:
+
     8.1. Calculate CARRIER_HISTORICAL (average delay by carrier and month)
 
     8.2. Calculate DEP_AIRPORT_HIST (average delay by departure airport and month)
