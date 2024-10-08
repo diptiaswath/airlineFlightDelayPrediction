@@ -60,7 +60,7 @@ Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| 
 
     - [StreamLit and FastAPI interface](#streamlit-and-fastapi-interface)
 
-    - [Repository with GitLFS](#git-large-file-storage)
+    - [Repository with GitLFS](#repository-with-gitlfs)
 
 5. [Project Infrastructure](#project-infrastructre)
 
