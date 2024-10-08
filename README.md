@@ -2,6 +2,76 @@
 
 Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| [Email](mailto:dipti.aswath@gmail.com) \| Early [SkyFlow](http://18.219.112.73:8501/) Prototype
 
+## Table of Contents
+
+1. [Executive Summary](#executive-summary)
+
+    - [Problem Statement](#problem-statement)
+
+    - [Rationale](#rationale)
+
+        - [Business Case 1: Enhancing Operational Efficiency](#business-case-1)
+
+        - [Business Case 2: Improving Customer Experience](#business-case-2)
+
+    - [Research Question](#research-question)
+
+    - [Evaluation Criteria](#evaluation-criteria)
+
+    - [Approach](#approach)
+
+        - [CRISP-DM Framework](#crisp-dm-framework)
+     
+        - [Feature Engineering Approach](#feature-engineering-approach)
+
+    - [Key Findings from Exploratory Data Analysis](#key-findings-from-exploratory-data-analysis)
+
+    - [Actionable Insights - Recommendations from Exploratory Data Analysis](#actionable-insights-recommendations-from-exploratory-data-analysis)
+
+    - [Model Evaluation Summary and Performance Metrics](#model-evaluation-summary-and-performance-metrics)
+
+        - [Performance Comparison Across Baseline, Logistic Regression and Decision Tree](#performance-comparison-1)
+
+        - [Performance Comparison Across Ensemble Bagging and Boosting Classifiers](#performance-comparison-2)
+
+        - [Performance Comparison Across Hybrid Ensemble Classifiers](#performance-comparison-3)
+
+    - [Recommendations for Model Selection and Deployment for Flight Delay Predictions]
+
+    - [Features influencing model recommendation]
+
+    - [Recommendations based on influential features in Flight Delay Predictions]
+
+    - [Partial Dependence Plots: Analyzing Feature Impact on Flight Delay Predictions for each Delay Class]
+
+2. [Data Sources](#data-sources)
+
+3. [Methodology Used for Data Preparation and Modeling](#methodolody-used-for-data-preparation-and-modeling)
+
+4. [Project Structure](#project-structure)
+
+    - [Data](#data)
+
+    - [Analysis and Visualization](#analysis-and-visualization)
+
+    - [Notebooks](#notebooks)
+
+    - [Model Artifacts](#model-artifacts)
+
+    - [StreamLit and FastAPI interface](#streamlit-and-fastapi-interface)
+
+    - [Working with repository with GitLFS](#git-large-file-storage)
+
+5. [Project Infrastructure](#project-infrastructre)
+
+6. [Key Insights from Phase 1 to Phase 2 of Project](#key-insights-from-phase-1-to-phase-2-of-project)
+
+7. [Future Work](#future-work)
+
+8. [Appendix](#appendix)
+
+9. [References](#references)
+
 ## Executive Summary
 
 ### Problem Statement:
@@ -96,88 +166,89 @@ To improve model performance in Phase2, new features were engineered by tracking
 
 ##### Enhanced Feature Engineering Algorithm
 
-###### Input:
-- Raw flight data
-- Aircraft data
-- Weather data
-- Airport data
-- Airline data
+```
+    ###### Input:
+    - Raw flight data
+    - Aircraft data
+    - Weather data
+    - Airport data
+    - Airline data
 
-###### Output:
-- Enriched dataset with engineered features for flight delay prediction
+    ###### Output:
+    - Enriched dataset with engineered features for flight delay prediction
 
-###### Algorithm:
+    ###### Algorithm:
 
-1. Initialize empty dataset D for engineered features
+    1. Initialize empty dataset D for engineered features
 
-2. For each flight record F in raw flight data:
+    2. For each flight record F in raw flight data:
 
-    2.1. Extract basic flight information (date, origin, destination, etc.)
+        2.1. Extract basic flight information (date, origin, destination, etc.)
 
-    2.2. Compute SEGMENT_NUMBER:
+        2.2. Compute SEGMENT_NUMBER:
 
-        a. Group flights by TAIL_NUM and DAY_OF_MONTH
+            a. Group flights by TAIL_NUM and DAY_OF_MONTH
 
-        b. Sort by DEP_TIME within each group
+            b. Sort by DEP_TIME within each group
 
-        c. Assign sequential numbers starting from 1
+            c. Assign sequential numbers starting from 1
 
-    2.3. Add SEGMENT_NUMBER to D
+        2.3. Add SEGMENT_NUMBER to D
 
-3. For each flight record F in D:
+    3. For each flight record F in D:
 
-    3.1. Identify previous flight P with same TAIL_NUM
+        3.1. Identify previous flight P with same TAIL_NUM
 
-    3.2. If P exists:
+        3.2. If P exists:
 
-        a. Set PREVIOUS_AIRPORT = P.DESTINATION
+            a. Set PREVIOUS_AIRPORT = P.DESTINATION
 
-        b. Set PREVIOUS_ARR_DELAY = P.ARR_DELAY
+            b. Set PREVIOUS_ARR_DELAY = P.ARR_DELAY
 
-        c. Set PREVIOUS_DEP_DELAY = P.DEP_DELAY
+            c. Set PREVIOUS_DEP_DELAY = P.DEP_DELAY
 
-        d. Set PREVIOUS_DURATION = P.ACTUAL_ELAPSED_TIME
+            d. Set PREVIOUS_DURATION = P.ACTUAL_ELAPSED_TIME
 
-    3.3. Else:
+        3.3. Else:
 
-        Set all PREVIOUS_* features to null or appropriate default values
+            Set all PREVIOUS_* features to null or appropriate default values
 
-    3.4. Add PREVIOUS_* features to D
+        3.4. Add PREVIOUS_* features to D
 
-4. Compute FLIGHT_DURATION:
+    4. Compute FLIGHT_DURATION:
 
-    4.1. FLIGHT_DURATION = CRS_ARR_TIME - CRS_DEP_TIME
+        4.1. FLIGHT_DURATION = CRS_ARR_TIME - CRS_DEP_TIME
 
-    4.2. Add FLIGHT_DURATION to D
+        4.2. Add FLIGHT_DURATION to D
 
-5. Merge weather data with D based on date and airport
+    5. Merge weather data with D based on date and airport
 
-6. Compute temporal features:
+    6. Compute temporal features:
 
-    6.1. Extract MONTH, DAY_OF_WEEK from date
+        6.1. Extract MONTH, DAY_OF_WEEK from date
 
-    6.2. Compute SEASON based on MONTH
+        6.2. Compute SEASON based on MONTH
 
-    6.3. Compute DEP_PART_OF_DAY based on CRS_DEP_TIME
+        6.3. Compute DEP_PART_OF_DAY based on CRS_DEP_TIME
 
-    6.4. Add temporal features to D
+        6.4. Add temporal features to D
 
-7. Merge airport and airline data with D
+    7. Merge airport and airline data with D
 
-8. Compute historical performance metrics:
+    8. Compute historical performance metrics:
 
-    8.1. Calculate CARRIER_HISTORICAL (average delay by carrier and month)
+        8.1. Calculate CARRIER_HISTORICAL (average delay by carrier and month)
 
-    8.2. Calculate DEP_AIRPORT_HIST (average delay by departure airport and month)
+        8.2. Calculate DEP_AIRPORT_HIST (average delay by departure airport and month)
 
-    8.3. Calculate DEP_BLOCK_HIST (average delay by departure time block and month)
+        8.3. Calculate DEP_BLOCK_HIST (average delay by departure time block and month)
 
-    8.4. Add historical metrics to D
+        8.4. Add historical metrics to D
 
-9. Handle missing values and perform necessary data type conversions
+    9. Handle missing values and perform necessary data type conversions
 
-10. Return enriched dataset D
-
+    10. Return enriched dataset D
+```
 
 ### Key Findings from Exploratory Data Analysis:
 
@@ -316,7 +387,7 @@ The ensemble, and hybrid ensemble models outperformed the baseline, Logistic Reg
 | **Hybrid Ensemble Classifier**     | - High weighted F1 score (0.7935)<br>- Good accuracy (0.8234)<br>- High weighted PR AUC (0.82)<br>- High weighted ROC AUC (0.80) | - Struggles with class 1 (F1 score: 0.0813)                  | - Performance comparable to other ensemble methods<br>- Good balance between precision and recall for class 0 and 2 | Top 5 (Permutation Importance):<br>1. PREVIOUS_ARR_DELAY: 0.1324<br>2. PREVIOUS_AIRPORT: 0.0495<br>3. PREVIOUS_DURATION: 0.0458<br>4. SEGMENT_NUMBER: 0.0431<br>5. DEP_PART_OF_DAY: 0.0216 |
 
 
-#### Recommendations for Model Selection and Deployment for Flight Delay Predictions:
+### Recommendations for Model Selection and Deployment for Flight Delay Predictions:
 
 **Best Model: Voting Classifier**
 
@@ -368,7 +439,7 @@ The Hybrid Ensemble Classifier is an alternate choice:
 
 -   Use where compute resources and infrastructure allow for multiple model deployments
 
-#### Features influencing model recommendation:
+### Features influencing model recommendation:
 
 Based on the feature importance results from across these models, the following features are consistently influential in flight delay predictions – ref: [feature descriptions](https://media.githubusercontent.com/media/diptiaswath/airlineFlightDelayPrediction/refs/heads/main/combined_data/dataset_documentation_v2.txt):
 
@@ -396,7 +467,7 @@ These features consistently appear among the top influential factors across diff
 
 ![](images/73998ff9e269dde72ea433aa54a200c0.jpeg)
 
-#### Recommendations based on influential features in Flight Delay Predictions:
+### Recommendations based on influential features in Flight Delay Predictions:
 
 | **Feature** | **Recommendation** |
 |-------------|--------------------|
@@ -412,11 +483,13 @@ These features consistently appear among the top influential factors across diff
 | **DAY_OF_WEEK** | - Adjust resources and schedules based on weekly patterns.<br>- Implement dynamic pricing strategies to manage demand across different days. |
 
 
-#### Partial Dependence Plots: Analyzing Feature Impact on Flight Delay Predictions for each Delay Class
+### Partial Dependence Plots: Analyzing Feature Impact on Flight Delay Predictions for each Delay Class
 
 ![A group of graphs showing the results of a performance Description automatically generated with medium confidence](images/6f95f3865ee6296b7e2ef6272d2b4c0c.jpeg)![A group of graphs showing the results of a graph Description automatically generated with medium confidence](images/287a3e4dd2cbd714dbf457681b515df5.jpeg)![A group of graphs showing the results of a test Description automatically generated with medium confidence](images/007e8eca9afcce2cc912829109df378c.jpeg)
 
-##### Detailed evaluation metrics for each model can be found in the Appendix.
+### More Deep Dives:
+
+Please read on for additional details.
 
 ## Data Sources
 
