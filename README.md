@@ -134,7 +134,6 @@ SkyFlow is an advanced tool that helps predict how flights might perform. It loo
 #### Why is this important? 
 
 It helps everyone plan better:
-
     - Airlines can manage their schedules more effectively.
     
     - Airports can prepare for busy times. 
@@ -144,7 +143,6 @@ It helps everyone plan better:
 #### How do we know if SkyFlow is doing a good job? 
 
 We look at five main things to evaluate SkyFlow's performance:
-
     - Precision: How often SkyFlow correctly identifies delay groups when it predicts a delay.
     
     - Recall: How often SkyFlow correctly identifies actual delays out of all delayed flights.
@@ -155,14 +153,13 @@ We look at five main things to evaluate SkyFlow's performance:
     
     - Receiver Operating Characteristic Area Under the Curve (ROC AUC): How well SkyFlow distinguishes between delayed and on-time flights.
 
-
 Our goal is to make SkyFlow as accurate as possible, so everyone can rely on its predictions to make their travel smoother and more predictable. 
 
 To monitor overall performance, we use the Precision-Recall Area Under the Curve (PR AUC) and Receiver Operating Characteristic Area Under the Curve (ROC AUC). 
 
 For evaluating the balance between correctly identifying delays and avoiding false alarms, we rely on the F1 Score as the primary metric, which combines precision and recall into a single value.
 
-### Approach:
+### Approach
 
 #### CRISP-DM Framework:
 
@@ -355,7 +352,7 @@ The Hybrid Ensemble Classifier is an alternate choice:
 | **DAY_OF_WEEK** | - Adjust resources and schedules based on weekly patterns.<br>- Implement dynamic pricing strategies to manage demand across different days. |
 
 
-## Deep Dives:
+## Deep Dives
 
 ### Enhanced Feature Engineering Algorithm
 
