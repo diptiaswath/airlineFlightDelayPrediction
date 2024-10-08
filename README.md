@@ -30,19 +30,19 @@ Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| 
 
     - [Model Evaluation Summary and Performance Metrics](#model-evaluation-summary-and-performance-metrics)
 
-        - [Performance Comparison Across Baseline, Logistic Regression and Decision Tree](#performance-comparison-1)
+        - [Performance Comparison Across Baseline, Logistic Regression and Decision Tree](#performance-comparison-across-baseline-logistic-regression-and-decision-tree)
 
-        - [Performance Comparison Across Ensemble Bagging and Boosting Classifiers](#performance-comparison-2)
+        - [Performance Comparison Across Ensemble Bagging and Boosting Classifiers](#performance-comparison-across-ensemble-bagging-and-boosting-classifiers)
 
-        - [Performance Comparison Across Hybrid Ensemble Classifiers](#performance-comparison-3)
+        - [Performance Comparison Across Hybrid Ensemble Classifiers](#performance-comparison-across-hybrid-ensemble-classifiers)
 
-    - [Recommendations for Model Selection and Deployment for Flight Delay Predictions]
+    - [Recommendations for Model Selection and Deployment for Flight Delay Predictions](#recommendations-for-model-selection-and-deployment-for-flight-delay-predictions)
 
-    - [Features influencing model recommendation]
+    - [Features influencing model recommendation](#features-influencing-model-recommendation)
 
-    - [Recommendations based on influential features in Flight Delay Predictions]
+    - [Recommendations based on influential features in Flight Delay Predictions](#recommendations-based-on-influential-features-in-flight-delay-predictions)
 
-    - [Partial Dependence Plots: Analyzing Feature Impact on Flight Delay Predictions for each Delay Class]
+    - [Partial Dependence Plots: Analyzing Feature Impact on Flight Delay Predictions for each Delay Class](#partial-dependence-plots-analyzing-feature-impact-on-flight-delay-predictions-for-each-delay-class)
 
 2. [Data Sources](#data-sources)
 
@@ -64,7 +64,7 @@ Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| 
 
 5. [Project Infrastructure](#project-infrastructre)
 
-6. [Key Insights from Phase 1 to Phase 2 of Project](#key-insights-from-phase-1-to-phase-2-of-project)
+6. [Key Insights from Phase1 to Phase2 of Project](#key-insights-from-phase1-to-phase2-of-project)
 
 7. [Future Work](#future-work)
 
@@ -487,7 +487,7 @@ These features consistently appear among the top influential factors across diff
 
 ![A group of graphs showing the results of a performance Description automatically generated with medium confidence](images/6f95f3865ee6296b7e2ef6272d2b4c0c.jpeg)![A group of graphs showing the results of a graph Description automatically generated with medium confidence](images/287a3e4dd2cbd714dbf457681b515df5.jpeg)![A group of graphs showing the results of a test Description automatically generated with medium confidence](images/007e8eca9afcce2cc912829109df378c.jpeg)
 
-### More Deep Dives:
+### Deep Dives:
 
 Please read on for additional details.
 
@@ -670,7 +670,7 @@ This project utilized Google Colab Pro to handle computationally intensive noteb
 -   Decision tree and Random Forest tree structures are available externally - view [here](https://drive.google.com/drive/folders/1qXDYyuo2lqJBwFTBoI7KCV45SZC-w163?usp=drive_link)
 
 
-## Key Insights from Phase 1 to Phase 2 of Project
+## Key Insights from Phase1 to Phase2 of Project
 
 -   Switched to predicting three classes instead of earlier four classes removing granularity of whether a flight had a specific arrival delay or a departure delay
 
