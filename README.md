@@ -1,6 +1,6 @@
 # SkyFlow: AI-Powered Flight Delay Prediction for Optimized Airline Operations
 
-Dipti Aswath | [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) | [Email](mailto:dipti.aswath@gmail.com)
+Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| [Email](mailto:dipti.aswath@gmail.com) \| Early [SkyFlow](http://18.219.112.73:8501/) Prototype\|
 
 ## Executive Summary
 
@@ -36,7 +36,7 @@ Accurate delay predictions lead to better customer service and proactive communi
 
 By addressing these areas, airlines can significantly improve operational efficiency, enhance passenger experience with better customer satisfaction scores, and better manage resources and disruptions. Predictive modeling for flight delays is not just about minimizing delays but also about fostering a more responsive and resilient airline operation.
 
-#### Example Usage: An AI system that predicts flight delays could:
+#### Example Usage: An AI system that predicts flight delays could also:
 
 1.  Suggest alternate flight paths that are less likely to experience delays.
 
@@ -50,13 +50,82 @@ By addressing these areas, airlines can significantly improve operational effici
 
 How can a multi-class classification model be developed to accurately predict flight delays by assessing multiple factors, including departure and arrival delays, using data related to flight status, weather conditions, air traffic, aircraft specifics, and ground operations?
 
-### Key Findings from Exploratory Data Analysis
+### Evaluation Criteria:
+
+For predicting flight delays as a multi-class classification problem with:
+
+-   **Class 0**: On-time flights
+
+-   **Class 1**: Either the departure or arrival of the current flight is delayed
+
+-   **Class 2**: Both departure and arrival of the current flight are delayed
+
+The key criteria and metrics considered are:
+
+1.  **Accurately predict delays while maintaining the accuracy of on-time flight predictions.**
+
+2.  **Strike a balance between:**
+
+    -   **High recall for delays**: Ensuring delayed flights are correctly identified.
+
+    -   **High precision for delays**: Avoiding misclassification of on-time flights as delayed.
+
+To monitor **overall model performance**, we use **Precision-Recall Area Under the Curve (PR AUC)** and **Receiver Operating Characteristic Area Under the Curve (ROC AUC)**. For evaluating the balance between recall and precision, we rely on the **F1 Score** as the primary metric.
+
+### Approach:
+
+#### CRISP-DM Framework:
+
+For the Flight Delay Prediction problem, the CRISP-DM (Cross Industry Standard Process for Data Mining) framework was applied to provide a structured solution. The process was as follows:
+
+1.  **Business Understanding:** The goal was to predict flight delays to improve airline operational efficiency and enhance customer satisfaction by reducing unexpected delays.
+
+2.  **Data Understanding:** A detailed analysis of the dataset was performed, identifying key patterns and relationships, such as flight times, delays, and distances, that could significantly influence prediction outcomes.
+
+3.  **Data Preparation:** The raw data was preprocessed, and relevant features were engineered. This included detailed delay metrics such as departure and arrival times, distances, and other flight-specific attributes to ensure high-quality inputs for model training.
+
+4.  **Modeling:** Various machine learning models were trained and evaluated, focusing on performance metrics like Precision-Recall AUC, ROC AUC, and F1 score. These models were iteratively tuned to optimize predictive performance.
+
+5.  **Deployment:** The best-performing model was integrated into **SkyFlow’s** prototype application, enabling real-time flight delay predictions. Future iterations aim to further enhance operational decision-making.
+
+#### Feature Engineering Approach: 
+
+During the data preparation phase, significant feature engineering was conducted as outlined in a later Methodology section. Initially, features that captured the relationship between departure and arrival delays were found to introduce data leakage, leading to overly optimistic predictions. As a result, these features were excluded in Phase 2.
+
+To improve model performance in Phase2, new features were engineered by tracking flight segment sequences for each tail number on a given day (e.g., SEGMENT_NUMBER). **Historical flight information**, such as previous airports (PREVIOUS_AIRPORT), prior delays (PREVIOUS_ARR_DELAY), and flight durations (PREVIOUS_DURATION), was incorporated. This was done by merging **current flight records** with its own FLIGHT_DURATION with the corresponding previous segment data, providing a richer and more comprehensive dataset for predicting delays.
+
+**Enhanced Feature Engineering:**
+
+1.  Segment Number:
+
+    -   Track flight number sequence for each tail number on a given day based on the combination of raw features TAIL_NUM, DAY_OF_MONTH, and DEP_TIME
+
+2. Previous Airports:
+
+    -   Capture previous segment (if any) of a current flight and its departing airport as PREVIOUS_AIRPORT
+
+3. Previous Delays and Durations:
+
+    -   Include previous flight’s arrival delay, departure delay and duration from ACTUAL_ELAPSED_TIME, ARR_DELAY and DEP_DELAY
+
+4. Current Flight Duration:
+
+    -   Include current flight duration using planned arrival, planned departure and scheduled elapsed times, CRS_ARR_TIME, CRS_DEP_TIME, and CRS_ELAPSED_TIME
+
+**Methodology:**
+
+-   Merge current flight records with previous segment data to create a richer dataset.
+
+-   Analyze historical features to understand their impact on current flight departure and arrival performance.
+
+
+### Key Findings from Exploratory Data Analysis:
 
 **Highest Departure and Arrival delays by Carriers (2019):** Identifying the carriers with the highest delays directly relates to **improved customer experience and financial impact**. By pinpointing these carriers, airlines can better manage customer expectations, offer targeted support, and address issues that could lead to costly disruptions and compensation claims.
 
-![A graph showing the average departure of a flight Description automatically generated](images/bc7e179bc1861433458bf6810faa5295.jpeg)
+![A graph of blue rectangular objects Description automatically generated](images/2b94694b74be808586d48c03731fac80.jpeg)
 
-![A graph showing the average arrival of passengers Description automatically generated](images/bed4de04b8db99bd5041395fbf01c60f.jpeg)
+![A graph of blue rectangular objects Description automatically generated](images/a9b49c565ce77aa38924548ea378a8cc.jpeg)
 
 **Top 30 Congested Airports with Flight Delays (2019):** This finding supports **enhanced operational efficiency and operational resilience**. By focusing on the most congested airports, airlines can optimize resource allocation and improve scheduling to alleviate delays at these critical points, leading to smoother operations and better crisis management.
 
@@ -66,9 +135,9 @@ How can a multi-class classification model be developed to accurately predict fl
 
 **SMOTE Resampling on Training Data:** Demonstrates the importance of **data-driven decision making**. By improving model performance through resampling, airlines can make more accurate predictions about delays, leading to better strategic planning and performance monitoring.
 
-![A screenshot of a computer program Description automatically generated](images/7c15fd0c16055e95bdd20642651cba48.jpeg)
+![A close-up of a computer code Description automatically generated](images/fcfe2f26e33b53b23f96f462c7f0255a.jpeg)
 
-![A diagram of a color scheme Description automatically generated with medium confidence](images/32b8b2fb96200ded01effd80e1fd6eea.jpeg)
+![A blue and purple pie chart Description automatically generated](images/382bf1e1bb694f5d41ec2e21890d8129.jpeg)
 
 **Delay Trends Across Distance Groups and Flight Segments (2019):** This finding helps provide valuable insights into how aircraft operational schedules and the number of daily flights contributed to 2019 delays, effectively addressing **operational efficiency and contingency planning**. Understanding how delay patterns vary with flight distance and segment numbers helps airlines plan better turnaround times and manage operational schedules more effectively to prevent delays.
 
@@ -76,7 +145,7 @@ How can a multi-class classification model be developed to accurately predict fl
 
 -   **Delays Correlate with Higher Segment Numbers**: Flights scheduled for more segments in a day are more prone to delays, regardless of distance. These delays are likely due to operational factors, such as shorter turnaround times, leading to delayed departures and arrivals.
 
-![A graph of different colored lines Description automatically generated with medium confidence](images/6972858dec585d485ce8ef20325ef477.jpeg)
+![A graph of a number across a group Description automatically generated](images/66a9850650bfdcfe6b29b486b4c62585.jpeg)
 
 **Median Departure and Arrival Delays per Carrier (2019):** Identified the top 20 carriers with the highest median delays. For each carrier, the top 20 airports with the most significant contribution to delays were also identified. By examining median delays, airlines can gain insights into typical delay experiences and ensure compliance with regulations. Focusing on specific carriers and airports with high delays can enhance **overall safety and customer satisfaction**.
 
@@ -88,134 +157,237 @@ How can a multi-class classification model be developed to accurately predict fl
 
 ![A screenshot of a graph Description automatically generated](images/fcb34c72898e35e1a0bfb19cd5d85403.jpeg)
 
-![A graph of a number of aircraft carrier names Description automatically generated](images/01857b3b3a37af99de404915b9763511.jpeg)
+![A row of purple rectangular objects Description automatically generated](images/c86c3808135fd06a48961a8d4d4f33a5.jpeg)
 
-[TODO - Add more key findings]
+**Analyzing Trends in Flight Delays by Distance Groups (2019):** This focuses on understanding how flight delays vary across different distance categories, which helps airlines optimize their operations to inform strategies to mitigate delays.
 
-### Actionable Insights: Recommendations from Exploratory Data Analysis 
+It can be observed that flights traveling short and moderate distances tend to have higher delays compared to the remainder of the distance categories.
 
-[TODO]
+![A graph of different colored squares Description automatically generated with medium confidence](images/913aded278e695525523876da8b87fe4.jpeg)
 
+**Analyzing Trends in Flight Delays by Season, Time of Day and Day of Week (2019):** This trend analysis aims to assist airlines in optimizing their operations by informing strategies to mitigate delays.
 
-### Model Evaluation Summary and Performance Metrics
+-   **Seasonal Trends:** Summer months generally experience the highest rates of both arrival and departure delays, while winter months also show significant arrival delays.
+
+-   **Time of Day:** Early morning and late-night flights are associated with the highest arrival delays, whereas afternoon and evening flights tend to experience more departure delays.
+
+-   **Weekly Patterns:** There is a noticeable dip in arrival delays on Saturdays, while other days of the week exhibit a relatively even distribution of both arrival and departure delays.
+
+![A screenshot of a graph Description automatically generated](images/19bcdc69732917d6bcd1213015bd6cd4.jpeg)![A purple and orange squares Description automatically generated](images/9bca13de2fa0dfd946d3d41872f7fd83.jpeg)
+
+![A purple and orange bars Description automatically generated](images/0fcbd4012821aef1b942af25c8508065.jpeg)
+
+**Analyzing Historical Average Delays (2019):** Visualize the average historical delays of DEP_BLOCK_HIST, which represents the historical average delay for different departure time blocks aggregated by month, and DEP_AIRPORT_HIST, indicating the historical average delay rates for flights departing from specific airports per month. This analysis examines how these metrics fluctuate due to various time-related and seasonal factors, aiming to provide insights into delay patterns across different times of day, days of the week, and seasons.Bottom of Form
+
+-   **Seasonal Trends:** Historical average delays are generally higher during the summer months, followed by winter and spring.
+
+-   **Weekly Trends:** Historical delays are evenly distributed throughout the week.
+
+-   **Time of Day:** Average delays for different departure time blocks are notably higher in the afternoons and evenings.
+
+![A group of different colored bars Description automatically generated](images/beee6138998176d3696bfb739b4d468f.jpeg)
+
+**Analyzing Average Weather features by Airlines and Airports (2019):** This analysis was done to understand how selected weather features (PRCP, TMAX, AWND, SNOW, SNWD) vary across different carriers, departing airports, and previous airports, to observe any patterns with how weather conditions impact flight operations.
+
+There was no significant trend observed in the average values of the selected weather features, when grouped by the specified columns (CARRIER_NAME, DEPARTING_AIRPORT, PREVIOUS_AIRPORT).
+
+![A graph of numbers on a white background Description automatically generated](images/ba9a0d316ba0fbfdfe4a22acba0fb102.jpeg)![A chart with purple rectangles Description automatically generated](images/3a20a59536450b473357cb98e4481307.jpeg)
+
+### Actionable Insights - Recommendations from Exploratory Data Analysis:
+
+\| \*\*Finding\*\* \| \*\*Recommendation\*\* \|
+
+\|-----------------------------------------------------\|---------------------------------------------------------------------------------------------------------\|
+
+\| \*\*Highest Departure and Arrival Delays by Carriers\*\* \| - Implement targeted training and support programs for high-delay carriers to improve operational efficiency. \<br\>- Use delay data to manage customer communications proactively. \|
+
+\| \*\*Top 30 Congested Airports with Flight Delays\*\* \| - Allocate more resources and staff during peak times at congested airports to minimize delays. \<br\>- Develop contingency plans for high-traffic airports to handle surges in passenger volume effectively. \|
+
+\| \*\*Delay Trends Across Distance Groups and Flight Segments\*\* \| - Analyze operational schedules to optimize turnaround times for flights, especially those with multiple segments. \<br\>- Review scheduling for short and moderate-distance flights to reduce potential delays. \|
+
+\| \*\*Seasonal Trends\*\* \| - Increase staffing and operational resources during summer months to manage higher delay rates effectively. \<br\>- Monitor weather patterns and adjust scheduling in advance to minimize disruptions during winter months. \|
+
+\| \*\*Time of Day\*\* \| - Consider adjusting flight schedules to reduce the number of early morning and late-night flights that experience high arrival delays. \<br\>- Increase capacity and resources during afternoon and evening hours to mitigate departure delays. \|
+
+\| \*\*Weekly Patterns\*\* \| - Evaluate operational strategies to understand the factors contributing to increased delays on specific days. \<br\>- Promote Saturday travel incentives to balance the load and improve operational efficiency. \|
+
+### Model Evaluation Summary and Performance Metrics:
 
 The following classification models were evaluated for predicting flight delays, listed in order:
 
--   Dummy Classifier (baseline)
+-   Dummy Classifier (Baseline)
 
 -   Multinomial Logistic Regression
 
 -   Decision Trees with hyperparameter tuning
 
--   Random Forest
+-   Ensemble Models – Bagging with Bagging Classifier with Decision Trees, Random Forest; Boosting with XGBoost, CatBoost and Light Gradient Boosting Machine (LGBM)
 
--   XGBoost
+-   Hybrid Ensemble Models – Voting Classifier as an ensemble of XGBoost and Random Forest, Stacking Classifiers (hyperparameter tuned and without) with XGBoost and Random Forest as base estimator and a meta classifier with one-vs-rest Logistic Regression.
 
--   CatBoost
+#### Model Evaluation Metrics:
 
--   Voting Classifier (ensemble of XGBoost and Random Forest)
+The ensemble, and hybrid ensemble models outperformed the baseline, Logistic Regression, and Decision Tree models. This section summarizes and compares the key metrics across these model groups, making its final recommendation for production deployment.
 
--   Bagging Classifier (with hyper parameter tuned Decision Tree as the base estimator)
+##### Performance comparison across Baseline, Logistic Regression and Decision Tree:
 
-#### Model Evaluation Metrics
+![A graph showing different types of flight delay Description automatically generated](images/5eff024ec6a16cf7aa739cbf7291dccf.jpeg)
 
-The bagging, boosting, and ensemble models outperformed the baseline, Logistic Regression, and Decision Tree models, as observed [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/README.md#comparison-of-logistic-regression-and-decision-tree-models). Below is a comparison table highlighting the key metrics of the ensemble models.
+\| Model \| Strengths \| Weaknesses \| Key Observations \| Important Features \|
 
-| Aspect | Random Forest | XGBoost | CatBoost | Voting Classifier | Bagging Classifier |
-|--------|---------------|---------|----------|-------------------|-------------------|
-| **Performance Analysis** |
-| Validation Accuracy | 0.7648 | 0.7823 | 0.7516 | 0.7806 | 0.7635 |
-| Accuracy | 0.7668 | 0.7820 | 0.7577 | 0.7809 | 0.7808 | 0.7633
-| Validation F1 Score | 0.7163 | 0.7122 | 0.6980 | 0.7170 | 0.7158 |
-| Weighted F1 score | 0.7142 | 0.7094 | 0.6967 | 0.7139 | 0.7102 |
-| Weighted PR AUC   | 0.7180 | 0.7313 | 0.7014 | 0.7305 | 0.7159 | 
-| Weighted ROC AUC | 0.66 | 0.69 | 0.63 | 0.68 | 0.66 |
-| **Bias and Variance Analysis** |
-| Bias | Low | Low | Slightly higher | Low | Low |
-| Variance | Moderate to High | Controlled | Controlled | Reduced | Reduced |
-| **Top Feature Importances** |
-| 1 | PREVIOUS_AIRPORT | DEP_PART_OF_DAY | DEP_PART_OF_DAY | N/A | N/A |
-| 2 | ARR_PART_OF_DAY | PRCP | DAY_OF_WEEK | N/A | N/A |
-| 3 | DEP_PART_OF_DAY | ARR_PART_OF_DAY | ARR_PART_OF_DAY | N/A | N/A |
-| 4 | DAY_OF_WEEK | DAY_OF_WEEK | PRCP | N/A | N/A |
-| 5 | DISTANCE | SEGMENT_NUMBER | SEASON | N/A | N/A |
-| **Overall Summary** |
-| Strengths | Good balance of bias-variance, captures complex patterns | Highest accuracy, good at reducing bias and variance | Handles categorical variables well | Combines strengths of RF and XGBoost | Reduces variance of Decision Trees |
-| Weaknesses | Slightly lower accuracy than XGBoost | May overfit if not tuned properly | Slightly underperforms compared to others | No significant improvement over XGBoost | Lower accuracy than XGBoost and Voting Classifier |
-| Best for | Baseline model, feature importance | Overall best performer | Handling categorical data | Robust predictions | Reducing variance in DecisionTrees |
+\|-------\|-----------\|------------\|-------------------\|---------------------\|
 
-##### Key Observations with Model Evaluations:
+ \| \*\*Baseline\*\* \| - Simple and fast \| - Very poor weighted F1 score (0.0373)\<br\>- Low weighted PR AUC (0.63)\<br\>- Poor weighted ROC AUC (0.50)\<br\>- Low accuracy (0.1461)\<br\>- Unable to distinguish between classes effectively \| - Performs poorly across all metrics\<br\>- Not suitable for this classification task \| N/A \|
 
--   High Accuracy: All models achieve accuracy above 75%, with XGBoost and Voting Classifier reaching 78%.
+\| \*\*Multinomial Logistic Regression\*\* \| - Best overall performance\<br\>- Highest weighted F1 score (0.7329)\<br\>- Highest weighted PR AUC (0.77)\<br\>- Best weighted ROC AUC (0.74)\<br\>- Best accuracy (0.7051)\<br\>- Good balance between precision and recall \| - Still struggles with minority class (class 1)\<br\>- Slightly lower interpretability compared to Decision Tree \| - Shows the best overall performance\<br\>- Outperforms other models in most weighted metrics\<br\>- Provides a good balance across different metrics and classes \| Positive influence on class 2:\<br\>- DAY_OF_WEEK\<br\>- CARRIER_NAME\<br\>- PREVIOUS_ARR_DELAY\<br\>- MONTH\<br\>- ARR_PART_OF_DAY\<br\>- DEP_PART_OF_DAY\<br\>- SEASON\<br\>\<br\>Negative influence on class 2:\<br\>- PREVIOUS_DURATION_CATEGORY\<br\>- FLIGHT_DURATION_CATEGORY\<br\>- DISTANCE_GROUP_DESC \|
 
--   Good F1 Scores: F1 scores are consistently above 0.70.
+ \| \*\*Hyperparameter-tuned Decision Tree\*\* \| - Competitive weighted F1 score (0.7422)\<br\>- Good weighted PR AUC (0.74)\<br\>- Decent weighted ROC AUC (0.70)\<br\>- Highest accuracy (0.7359)\<br\>- Better interpretability than Logistic Regression \| - Slightly lower weighted F1 score than Logistic Regression\<br\>- Lower weighted PR AUC and ROC AUC compared to Logistic Regression\<br\>- Poorer performance on minority class (class 1) \| - Performs competitively, close to Logistic Regression\<br\>- Offers better interpretability\<br\>- Slightly higher accuracy than Logistic Regression \| Top features (permutation importance):\<br\>1. PREVIOUS_ARR_DELAY\<br\>2. DEP_PART_OF_DAY\<br\>3. PREVIOUS_DURATION\<br\>4. DISTANCE\<br\>5. FLIGHT_DURATION\<br\>\<br\>Top features (built-in importance):\<br\>1. PREVIOUS_ARR_DELAY\<br\>2. DEP_PART_OF_DAY\<br\>3. DAY_OF_WEEK\<br\>4. PRCP\<br\>5. AIRLINE_AIRPORT_FLIGHTS_MONTH \|
 
--   Ensemble Methods: Voting Classifier and Bagging Classifier show improvements over individual models, demonstrating effective use of ensemble techniques.
+##### Performance comparison across Ensemble Bagging and Boosting Classifiers:
 
--   Consistent Feature Importance: There's consistency in important features across models.
+![A graph showing different colored bars Description automatically generated with medium confidence](images/67bdce3d387a3cab8d8400179e93aa93.jpeg)
 
--   Weather Integration: The importance of PRCP (precipitation) shows successful integration of weather data into the models.
+\| Model \| Strengths \| Weaknesses \| Key Observations \| Important Features \|
 
--   Temporal Features: The models effectively utilize time-based features (DEP_PART_OF_DAY, ARR_PART_OF_DAY, DAY_OF_WEEK), which are crucial for flight delay prediction.
+\|-------------------------------------\|-----------------------------------------------------------------------------------------------\|-----------------------------------------------------------------------------------------------------\|------------------------------------------------------------------------------------------------------\|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\|
 
--   Class Imbalance: All models struggle with classes 1 and 2 (delayed departure or delayed arrivals) because of the class imbalance.
+\| \*\*BaggingClassifier (Decision Tree)\*\* \| - High weighted F1 score (0.7888)\<br\>- High weighted PR AUC (0.81)\<br\>- Good weighted ROC AUC (0.78) \| - Slightly lower weighted ROC AUC compared to some other models \| - Balanced performance across weighted metrics\<br\>- Good overall predictive power \| Top 5 (Permutation Importance):\<br\>1. PREVIOUS_ARR_DELAY: 0.1340\<br\>2. PREVIOUS_DURATION: 0.0802\<br\>3. SEGMENT_NUMBER: 0.0766\<br\>4. DEP_PART_OF_DAY: 0.0597\<br\>5. ARR_PART_OF_DAY: 0.0199 \|
 
-##### Model Deployment Recommendations:
+\| \*\*Random Forest Classifier\*\* \| - High weighted F1 score (0.7887)\<br\>- High weighted PR AUC (0.81)\<br\>- Best weighted ROC AUC (0.79) \| - Marginally lower weighted F1 score than BaggingClassifier \| - Very similar performance to BaggingClassifier\<br\>- Slightly better at handling class imbalance \| Top 5 (Built-in Importance):\<br\>1. PREVIOUS_ARR_DELAY: 0.1370\<br\>2. DISTANCE: -0.0006\<br\>3. TMAX: -0.0000\<br\>4. FLIGHT_DURATION: -0.0005\<br\>5. AWND: 0.0001 \|
 
-Primary Model: XGBoost is recommended as the primary choice for deployment due to its overall superior performance:
+\| \*\*XGBoost Classifier\*\* \| - High weighted PR AUC (0.81)\<br\>- High weighted ROC AUC (0.79) \| - Lower weighted F1 score (0.7682) compared to BaggingClassifier and Random Forest \| - Good balance between precision and recall\<br\>- Strong performance in AUC metrics \| Top 5 (Built-in Importance):\<br\>1. PREVIOUS_ARR_DELAY: 0.1718\<br\>2. DEP_PART_OF_DAY: 0.0503\<br\>3. PREVIOUS_DURATION_CATEGORY: -0.0040\<br\>4. PRCP: 4.3230\<br\>5. ARR_PART_OF_DAY: 4.4493 \|
 
-1.  Highest accuracy (0.7823)
+\| \*\*LightGBM\*\* \| - High weighted PR AUC (0.81)\<br\>- High weighted ROC AUC (0.79) \| - Lower weighted F1 score (0.7182) \| - Underperforms in F1 score compared to other models\<br\>- Maintains strong AUC performance \| Top 5 (Built-in Importance):\<br\>1. AIRLINE_AIRPORT_FLIGHTS_MONTH: 1207.0000\<br\>2. AIRLINE_FLIGHTS_MONTH: 996.0000\<br\>3. PREVIOUS_ARR_DELAY: 1031.0000\<br\>4. DISTANCE: 915.0000\<br\>5. DEP_AIRPORT_HIST: 856 \|
 
-2.  Best weighted ROC AUC (0.69)
+\| \*\*CatBoost\*\* \| - Relatively high weighted PR AUC (0.78) \| - Lowest weighted F1 score (0.5134)\<br\>- Lowest weighted ROC AUC (0.75) \| - Significantly underperforms compared to other models\<br\>- Struggles with overall predictive power \| Top 5 (Built-in Importance):\<br\>1. PREVIOUS_ARR_DELAY: 64.3610\<br\>2. DEP_PART_OF_DAY: 11.9855\<br\>3. ARR_PART_OF_DAY: 4.4493\<br\>4. PRCP: 4.3230\<br\>5. SEGMENT_NUMBER: 2.8930 \|
 
-3.  Strong performance in weighted PR AUC (0.73)
+##### Performance comparison across Hybrid Ensemble Classifiers:
 
-4.  Good balance between bias and variance
+![A graph of different colored bars Description automatically generated with medium confidence](images/0b25c75c267ad64ac604422e29a8079a.jpeg)
 
-Backup/Ensemble Model: Voting Classifier (XGBoost + Random Forest) – This model should be considered as a backup or complementary model:
+\| Model \| Strengths \| Weaknesses \| Key Observations \| Important Features \|
 
-1.  Nearly matches XGBoost's performance (accuracy: 0.7806)
+\|-------------------------------------\|-----------------------------------------------------------------------------------------------\|-----------------------------------------------------------------------------------------------------\|------------------------------------------------------------------------------------------------------\|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\|
 
-2.  Provides robustness through ensemble learning
+\| \*\*Voting Classifier\*\* \| - Highest weighted F1 score (0.7944)\<br\>- Highest accuracy (0.8290)\<br\>- Best weighted PR AUC (0.82)\<br\>- Best weighted ROC AUC (0.80) \| - Low F1 score for class 1 (0.0677) \| - Best overall performance\<br\>- Strong in identifying on-time flights (class 0)\<br\>- Good balance between precision and recall \| Top 5 (Permutation Importance):\<br\>1. PREVIOUS_ARR_DELAY: 0.1311\<br\>2. SEGMENT_NUMBER: 0.0552\<br\>3. PREVIOUS_AIRPORT: 0.0476\<br\>4. PREVIOUS_DURATION: 0.0429\<br\>5. DEP_PART_OF_DAY: 0.0184 \|
 
-#### Feature Importances across Models
+\| \*\*Stacking Classifier\*\* \| - Good weighted F1 score (0.7896)\<br\>- Good accuracy (0.8118)\<br\>- High weighted PR AUC (0.81)\<br\>- High weighted ROC AUC (0.79) \| - Lower performance on class 1 (F1 score: 0.0936) compared to other classes \| - Slightly lower performance than Voting Classifier\<br\>- Better performance on class 1 compared to Voting Classifier \| Top 5 (Permutation Importance):\<br\>1. PREVIOUS_ARR_DELAY: 0.1059\<br\>2. PREVIOUS_AIRPORT: 0.0247\<br\>3. SEGMENT_NUMBER: 0.0200\<br\>4. PREVIOUS_DURATION: 0.0192\<br\>5. DEP_PART_OF_DAY: 0.0173 \|
 
-Below is a comparison of the feature importances of the top 5 features across the three models (Random Forest, XGBoost, and CatBoost) using both permutation importance and built-in feature importance methods. Note, that the Voting Classifier and Bagging Classifier did not have separate feature importances as they are ensemble methods.
+\| \*\*Tuned Stacking Classifier\*\* \| - Improved weighted F1 score (0.7921)\<br\>- Improved accuracy (0.8180)\<br\>- High weighted PR AUC (0.81)\<br\>- High weighted ROC AUC (0.79) \| - Still struggles with class 1 (F1 score: 0.0901) \| - Performance improvement over base Stacking Classifier\<br\>- Better balance across all classes \| Top 5 (Permutation Importance):\<br\>1. PREVIOUS_ARR_DELAY: 0.1320\<br\>2. PREVIOUS_AIRPORT: 0.0734\<br\>3. SEGMENT_NUMBER: 0.0530\<br\>4. PREVIOUS_DURATION: 0.0472\<br\>5. DEP_PART_OF_DAY: 0.0256 \|
 
-| Rank | Random Forest |  XGBoost  |  CatBoost  |
-|------|---------------|-----------|------------|
-| **Permutation Importance** |
-| 1 | PREVIOUS_AIRPORT (0.0528) | PRCP (0.0127) | DEP_PART_OF_DAY (0.0097) |
-| 2 | SEGMENT_NUMBER (0.0200) | DEP_PART_OF_DAY (0.0081) | PRCP (0.0090) |
-| 3 | DEP_PART_OF_DAY (0.0184) | DEP_AIRPORT_HIST (0.0069) | ARR_PART_OF_DAY (0.0090) |
-| 4 | PRCP (0.0149) | SEGMENT_NUMBER (0.0044) | PREVIOUS_AIRPORT (0.0055) |
-| 5 | ARR_PART_OF_DAY (0.0059) | DEP_BLOCK_HIST (0.0046) | SEGMENT_NUMBER (0.0054) |
-| **Built-in Feature Importance** |
-| 1 | ARR_PART_OF_DAY (0.0700) | DEP_PART_OF_DAY (0.2657) | DEP_PART_OF_DAY (25.6763) |
-| 2 | DEP_PART_OF_DAY (0.0653) | PRCP (0.1854) | DAY_OF_WEEK (24.5003) |
-| 3 | DAY_OF_WEEK (0.0517) | ARR_PART_OF_DAY (0.1109) | ARR_PART_OF_DAY (23.9617) |
-| 4 | PREVIOUS_AIRPORT (0.0467) | DAY_OF_WEEK (0.0979) | PRCP (10.2009) |
-| 5 | DISTANCE (0.0466) | SEGMENT_NUMBER (0.0376) | SEASON (3.3861) |
+\| \*\*Hybrid Ensemble Classifier\*\* \| - High weighted F1 score (0.7935)\<br\>- Good accuracy (0.8234)\<br\>- High weighted PR AUC (0.82)\<br\>- High weighted ROC AUC (0.80) \| - Struggles with class 1 (F1 score: 0.0813) \| - Performance comparable to other ensemble methods\<br\>- Good balance between precision and recall for class 0 and 2 \| Top 5 (Permutation Importance):\<br\>1. PREVIOUS_ARR_DELAY: 0.1324\<br\>2. PREVIOUS_AIRPORT: 0.0495\<br\>3. PREVIOUS_DURATION: 0.0458\<br\>4. SEGMENT_NUMBER: 0.0431\<br\>5. DEP_PART_OF_DAY: 0.0216 \|
 
-##### Key Observations with Features used by models:
+##### Recommendations for Model Selection and Deployment for Flight Delay Predictions:
 
--   DEP_PART_OF_DAY and PRCP are consistently important across all models and methods.
+**Best Model: Voting Classifier**
 
--   Temporal features (DEP_PART_OF_DAY, ARR_PART_OF_DAY, DAY_OF_WEEK) are crucial for all models.
+The Voting Classifier emerges as the best overall model for flight delay predictions due to its performance across multiple metrics:
 
--   Built-in importances tend to favor categorical features more than permutation importances.
+-   Highest weighted F1 score (0.7944)
 
--   CatBoost's built-in importances show much larger values compared to other models.
+-   Highest accuracy (0.8290)
 
-##### Feature Selection Recommendations:
+-   Best weighted PR AUC (0.82)
 
--   Prioritize temporal features (DEP_PART_OF_DAY, ARR_PART_OF_DAY, DAY_OF_WEEK) and weather data (PRCP).
+-   Best weighted ROC AUC (0.80)
 
--   Consider SEGMENT_NUMBER and PREVIOUS_AIRPORT as potentially important features.
+**Key strengths:**
 
--   Interactions between high-importance features, especially temporal and weather features play a key role.
+-   Strong performance in identifying on-time flights (class 0)
 
-#### Detailed evaluation metrics for each model can be found in the Appendix.
+-   Good balance between precision and recall across delay classes
+
+**Deployment considerations:**
+
+-   Implement as the primary model for flight delay predictions
+
+-   Use for real-time predictions and operational decision-making
+
+-   Integrate into airline and airport management systems
+
+**Alternate Model: Hybrid Ensemble Classifier**
+
+The Hybrid Ensemble Classifier is an alternate choice:
+
+-   High weighted F1 score (0.7935)
+
+-   Good accuracy (0.8234)
+
+-   High weighted PR AUC (0.82)
+
+-   High weighted ROC AUC (0.80)
+
+**Key strengths:**
+
+-   Performance comparable to the Voting Classifier
+
+-   Good balance between precision and recall for delay classes 0 and 2
+
+**Deployment considerations:**
+
+-   Use as a complementary model to the Voting Classifier
+
+-   Use where compute resources and infrastructure allow for multiple model deployments
+
+##### Features influencing model recommendation:
+
+Based on the feature importance results from across these models, the following features are consistently influential in flight delay predictions – ref: [feature descriptions](https://media.githubusercontent.com/media/diptiaswath/airlineFlightDelayPrediction/refs/heads/main/combined_data/dataset_documentation_v2.txt):
+
+1.  PREVIOUS_ARR_DELAY: This is consistently the most important feature across all models. It represents the arrival delay of the previous flight for the same aircraft.
+
+2.  SEGMENT_NUMBER: This feature, which represents the order of flights for an aircraft on a given day, is highly influential in several models.
+
+3.  PREVIOUS_DURATION: The duration of the previous flight is an important factor in predicting delays.
+
+4.  DEP_PART_OF_DAY: The time of day when the current flight departs is a significant predictor of delays.
+
+5.  PREVIOUS_AIRPORT: The departing airport from where the aircraft on its previous segment last came seems to have a notable impact on delay predictions.
+
+6.  DISTANCE: The flight distance appears to be moderately important in several models.
+
+7.  DEP_BLOCK_HIST: Historical average delay for different departure time blocks is influential.
+
+8.  CARRIER_NAME: The airline operating the flight is a relevant factor in some models.
+
+9.  PRCP: Precipitation at the airport on the day of the flight is a notable weather-related feature.
+
+10. DAY_OF_WEEK: The day of the week when the flight occurs has some influence on delay predictions.
+
+These features consistently appear among the top influential factors across different models (Bagging Classifier, Random Forest, XGBoost, LightGBM, and ensemble methods like Voting and Stacking Classifiers). While the exact order and magnitude of importance varies between the models, these features represent a mix of temporal factors (previous delays and time of day), operational aspects (segment number and carrier), geographical elements (distance and previous airport), and weather conditions (precipitation).
+
+![](images/73998ff9e269dde72ea433aa54a200c0.jpeg)
+
+##### Recommendations based on influential features in Flight Delay Predictions:
+
+\| Feature \| Recommendation \|
+
+\|-----------------------------\|---------------------------------------------------------------------------------------------------------------\|
+
+\| \*\*PREVIOUS_ARR_DELAY\*\* \| - Implement robust systems to track and analyze previous flight delays.\<br\>- Develop strategies to mitigate the cascading effect of delays (e.g., buffer time between connected flights). \|
+
+\| \*\*SEGMENT_NUMBER\*\* \| - Optimize flight schedules, especially for aircraft making multiple trips per day.\<br\>- Consider maintenance and crew scheduling to minimize delays in later segments. \|
+
+\| \*\*PREVIOUS_DURATION\*\* \| - Analyze routes with consistently longer durations and consider adjustments.\<br\>- Improve accuracy of flight duration estimates for better scheduling. \|
+
+\| \*\*DEP_PART_OF_DAY\*\* \| - Adjust departure times to less congested periods of the day.\<br\>- Allocate more resources during peak departure times. \|
+
+\| \*\*PREVIOUS_AIRPORT\*\* \| - Identify problematic connections or airports.\<br\>- Optimize route networks to minimize impact of delay-prone airports. \|
+
+\| \*\*DISTANCE\*\* \| - Allocate appropriate aircraft to routes based on distance.\<br\>- Consider fuel stops or direct flights for very long distances. \|
+
+\| \*\*DEP_BLOCK_HIST\*\* \| - Use historical data to predict and prepare for delays during specific time blocks.\<br\>- Adjust staffing and resources based on historically problematic time periods. \|
+
+\| \*\*CARRIER_NAME\*\* \| - Benchmark airline performance against industry standards.\<br\>- Share best practices within the organization to improve overall efficiency. \|
+
+\| \*\*PRCP (Precipitation)\*\* \| - Enhance weather forecasting capabilities.\<br\>- Develop contingency plans for various weather scenarios.\<br\>- Invest in equipment and training for efficient operations during adverse weather. \|
+
+\| \*\*DAY_OF_WEEK\*\* \| - Adjust resources and schedules based on weekly patterns.\<br\>- Implement dynamic pricing strategies to manage demand across different days. \|
+
+##### Partial Dependence Plots: Analyzing Feature Impact on Flight Delay Predictions for each Delay Class
+
+![A group of graphs showing the results of a performance Description automatically generated with medium confidence](images/6f95f3865ee6296b7e2ef6272d2b4c0c.jpeg)![A group of graphs showing the results of a graph Description automatically generated with medium confidence](images/287a3e4dd2cbd714dbf457681b515df5.jpeg)![A group of graphs showing the results of a test Description automatically generated with medium confidence](images/007e8eca9afcce2cc912829109df378c.jpeg)
+
+##### Detailed evaluation metrics for each model can be found in the Appendix.
 
 ## Data Sources
 
@@ -233,79 +405,86 @@ Kaggle Dataset from [here](https://www.kaggle.com/datasets/threnjen/2019-airline
 
 -   Airport and Carrier look-up codes
 
-## Methodology Used
+## Methodology Used for Data Preparation and Modeling
 
-**CRISP-DM Framework:** 
-TODO
-
-**Data Preparation:** Involved cleaning and merging multiple raw CSV files to create a unified data-set with \~4M entries (for training) and \~2M entries (for testing) with 34 predictor variables and 1 target variable. Raw data-set description is [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/raw_data/raw_data_documentation.txt).
+**Data Preparation:** Involved cleaning and merging multiple raw CSV files to create a unified dataset with \~4M entries (for training) and \~2M entries (for testing) with 34 predictor variables and 1 target variable. Raw data-set description is [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/raw_data/raw_data_documentation.txt).
 
 **Feature Engineering:**
 
--   Delay Categories: Classified delays into four distinct categories for more granular analysis of flight performance:
+-   **Delay Categories:** Classified delays into three distinct categories for more granular analysis of flight performance:
 
     Class0: On-time Departure and Arrival - Flights that depart and arrive within their scheduled times.
 
-    Class1: On-time Departure, Delayed Arrival - Flights that experience delays during arrival, but depart on time.
+    Class1: Either departure or arrival delayed - Flights that experience delays either during arrival or departure.
 
-    Class2: Delayed Departure, On-time Arrival - Flights that experience delays during departure but still arrive on time.
+    Class2: Delayed Departure and Arrival - Flights that experience delays both in departure and arrival times.![A close up of a document Description automatically generated](images/4179d2a6da699c4916a9146148ebaa37.jpeg)
 
-    Class3: Delayed Departure and Arrival - Flights that experience delays both in departure and arrival times.
+    ![A comparison of a number of classes Description automatically generated](images/8d8b75635e1f4f86ef2204ecb997fd7b.jpeg)
 
-    ![A pie chart with numbers and percentages Description automatically generated](images/37466f6e1dd66bc41f26323971cadf9e.jpeg)![A graph showing different types of classes Description automatically generated with medium confidence](images/1c21c80d52ac3af3c5475634cc711073.jpeg)
+-   **Aggregation Features:** Developed historical delay averages, to identify patterns and trends in airline operations.
 
--   Aggregation Features: Developed historical delay averages, to identify patterns and trends in airline operations.
+```
+    CARRIER_HISTORICAL = captures the historical average delay rate of each carrier per month
 
-    ```
-        CARRIER_HISTORICAL = captures the historical average delay rate of each carrier per month
+    DEP_AIRPORT_HIST = captures historical average delay rates for flights departing from specific airports per month
 
-        DEP_AIRPORT_HIST = captures historical average delay rates for flights departing from specific airports per month
+    PREV_AIRPORT_HIST = captures historical average delay rate for the airport from which the aircraft arrived before the current departure
 
-        PREV_AIRPORT_HIST = captures historical average delay rate for the airport from which the aircraft arrived before the current departure
+    DAY_HISTORICAL = captures historical average delays associated with each day of the week, adjusted monthly
 
-        DAY_HISTORICAL = captures historical average delays associated with each day of the week, adjusted monthly
+    DEP_BLOCK_HIST = captures historical average delay rate for different departure time blocks, aggregated by month
+```
 
-        DEP_BLOCK_HIST = captures historical average delay rate for different departure time blocks, aggregated by month
-    ```
-
--   Time-Based Features: Extracted seasonal information from the month and categorized parts of the day using departure and arrival time blocks to enhance temporal analysis of flight data.
+-   **Time-Based Features:** Extracted seasonal information from the month and categorized parts of the day using departure and arrival time blocks to enhance temporal analysis of flight data.
 
     ![A comparison of different colored bars Description automatically generated](images/c85203ce6491ccef94dedf1330bc73fd.jpeg)
 
     ![A group of bars with numbers Description automatically generated with medium confidence](images/109e7b83d38d2bfe4e13dd5c67060ea6.jpeg)
 
--   Distance-Based Features: Mapped distance groups to descriptive labels, providing clearer insights into flight range categories for more intuitive analysis.
+-   **Distance-Based Features:** Mapped distance groups to descriptive labels, providing clearer insights into flight range categories for more intuitive analysis.
 
     ![A close-up of a graph Description automatically generated](images/30988bff062a1543f4a633070acbba1f.jpeg)
 
--   Delay-Based Features: Created new features by combining actual departure and arrival times with scheduled times, generating detailed delay metrics to enhance analysis of flight performance and punctuality.
+-   **Delay-Based Features:** Created new features by combining actual departure and arrival times with scheduled times, generating detailed delay metrics to enhance analysis of flight performance and punctuality. However, in Phase 2 of model evaluation, these features were removed due to data leakage, as they resulted in nearly 100% prediction accuracy.
 
-    ```
-        ELAPSED_TIME_DIFF, DEP_DELAY, ARR_DELAY
-    ```
--   Employee Statistics Features: Developed features to analyze staffing and resourcing in airline and carrier operations, providing insights into workforce allocation, scheduling efficiency, and resource optimization.
+```
+    ELAPSED_TIME_DIFF, DEP_DELAY, ARR_DELAY
+```
 
-    ```
-        FLT_ATTENDANTS_PER_PASS, PASSENGER_HANDLING
-    ```
+-   **Flight Duration, Previous Flight Duration and Arrival Delay:** Phase2 also introduced new delay-based features. Flight duration was the total duration of the current flight calculated from the planned departure and arrival times. This feature helps in assessing how longer flight durations may correlate with increased delays. Previous Flight Duration and Previous Arrival Delay were introduced as historical features and the approach to engineering these new features is outlined in the executive summary.
 
--   Removed highly correlated features with VIF
+![A chart of flight duration Description automatically generated with medium confidence](images/6b46969dc7c96afd406a9c57597f1a32.jpeg)
 
-    ![A close-up of a document Description automatically generated](images/c2f445131a51350dbad395f03b0b4aad.png)![A close-up of a number Description automatically generated](images/7ce889c572198a3b6907833d26644d84.jpeg)
+```
+    FLIGHT_DURATION, FLIGHT_DURATION_CATEGORY, PREVIOUS_DURATION, 
+    PREVIOUS_DURATION_CATEGORY, PREVIOUS_ARR_DELAY
+```
 
-**Data Pre-Processing:** Missing values and outliers detected were removed. SMOTETomek was applied to just the training data-set. This combined SMOTE's oversampling of the minority classes (classes 1,2 and 3) and Tomek links' under-sampling. Categorical features were also target encoded and Numerical features were scaled.
+-   **Employee Statistics Features:** Developed features to analyze staffing and resourcing in airline and carrier operations, providing insights into workforce allocation, scheduling efficiency, and resource optimization.
 
-**Train, Validation and Test Split:** TODO
+```
+    FLT_ATTENDANTS_PER_PASS, PASSENGER_HANDLING
+```
 
-**Modeling and Evaluation:** Classification algorithms used were Decision Trees, Random Forest, and multi-nomial Logistic Regression, with evaluation metrics: F1 Score, PR AUC, ROC AUC and Accuracy scores. Feature Selection, specifically Recursive Feature Elimination (RFE) was used to select features from among the 34 predictor variables for Decision Treee and Logistic Regression Classifier.
+-   **Removed highly correlated** features with VIF – see before and after removal:
+
+    ![A close-up of a number Description automatically generated](images/dab012fcd0e28453f4383b08226af68f.jpeg)![A close-up of a number Description automatically generated](images/da24c8fd251ec98d891e6c0d6fb771b8.jpeg)
+
+**Data Pre-Processing:** Missing values and outliers detected were removed. SMOTE Tomek was applied to just the training dataset. This combined SMOTE's oversampling of the minority classes (classes 0,1 and 2) and Tomek links' under-sampling. Categorical features were also target encoded and Numerical features were scaled.
+
+**Model Evaluation with Training, Validation and Test dataset:**
+
+The dataset was initially split into Training (70%, 4.542M entries) and Test (30%, 1.946M entries) sets. The training set was further divided, with 20% retained for validation. From the remaining training data, a sample of up to 500,000 entries was extracted for model training, ensuring that the sample size did not exceed the available data.
+
+All splits were performed using stratified sampling to maintain class distribution. This approach was adopted to manage the large dataset by creating a more manageable training set size while still preserving a substantial validation set.
 
 ## Project Structure
 
 **Data:**
 
--   [Engineered Features Documentation](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/dataset_documentation.txt)
+-   [Engineered Features Documentation](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/dataset_documentation_v2.txt)
 
--   Merged Datasets: [Train](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/train.pkl) \| [Test](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/test.pkl)
+-   Merged Datasets with new features: [Train](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/train_v2.pkl) \| [Test](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/test_v2.pkl)
 
 -   [Raw Data](https://github.com/diptiaswath/airlineFlightDelayPrediction/tree/main/raw_data)
 
@@ -319,13 +498,33 @@ TODO
 
 **Notebooks:**
 
--   [Data Preparation and Feature Engineering](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/notebooks/flight-delays-data-prep-and-eda_v1.ipynb)
+Links to the latest set of Notebooks from [this folder](https://github.com/diptiaswath/airlineFlightDelayPrediction/tree/main/notebooks) are noted below. Please note, earlier revisions continue to be available in the same folder to track iterations.
+
+-   [Data Preparation and Feature Engineering](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/notebooks/flight-delays-data-prep-and-eda_v2.ipynb)
 
 -   [Additional Data Exploration](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/notebooks/flight-delays-data-exploration_v1.ipynb)
 
--   [Data Pre-processing, Modeling, and Evaluation](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/notebooks/flight-delays-data-preproc-and-modeling_v1.ipynb)
+-   [Data Preprocessing and Model Training](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/notebooks/flight-delays-data-preproc-and-modeling_v2.ipynb)
+
+-   [Model Evaluations with performance metrics analysis](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/notebooks/flight-delays-results-comparison-and-analysis_v1.ipynb)
 
 -   [Utility Functions](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/notebooks/utils/common_functions.ipynb)
+
+**Model Artifacts:**
+
+Folder [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/tree/main/model_artifacts) contains:
+
+-   Recommended Model for production deploys
+
+-   Performance Metrics for model evaluations in csv
+
+[**StreamLit**](http://18.219.112.73:8501/) **and** [**FastAPI**](http://18.219.112.73:8000/docs#/default/predict_flight_delays_predict_post) **interface:**
+
+-   FastAPI as backend API deployed to AWS EC2 [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/app_interface/main.py)
+
+-   StreamLit application deployed to AWS EC2 [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/app_interface/skyflow_app.py)
+
+-   Model deployed to AWS EC2 is [this](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/model_artifacts/best_xg_pipeline.pkl)
 
 **Git Large File Storage (LFS):**
 
@@ -335,18 +534,18 @@ This project uses Git Large File Storage (LFS) to handle large files efficiently
 
 -   Ensure you have Git LFS installed. If not, install it from [git-lfs.com](https://git-lfs.com).
 
--   After cloning the repository, run: 
+-   After cloning the repository, run:
 
-     ```
-        git lfs install 
-        git lfs pull 
-     ```       
+```
+   git lfs install 
+   git lfs pull 
+```
 
--   When adding new large files, track them with: 
+-   When adding new large files, track them with:
 
-    ``` 
-        git lfs track "path/to/large/file" 
-    ```     
+```
+    git lfs track "path/to/large/file" 
+```
 
 -   Commit and push as usual. Git LFS will handle the large files automatically. For more information on Git LFS, refer to the [official documentation](https://git-lfs.com/).
 
@@ -358,7 +557,7 @@ This project utilized Google Colab Pro to handle computationally intensive noteb
 
 -   Data exploration and modeling results from Colab Pro are captured in notebooks available in this GitHub repository.
 
--   Direct links to key external notebooks for results: [Exploration Notebook](https://drive.google.com/file/d/136lYzQDpJ9rODL6nGHwUe3S37fY8L1c_/view?usp=drive_link), [Modeling Notebook](https://drive.google.com/file/d/1wR0uXhx9T_DXFRhNy-dKAz7XZkCIQQdy/view?usp=drive_link)
+-   Direct links to key external notebooks for results: [Exploration Notebook](https://drive.google.com/file/d/136lYzQDpJ9rODL6nGHwUe3S37fY8L1c_/view?usp=sharing), [Modeling Notebook](https://drive.google.com/file/d/1X2UTqPnYTcd4Dn-E0AMIXsa1Xlr6P1Jr/view?usp=sharing)
 
 **AutoViz Visualizations:**
 
@@ -366,129 +565,80 @@ This project utilized Google Colab Pro to handle computationally intensive noteb
 
 **Decision Tree and Random Forest Artifacts**
 
--   Decision tree structures and rule sets are available in two locations:
+-   Decision tree and Random Forest tree structures are available externally - view [here](https://drive.google.com/drive/folders/1qXDYyuo2lqJBwFTBoI7KCV45SZC-w163?usp=drive_link)
 
-    -   Externally: View [here](https://drive.google.com/drive/folders/1qXDYyuo2lqJBwFTBoI7KCV45SZC-w163?usp=drive_link)
 
-    -   Locally: In the [images](https://github.com/diptiaswath/airlineFlightDelayPrediction/tree/main/images) folder of this repository
-
--   [TODO for Random Forest Artifacts]
 
 ## Key Insights from Phase 1 to Phase 2 of Project
 
-[TODO]
+-   Switched to predicting three classes instead of earlier four classes removing granularity of whether a flight had a specific arrival delay or a departure delay
 
-## Next Steps
+-   Experimented with F2 scores as an evaluation metric
 
--   Feature Engineering: Use Dimensionality Reduction and Clustering to reduce dimensions, and cluster features together to reduce the count of 34 predictors. Relying on Feature Selection techniques alone, takes a while to train any of the classification models.
+-   Switched back to focus on F1 Score to: a) Decrease false positives for delayed flights, especially Class 2, b) Improve accuracy of on-time flight predictions - Class1, c) Increase precision for Class 2 and Class 1
 
--   Explore Neural Network models to see if performance can be improved further.
+-   Revisited SMOTETomek sampling strategy to improve prediction performance for minority classes – Class1 (either departure or arrival delayed) and Class2 – (both arrival and departure delayed)
 
--   Use StreamLit and Fast API to serve flight prediction delays via an application interface
+-  Adding a Stacking Classifier and a Hybrid Ensemble to improve F1 scores by combining the strengths of multiple models, allowing them to capture diverse patterns in the data. This approach helped achieve a better balance between precision and recall, improving overall F1 performance
 
-## 
+-   Enhanced feature engineering outlined in summary to further improve model performance on minority class predictions
+
+## Future Work
+
+-   Feature Engineering: Improve flight prediction performance of the minority classes (Class1 and Class2) with engineered features.
+
+-   Extend Forecast Horizon: Increase the prediction timeframe beyond the current 24-hour forecast, potentially providing predictions 48 or 72 hours in advance.
+
+-   Explore Artificial Neural Network models: Investigate if performance can be improved further.
+
+-   Use of Principal Component Analysis (PCA): With 2D visualization to explore patterns within the current delay classes. If analysis reveals significant overlap between classes or a lack of distinct patterns, it may be beneficial to consider a more granular classification, such as separating arrival delays and departure delays into their own distinct classes.
+
+-   Expand SkyFlow: Refine its StreamLit interface beyond the initial prototype to include dashboards and to work with reduced number of inputs.
+
+-   Real-time Updates: Incorporate real-time data to refine predictions as the departure time approaches.
 
 ## Appendix
 
 ### Baseline Dummy Classifier
 
-![A close up of text Description automatically generated](images/2aec35d27247a8af89c469f4ccdf742b.jpeg)
+![A screenshot of a computer Description automatically generated](images/003316cfe2fd794711a87408e377e062.jpeg)
+
+![A graph with numbers and lines Description automatically generated with medium confidence](images/d98faf4dd8ea82e21d139e4761fd8c2d.jpeg)
 
 ### Multinomial Logistic Regression Classifier
 
-[TODO]
+![A screenshot of a computer Description automatically generated](images/08f42e2e42051f1dddcbfcb6e69d3c50.jpeg)
 
-### Decision Tree – Original vs. Hyper-Parameter tuned Decision Tree
+![A graph of a graph Description automatically generated with medium confidence](images/b116bd235989b893f9cf1dc7db2b80a6.jpeg)
 
-#### Original Decision Tree
+![A red bar graph with white background Description automatically generated](images/a1ec3291390c55ded70c6dcf438a1374.jpeg)
 
-[Plot Tree](https://drive.google.com/file/d/1AvAqaliIrgzmXr1LmOCu2uv6v6OrsQI2/view?usp=sharing)
+### ![A graph showing a number of different colored squares Description automatically generated with medium confidence](images/55e1db73b656832c650a6d521846d275.jpeg)
 
-![A white background with black text Description automatically generated](images/77ab7f3e5ef8d36ed993e15f11e7226e.jpeg)![A graph with numbers and lines Description automatically generated](images/d0f13a55a92f0376086088325196e7d5.jpeg)
+![A graph showing a red and blue bar graph Description automatically generated](images/a84857a06ccade56dea8cf50908d2f3f.jpeg)
 
-![A graph with blue bars Description automatically generated with medium confidence](images/a9b349364f50c4d2f665d6a214590012.jpeg)
+### Decision Tree – HyperParameter tuned Decision Tree
 
-![A graph with blue bars Description automatically generated](images/11ba2e72c2422566a02869972f772039.jpeg)
+[PlotTree](https://drive.google.com/file/d/1mqMruSxPR5IsCufHfEU3r7Ub3R5cfNXJ/view?usp=sharing)
 
-#### Hyper-Parameter tuned Decision Tree
+![A white background with black text Description automatically generated](images/4f42f0bffee00ff5e41a005a5a0f8e3a.jpeg)
 
-[Decision Tree Rules](https://drive.google.com/file/d/1-6eoRoPugySwIHnwEcrTfpa8EjB3Xszw/view?usp=sharing) and [Plot Tree](https://drive.google.com/file/d/1mqMruSxPR5IsCufHfEU3r7Ub3R5cfNXJ/view?usp=sharing)
+![](images/948bfb6adbab45d490678241bcad64ac.jpeg)
 
-![A white screen with black text Description automatically generated](images/0f44b18d0cb398b119362290c86b1114.jpeg)
+![](images/2ce024343583f50fb3f75f8cbc438094.jpeg)
 
-![A white background with black text Description automatically generated](images/aafab2976f08077b4014b20907262762.jpeg)
+### Ensemble and Hybrid Ensemble model evaluation metrics
 
-![A graph with numbers and lines Description automatically generated with medium confidence](images/d697216b2004a5ff95060ebc3bb3ff2f.jpeg)
-
-![A graph with blue and white bars Description automatically generated](images/7ca78baddc60550730961bbeeeb95d04.jpeg)
-
-![A graph of blue and white bars Description automatically generated](images/d97feba3aef5d8542319dbefe5e4588c.jpeg)
-
-### Comparison of Logistic Regression and Decision Tree Models
-
-| Aspect | Decision Tree | Hyper-Parameter Tuned Decision Tree | Logistic Regression |
-|--------|---------------|-------------------------------------|---------------------|
-| **Performance Analysis** |
-| Validation Accuracy | 0.6486 | 0.6480 | 0.4922 |
-| Accuracy | 0.63 | 0.6225 | 0.5258 |
-| Validation F1 Score | 0.6561 | 0.6577 | 0.5637 |
-| Weighted F1 Score | 0.6436 | 0.6403 | 0.5875 |
-| Weighted PR AUC | 0.6453 | 0.6460 | 0.6881 |
-| Weighted ROC AUC | 0.5468 | 0.5487 | 0.6216 |
-| **Bias vs. Variance** |
-| Bias | Moderate | Moderate | High |
-| Variance | High | High | Low |
-| **Selected Features** | Top 5 by permutation importance:<br>1. DEP_AIRPORT_HIST<br>2. DEP_PART_OF_DAY<br>3. AIRLINE_AIRPORT_FLIGHTS_MONTH<br>4. AIRLINE_FLIGHTS_MONTH<br>5. CONCURRENT_FLIGHTS<br><br>Top 5 by built-in importance:<br>1. DAY_OF_WEEK<br>2. DEP_PART_OF_DAY<br>3. DISTANCE<br>4. AIRLINE_FLIGHTS_MONTH<br>5. AIRLINE_AIRPORT_FLIGHTS_MONTH | Top 5 by permutation importance:<br>1. DEP_PART_OF_DAY<br>2. ARR_PART_OF_DAY<br>3. PREVIOUS_AIRPORT<br>4. DEP_AIRPORT_HIST<br>5. AIRLINE_FLIGHTS_MONTH<br><br>Top 5 by built-in importance:<br>1. DEP_PART_OF_DAY<br>2. DISTANCE<br>3. DAY_OF_WEEK<br>4. AIRLINE_FLIGHTS_MONTH<br>5. AIRLINE_AIRPORT_FLIGHTS_MONTH | Selected features:<br>1. SEGMENT_NUMBER<br>2. PREV_AIRPORT_HIST<br>3. DEP_BLOCK_HIST<br>4. MONTH<br>5. DAY_OF_WEEK<br>6. CARRIER_NAME<br>7. PREVIOUS_AIRPORT<br>8. DEP_PART_OF_DAY<br>9. ARR_PART_OF_DAY<br>10. DISTANCE_GROUP_DESC |
-| **Feature Importance Analysis** | - DEP_AIRPORT_HIST and DEP_PART_OF_DAY are consistently important<br>- AIRLINE_FLIGHTS_MONTH and AIRLINE_AIRPORT_FLIGHTS_MONTH show high importance<br>- DAY_OF_WEEK has high built-in importance but lower permutation importance | - DEP_PART_OF_DAY and ARR_PART_OF_DAY are highly important<br>- PREVIOUS_AIRPORT and DEP_AIRPORT_HIST are significant<br>- DISTANCE is important in built-in metrics but less so in permutation importance | - Includes unique features like SEGMENT_NUMBER and DEP_BLOCK_HIST<br>- Emphasizes categorical features (CARRIER_NAME, DISTANCE_GROUP_DESC)<br>- Includes both departure and arrival related features |
-| **Overall Summary** |
-| Strengths | - Good overall accuracy<br>- Balanced performance across classes<br>- Interpretable<br>- Relies heavily on historical and time-based features<br>- Considers airline and airport-specific metrics | - Slightly improved F1 score<br>- Similar performance to base DT<br>- Potential for better generalization<br>- Emphasizes time of day features<br>- Balances historical, geographical, and time-based features<br>- Includes weather features | - Better at identifying minority classes<br>- Lower variance<br>- Good ROC AUC scores<br>- Uses a mix of flight-specific and general features<br>- Includes categorical features not present in tree models<br>- Focuses on historical patterns and time-based features |
-| Weaknesses | - Poor performance on minority classes<br>- Potential overfitting<br>- DAY_OF_WEEK importance varies between methods | - Still struggles with minority classes<br>- Complex model | - Lower overall accuracy<br>- Struggles with imbalanced data |
-| Best suited for | - When interpretability is important<br>- When historical and time-based features are crucial | - When slightly better performance is needed<br>- When some overfitting is acceptable<br>- When a balance of various feature types is desired | - When probabilistic outputs are needed<br>- When a simpler model is preferred<br>- When categorical features are important |
-
-### Random Forest Classifier
-
-[TODO – PDP plots]
-
-![A white background with black text Description automatically generated](images/e6de2f9a1e1a6f8912fb4ab041af2632.jpeg)
-
-![A graph of a function Description automatically generated with medium confidence](images/9bf88c314e07a595ca565b23eb092b97.jpeg)
-
-![A graph with blue and white bars Description automatically generated](images/c086a3ca4aa026d85d1d0e38620f60fd.jpeg)
-
-![A graph showing a blue line Description automatically generated with medium confidence](images/8aecfeb9f46121197f064db6ed5a18d6.jpeg)
-
-### XGBoost Classifier
-
-![A white rectangular object with black text Description automatically generated](images/2492e4ae3697ec2dc042d81563959a0e.jpeg)
-
-![A graph of different colored lines Description automatically generated](images/2e0bbae1d5a59326d93c8edc84f2a64b.jpeg)
-
-![A graph showing the number of permutation Description automatically generated](images/53b4bf4dc28e1cc30d3215d1590a481e.jpeg)
-
-![A graph with blue and white bars Description automatically generated](images/6cd31b8898e421e6d820afa098e0ac81.jpeg)
-
-### CatBoost Classifier
-
-![A white background with black text Description automatically generated](images/7322e9426f6ab8cced6f808f35cd4c7c.jpeg)
-
-![A graph of a line Description automatically generated with medium confidence](images/d12fa06e5e9f7c0f698c283f06683cda.jpeg)
-
-![A graph showing a number of permutation Description automatically generated](images/f9f7727ca863b07399c8e7990ab53ea3.jpeg)
-
-![A graph with blue and white stripes Description automatically generated with medium confidence](images/6e2dab857efe347a027c0e7eebbab5d1.jpeg)
-
-### Voting Classifier (ensemble of XGBoost and Random Forest)
-
-![A screenshot of a computer Description automatically generated](images/a3ac9dbc99e4e37616ea55a6f5aad927.jpeg)
-
-![A graph of a function Description automatically generated with medium confidence](images/9ed1f4fe95fc91ec07ed558abfbb37b9.jpeg)
-
-### Bagging Classifier (with XGBoost as the base estimator)
-
-![A screenshot of a computer Description automatically generated](images/53177516b24b88a1db76e5748aac4088.jpeg)
-
-![A graph with different colored lines Description automatically generated](images/1d114229f6f79bc9f6ff6955cb6cdc09.jpeg)
+Similar metrics for the ensemble and hybrid classifiers can be found in this [notebook here](https://colab.research.google.com/drive/1X2UTqPnYTcd4Dn-E0AMIXsa1Xlr6P1Jr#scrollTo=Y1Ri0hilb7Wa&uniqifier=2)
 
 ## References
 
-TODO
+-   How are airlines [using AI](https://www.cirium.com/thoughtcloud/predicting-flight-delays-how-airlines-are-harnessing-ai-to-minimize-disruptions/) to minimize disruptions
+
+-   Case Study with [JetBlue’s use](https://www.tomorrow.io/customer-stories/jetblue/) of Tommorow.io
+
+-   [KDD2018](https://www.kdd.org/kdd2018/accepted-papers/view/predicting-estimated-time-of-arrival-for-commercial-flights): Predicting Estimated Time of Arrival for Commercial Flights
+
+-   Mamdouh, M., Ezzat, M. & A.Hefny, H. A novel intelligent approach for flight delay prediction. *J Big Data* **10**, 179 (2023). <https://doi.org/10.1186/s40537-023-00854-w>
+
+-   Yuemin Tang. 2021. Airline Flight Delay Prediction Using Machine Learning Models. In *2021 5th International Conference on E-Business and Internet (ICEBI 2021), October 15-17, 2021, Singapore, Singapore*. ACM, New York, NY, USA, 7 Pages. <https://doi.org/10.1145/3497701.3497725>
