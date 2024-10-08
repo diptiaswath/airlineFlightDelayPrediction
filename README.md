@@ -1,8 +1,8 @@
 # SkyFlow: AI-Powered Flight Delay Prediction for Optimized Airline Operations
 
-Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| [Email](mailto:dipti.aswath@gmail.com) \ 
+Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| [Email](mailto:dipti.aswath@gmail.com) 
 
-Early [SkyFlow](http://18.219.112.73:8501/) Prototype\
+Early [SkyFlow](http://18.219.112.73:8501/) Prototype
 
 ## Executive Summary
 
@@ -113,42 +113,60 @@ To improve model performance in Phase2, new features were engineered by tracking
 1. Initialize empty dataset D for engineered features
 
 2. For each flight record F in raw flight data:
+
     2.1. Extract basic flight information (date, origin, destination, etc.)
+
     2.2. Compute SEGMENT_NUMBER:
         a. Group flights by TAIL_NUM and DAY_OF_MONTH
+
         b. Sort by DEP_TIME within each group
+
         c. Assign sequential numbers starting from 1
+
     2.3. Add SEGMENT_NUMBER to D
 
 3. For each flight record F in D:
     3.1. Identify previous flight P with same TAIL_NUM
+
     3.2. If P exists:
         a. Set PREVIOUS_AIRPORT = P.DESTINATION
+
         b. Set PREVIOUS_ARR_DELAY = P.ARR_DELAY
+
         c. Set PREVIOUS_DEP_DELAY = P.DEP_DELAY
+
         d. Set PREVIOUS_DURATION = P.ACTUAL_ELAPSED_TIME
+
     3.3. Else:
         Set all PREVIOUS_* features to null or appropriate default values
+
     3.4. Add PREVIOUS_* features to D
 
 4. Compute FLIGHT_DURATION:
     4.1. FLIGHT_DURATION = CRS_ARR_TIME - CRS_DEP_TIME
+
     4.2. Add FLIGHT_DURATION to D
 
 5. Merge weather data with D based on date and airport
 
 6. Compute temporal features:
     6.1. Extract MONTH, DAY_OF_WEEK from date
+
     6.2. Compute SEASON based on MONTH
+
     6.3. Compute DEP_PART_OF_DAY based on CRS_DEP_TIME
+
     6.4. Add temporal features to D
 
 7. Merge airport and airline data with D
 
 8. Compute historical performance metrics:
     8.1. Calculate CARRIER_HISTORICAL (average delay by carrier and month)
+
     8.2. Calculate DEP_AIRPORT_HIST (average delay by departure airport and month)
+
     8.3. Calculate DEP_BLOCK_HIST (average delay by departure time block and month)
+
     8.4. Add historical metrics to D
 
 9. Handle missing values and perform necessary data type conversions
@@ -259,7 +277,7 @@ The following classification models were evaluated for predicting flight delays,
 
 The ensemble, and hybrid ensemble models outperformed the baseline, Logistic Regression, and Decision Tree models. This section summarizes and compares the key metrics across these model groups, making its final recommendation for production deployment.
 
-##### Performance comparison across Baseline, Logistic Regression and Decision Tree:
+#### Performance comparison across Baseline, Logistic Regression and Decision Tree:
 
 ![A graph showing different types of flight delay Description automatically generated](images/5eff024ec6a16cf7aa739cbf7291dccf.jpeg)
 
@@ -269,7 +287,7 @@ The ensemble, and hybrid ensemble models outperformed the baseline, Logistic Reg
 | **Multinomial Logistic Regression** | - Best overall performance<br>- Highest weighted F1 score (0.7329)<br>- Highest weighted PR AUC (0.77)<br>- Best weighted ROC AUC (0.74)<br>- Best accuracy (0.7051)<br>- Good balance between precision and recall | - Still struggles with minority class (class 1)<br>- Slightly lower interpretability compared to Decision Tree | - Shows the best overall performance<br>- Outperforms other models in most weighted metrics<br>- Provides a good balance across different metrics and classes | Positive influence on class 2:<br>- DAY_OF_WEEK<br>- CARRIER_NAME<br>- PREVIOUS_ARR_DELAY<br>- MONTH<br>- ARR_PART_OF_DAY<br>- DEP_PART_OF_DAY<br>- SEASON<br><br>Negative influence on class 2:<br>- PREVIOUS_DURATION_CATEGORY<br>- FLIGHT_DURATION_CATEGORY<br>- DISTANCE_GROUP_DESC |
 | **Hyperparameter-tuned Decision Tree** | - Competitive weighted F1 score (0.7422)<br>- Good weighted PR AUC (0.74)<br>- Decent weighted ROC AUC (0.70)<br>- Highest accuracy (0.7359)<br>- Better interpretability than Logistic Regression | - Slightly lower weighted F1 score than Logistic Regression<br>- Lower weighted PR AUC and ROC AUC compared to Log
 
-##### Performance comparison across Ensemble Bagging and Boosting Classifiers:
+#### Performance comparison across Ensemble Bagging and Boosting Classifiers:
 
 ![A graph showing different colored bars Description automatically generated with medium confidence](images/67bdce3d387a3cab8d8400179e93aa93.jpeg)
 
@@ -281,7 +299,7 @@ The ensemble, and hybrid ensemble models outperformed the baseline, Logistic Reg
 | **LightGBM**                          | - High weighted PR AUC (0.81)<br>- High weighted ROC AUC (0.79)                             | - Lower weighted F1 score (0.7182)                             | - Underperforms in F1 score compared to other models<br>- Maintains strong AUC performance | Top 5 (Built-in Importance):<br>1. AIRLINE_AIRPORT_FLIGHTS_MONTH: 1207.0000<br>2. AIRLINE_FLIGHTS_MONTH: 996.0000<br>3. PREVIOUS_ARR_DELAY: 1031.0000<br>4. DISTANCE: 915.0000<br>5. DEP_AIRPORT_HIST: 856 |
 | **CatBoost**                          | - Relatively high weighted PR AUC (0.78)                                                    | - Lowest weighted F1 score (0.5134)<br>- Lowest weighted ROC AUC (0.75) | - Significantly underperforms compared to other models<br>- Struggles with overall predictive power | Top 5 (Built-in Importance):<br>1. PREVIOUS_ARR_DELAY: 64.3610<br>2. DEP_PART_OF_DAY: 11.9855<br>3. ARR_PART_OF_DAY: 4.4493<br>4. PRCP: 4.3230<br>5 SEGMENT_NUMBER: 2.8930 |
 
-##### Performance comparison across Hybrid Ensemble Classifiers:
+#### Performance comparison across Hybrid Ensemble Classifiers:
 
 ![A graph of different colored bars Description automatically generated with medium confidence](images/0b25c75c267ad64ac604422e29a8079a.jpeg)
 
@@ -291,9 +309,9 @@ The ensemble, and hybrid ensemble models outperformed the baseline, Logistic Reg
 | **Stacking Classifier**            | - Good weighted F1 score (0.7896)<br>- Good accuracy (0.8118)<br>- High weighted PR AUC (0.81)<br>- High weighted ROC AUC (0.79) | - Lower performance on class 1 (F1 score: 0.0936) compared to other classes | - Slightly lower performance than Voting Classifier<br>- Better performance on class 1 compared to Voting Classifier | Top 5 (Permutation Importance):<br>1. PREVIOUS_ARR_DELAY: 0.1059<br>2. PREVIOUS_AIRPORT: 0.0247<br>3. SEGMENT_NUMBER: 0.0200<br>4. PREVIOUS_DURATION: 0.0192<br>5. DEP_PART_OF_DAY: 0.0173 |
 | **Tuned Stacking Classifier**      | - Improved weighted F1 score (0.7921)<br>- Improved accuracy (0.8180)<br>- High weighted PR AUC (0.81)<br>- High weighted ROC AUC (0.79) | - Still struggles with class 1 (F1 score: 0.0901)            | - Performance improvement over base Stacking Classifier<br>- Better balance across all classes | Top 5 (Permutation Importance):<br>1. PREVIOUS_ARR_DELAY: 0.1320<br>2. PREVIOUS_AIRPORT: 0.0734<br>3. SEGMENT_NUMBER: 0.0530<br>4. PREVIOUS_DURATION: 0.0472<br>5. DEP_PART_OF_DAY: 0.0256 |
 | **Hybrid Ensemble Classifier**     | - High weighted F1 score (0.7935)<br>- Good accuracy (0.8234)<br>- High weighted PR AUC (0.82)<br>- High weighted ROC AUC (0.80) | - Struggles with class 1 (F1 score: 0.0813)                  | - Performance comparable to other ensemble methods<br>- Good balance between precision and recall for class 0 and 2 | Top 5 (Permutation Importance):<br>1. PREVIOUS_ARR_DELAY: 0.1324<br>2. PREVIOUS_AIRPORT: 0.0495<br>3. PREVIOUS_DURATION: 0.0458<br>4. SEGMENT_NUMBER: 0.0431<br>5. DEP_PART_OF_DAY: 0.0216 |
-| 
 
-##### Recommendations for Model Selection and Deployment for Flight Delay Predictions:
+
+#### Recommendations for Model Selection and Deployment for Flight Delay Predictions:
 
 **Best Model: Voting Classifier**
 
@@ -345,7 +363,7 @@ The Hybrid Ensemble Classifier is an alternate choice:
 
 -   Use where compute resources and infrastructure allow for multiple model deployments
 
-##### Features influencing model recommendation:
+#### Features influencing model recommendation:
 
 Based on the feature importance results from across these models, the following features are consistently influential in flight delay predictions – ref: [feature descriptions](https://media.githubusercontent.com/media/diptiaswath/airlineFlightDelayPrediction/refs/heads/main/combined_data/dataset_documentation_v2.txt):
 
@@ -373,33 +391,23 @@ These features consistently appear among the top influential factors across diff
 
 ![](images/73998ff9e269dde72ea433aa54a200c0.jpeg)
 
-##### Recommendations based on influential features in Flight Delay Predictions:
+#### Recommendations based on influential features in Flight Delay Predictions:
 
-\| Feature \| Recommendation \|
+| **Feature** | **Recommendation** |
+|-------------|--------------------|
+| **PREVIOUS_ARR_DELAY** | - Implement robust systems to track and analyze previous flight delays.<br>- Develop strategies to mitigate the cascading effect of delays (e.g., buffer time between connected flights). |
+| **SEGMENT_NUMBER** | - Optimize flight schedules, especially for aircraft making multiple trips per day.<br>- Consider maintenance and crew scheduling to minimize delays in later segments. |
+| **PREVIOUS_DURATION** | - Analyze routes with consistently longer durations and consider adjustments.<br>- Improve accuracy of flight duration estimates for better scheduling. |
+| **DEP_PART_OF_DAY** | - Adjust departure times to less congested periods of the day.<br>- Allocate more resources during peak departure times. |
+| **PREVIOUS_AIRPORT** | - Identify problematic connections or airports.<br>- Optimize route networks to minimize impact of delay-prone airports. |
+| **DISTANCE** | - Allocate appropriate aircraft to routes based on distance.<br>- Consider fuel stops or direct flights for very long distances. |
+| **DEP_BLOCK_HIST** | - Use historical data to predict and prepare for delays during specific time blocks.<br>- Adjust staffing and resources based on historically problematic time periods. |
+| **CARRIER_NAME** | - Benchmark airline performance against industry standards.<br>- Share best practices within the organization to improve overall efficiency. |
+| **PRCP (Precipitation)** | - Enhance weather forecasting capabilities.<br>- Develop contingency plans for various weather scenarios.<br>- Invest in equipment and training for efficient operations during adverse weather. |
+| **DAY_OF_WEEK** | - Adjust resources and schedules based on weekly patterns.<br>- Implement dynamic pricing strategies to manage demand across different days. |
 
-\|-----------------------------\|---------------------------------------------------------------------------------------------------------------\|
 
-\| \*\*PREVIOUS_ARR_DELAY\*\* \| - Implement robust systems to track and analyze previous flight delays.\<br\>- Develop strategies to mitigate the cascading effect of delays (e.g., buffer time between connected flights). \|
-
-\| \*\*SEGMENT_NUMBER\*\* \| - Optimize flight schedules, especially for aircraft making multiple trips per day.\<br\>- Consider maintenance and crew scheduling to minimize delays in later segments. \|
-
-\| \*\*PREVIOUS_DURATION\*\* \| - Analyze routes with consistently longer durations and consider adjustments.\<br\>- Improve accuracy of flight duration estimates for better scheduling. \|
-
-\| \*\*DEP_PART_OF_DAY\*\* \| - Adjust departure times to less congested periods of the day.\<br\>- Allocate more resources during peak departure times. \|
-
-\| \*\*PREVIOUS_AIRPORT\*\* \| - Identify problematic connections or airports.\<br\>- Optimize route networks to minimize impact of delay-prone airports. \|
-
-\| \*\*DISTANCE\*\* \| - Allocate appropriate aircraft to routes based on distance.\<br\>- Consider fuel stops or direct flights for very long distances. \|
-
-\| \*\*DEP_BLOCK_HIST\*\* \| - Use historical data to predict and prepare for delays during specific time blocks.\<br\>- Adjust staffing and resources based on historically problematic time periods. \|
-
-\| \*\*CARRIER_NAME\*\* \| - Benchmark airline performance against industry standards.\<br\>- Share best practices within the organization to improve overall efficiency. \|
-
-\| \*\*PRCP (Precipitation)\*\* \| - Enhance weather forecasting capabilities.\<br\>- Develop contingency plans for various weather scenarios.\<br\>- Invest in equipment and training for efficient operations during adverse weather. \|
-
-\| \*\*DAY_OF_WEEK\*\* \| - Adjust resources and schedules based on weekly patterns.\<br\>- Implement dynamic pricing strategies to manage demand across different days. \|
-
-##### Partial Dependence Plots: Analyzing Feature Impact on Flight Delay Predictions for each Delay Class
+#### Partial Dependence Plots: Analyzing Feature Impact on Flight Delay Predictions for each Delay Class
 
 ![A group of graphs showing the results of a performance Description automatically generated with medium confidence](images/6f95f3865ee6296b7e2ef6272d2b4c0c.jpeg)![A group of graphs showing the results of a graph Description automatically generated with medium confidence](images/287a3e4dd2cbd714dbf457681b515df5.jpeg)![A group of graphs showing the results of a test Description automatically generated with medium confidence](images/007e8eca9afcce2cc912829109df378c.jpeg)
 
@@ -546,7 +554,7 @@ Folder [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/tree/m
 
 This project uses Git Large File Storage (LFS) to handle large files efficiently. Git LFS replaces large files with text pointers inside Git, while storing the file contents on a remote server.
 
-#### To work with this repository:
+To work with this repository:
 
 -   Ensure you have Git LFS installed. If not, install it from [git-lfs.com](https://git-lfs.com).
 
@@ -584,7 +592,6 @@ This project utilized Google Colab Pro to handle computationally intensive noteb
 -   Decision tree and Random Forest tree structures are available externally - view [here](https://drive.google.com/drive/folders/1qXDYyuo2lqJBwFTBoI7KCV45SZC-w163?usp=drive_link)
 
 
-
 ## Key Insights from Phase 1 to Phase 2 of Project
 
 -   Switched to predicting three classes instead of earlier four classes removing granularity of whether a flight had a specific arrival delay or a departure delay
@@ -601,17 +608,17 @@ This project utilized Google Colab Pro to handle computationally intensive noteb
 
 ## Future Work
 
--   Feature Engineering: Improve flight prediction performance of the minority classes (Class1 and Class2) with engineered features.
+**Feature Engineering:** Improve flight prediction performance of the minority classes (Class1 and Class2) with engineered features.
 
--   Extend Forecast Horizon: Increase the prediction timeframe beyond the current 24-hour forecast, potentially providing predictions 48 or 72 hours in advance.
+**Extend Forecast Horizon:** Increase the prediction timeframe beyond the current 24-hour forecast, potentially providing predictions 48 or 72 hours in advance.
 
--   Explore Artificial Neural Network models: Investigate if performance can be improved further.
+**Explore Artificial Neural Network models:** Investigate if performance can be improved further.
 
--   Use of Principal Component Analysis (PCA): With 2D visualization to explore patterns within the current delay classes. If analysis reveals significant overlap between classes or a lack of distinct patterns, it may be beneficial to consider a more granular classification, such as separating arrival delays and departure delays into their own distinct classes.
+**Use of Principal Component Analysis (PCA):** With 2D visualization to explore patterns within the current delay classes. If analysis reveals significant overlap between classes or a lack of distinct patterns, it may be beneficial to consider a more granular classification, such as separating arrival delays and departure delays into their own distinct classes.
 
--   Expand SkyFlow: Refine its StreamLit interface beyond the initial prototype to include dashboards and to work with reduced number of inputs.
+**Expand SkyFlow:** Refine its StreamLit interface beyond the initial prototype to include dashboards and to work with reduced number of inputs.
 
--   Real-time Updates: Incorporate real-time data to refine predictions as the departure time approaches.
+**Real-time Updates:** Incorporate real-time data to refine predictions as the departure time approaches.
 
 ## Appendix
 
@@ -649,12 +656,12 @@ Similar metrics for the ensemble and hybrid classifiers can be found in this [no
 
 ## References
 
--   How are airlines [using AI](https://www.cirium.com/thoughtcloud/predicting-flight-delays-how-airlines-are-harnessing-ai-to-minimize-disruptions/) to minimize disruptions
+How are airlines [using AI](https://www.cirium.com/thoughtcloud/predicting-flight-delays-how-airlines-are-harnessing-ai-to-minimize-disruptions/) to minimize disruptions
 
--   Case Study with [JetBlue’s use](https://www.tomorrow.io/customer-stories/jetblue/) of Tommorow.io
+Case Study with [JetBlue’s use](https://www.tomorrow.io/customer-stories/jetblue/) of Tommorow.io
 
--   [KDD2018](https://www.kdd.org/kdd2018/accepted-papers/view/predicting-estimated-time-of-arrival-for-commercial-flights): Predicting Estimated Time of Arrival for Commercial Flights
+[KDD2018](https://www.kdd.org/kdd2018/accepted-papers/view/predicting-estimated-time-of-arrival-for-commercial-flights): Predicting Estimated Time of Arrival for Commercial Flights
 
--   Mamdouh, M., Ezzat, M. & A.Hefny, H. A novel intelligent approach for flight delay prediction. *J Big Data* **10**, 179 (2023). <https://doi.org/10.1186/s40537-023-00854-w>
+Mamdouh, M., Ezzat, M. & A.Hefny, H. A novel intelligent approach for flight delay prediction. *J Big Data* **10**, 179 (2023). <https://doi.org/10.1186/s40537-023-00854-w>
 
--   Yuemin Tang. 2021. Airline Flight Delay Prediction Using Machine Learning Models. In *2021 5th International Conference on E-Business and Internet (ICEBI 2021), October 15-17, 2021, Singapore, Singapore*. ACM, New York, NY, USA, 7 Pages. <https://doi.org/10.1145/3497701.3497725>
+Yuemin Tang. 2021. Airline Flight Delay Prediction Using Machine Learning Models. In *2021 5th International Conference on E-Business and Internet (ICEBI 2021), October 15-17, 2021, Singapore, Singapore*. ACM, New York, NY, USA, 7 Pages. <https://doi.org/10.1145/3497701.3497725>
