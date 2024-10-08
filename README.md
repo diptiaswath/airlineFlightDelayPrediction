@@ -582,7 +582,7 @@ All splits were performed using stratified sampling to maintain class distributi
 
 ## Project Structure
 
-**Data:**
+### Data:
 
 -   [Engineered Features Documentation](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/combined_data/dataset_documentation_v2.txt)
 
@@ -592,13 +592,13 @@ All splits were performed using stratified sampling to maintain class distributi
 
 -   [Raw Data Documentation](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/raw_data/raw_data_documentation.txt)
 
-**Analysis and Visualization:**
+### Analysis and Visualization:
 
 -   [AutoViz Plots](https://github.com/diptiaswath/airlineFlightDelayPrediction/tree/main/plots) (Credit: [AutoViML/AutoViz](https://github.com/AutoViML/AutoViz))
 
 -   [README Images](https://github.com/diptiaswath/airlineFlightDelayPrediction/tree/main/images)
-
-**Notebooks:**
+  
+### Notebooks:
 
 Links to the latest set of Notebooks from [this folder](https://github.com/diptiaswath/airlineFlightDelayPrediction/tree/main/notebooks) are noted below. Please note, earlier revisions continue to be available in the same folder to track iterations.
 
@@ -612,7 +612,7 @@ Links to the latest set of Notebooks from [this folder](https://github.com/dipti
 
 -   [Utility Functions](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/notebooks/utils/common_functions.ipynb)
 
-**Model Artifacts:**
+### Model Artifacts:
 
 Folder [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/tree/main/model_artifacts) contains:
 
@@ -620,7 +620,7 @@ Folder [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/tree/m
 
 -   Performance Metrics for model evaluations in csv
 
-[**StreamLit**](http://18.219.112.73:8501/) **and** [**FastAPI**](http://18.219.112.73:8000/docs#/default/predict_flight_delays_predict_post) **interface:**
+## [StreamLit](http://18.219.112.73:8501/) and [FastAPI](http://18.219.112.73:8000/docs#/default/predict_flight_delays_predict_post) interface:
 
 -   FastAPI as backend API deployed to AWS EC2 [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/app_interface/main.py)
 
@@ -628,7 +628,7 @@ Folder [here](https://github.com/diptiaswath/airlineFlightDelayPrediction/tree/m
 
 -   Model deployed to AWS EC2 is [this](https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/model_artifacts/best_xg_pipeline.pkl)
 
-**Git Large File Storage (LFS):**
+## Repository with GitLFS:
 
 This project uses Git Large File Storage (LFS) to handle large files efficiently. Git LFS replaces large files with text pointers inside Git, while storing the file contents on a remote server.
 
