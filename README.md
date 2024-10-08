@@ -42,7 +42,7 @@ Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| 
 
     - [Recommendations based on influential features in Flight Delay Predictions](#recommendations-based-on-influential-features-in-flight-delay-predictions)
 
-    - [Partial Dependence Plots: Visualize Feature Impact on Flight Delay Predictions for each Delay Class](#partial-dependence-plots-analyzing-feature-impact-on-flight-delay-predictions-for-each-delay-class)
+    - [Partial Dependence Plots: Visualize Feature Impact on Flight Delay Predictions for each Delay Class](#partial-dependence-plots-visualize-feature-impact-on-flight-delay-predictions-for-each-delay-class)
 
 2. [Data Sources](#data-sources)
 
