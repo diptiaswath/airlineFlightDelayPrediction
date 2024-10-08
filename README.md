@@ -1,6 +1,6 @@
-# SkyFlow: AI-Powered Flight Delay Prediction for Optimized Airline Operations
+# SkyFlow: AI-Powered Flight Delay Predictions
 
-Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| [Email](mailto:dipti.aswath@gmail.com) \| Early [SkyFlow](http://18.219.112.73:8501/) Prototype
+Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| [Email](mailto:dipti.aswath@gmail.com) \| [Early SkyFlow Prototype](http://18.219.112.73:8501/) 
 
 ## Table of Contents
 
