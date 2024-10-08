@@ -128,40 +128,41 @@ How can we develop an AI and machine learning-powered smart system to accurately
 
 SkyFlow is an advanced tool that helps predict how flights might perform. It looks at many factors like weather, how busy the airport is, and how well the airline usually does. Then, it puts each flight into one of three groups:
 
-"On Time": These flights are expected to leave and arrive as scheduled.
+**On Time:** These flights are expected to leave and arrive as scheduled.
 
-"Partial Delay": These flights might be delayed leaving or arriving.
+**Partial Delay**: These flights might be delayed leaving or arriving.
 
-"Full Delay": These flights are likely to be delayed both leaving and arriving.
+**Full Delay**: These flights are likely to be delayed both leaving and arriving.
 
 #### Why is this important? 
 
 It helps everyone plan better:
 
-Airlines can manage their schedules more effectively.
+**Airlines:** Can manage their schedules more effectively.
     
-Airports can prepare for busy times. 
+**Airports:** Can prepare for busy times. 
     
-Passengers can adjust their plans if needed.
+**Passengers:** Can adjust their plans if needed.
 
 #### How do we know if SkyFlow is doing a good job? 
 
 We look at five main things to evaluate SkyFlow's performance:
 
-Precision: How often SkyFlow correctly identifies delay groups when it predicts a delay.
+**Precision:** How often SkyFlow correctly identifies delay groups when it predicts a delay.
     
-Recall: How often SkyFlow correctly identifies actual delays out of all delayed flights.
+**Recall:** How often SkyFlow correctly identifies actual delays out of all delayed flights.
     
-F1 Score: How well SkyFlow balances precision and recall.
+**F1 Score:** How well SkyFlow balances precision and recall.
     
-Precision-Recall Area Under the Curve (PR AUC): How well SkyFlow performs across different thresholds for classifying delays.
+**Precision-Recall Area Under the Curve (PR AUC):** How well SkyFlow performs across different thresholds for classifying delays.
     
-Receiver Operating Characteristic Area Under the Curve (ROC AUC): How well SkyFlow distinguishes between delayed and on-time flights.
+**Receiver Operating Characteristic Area Under the Curve (ROC AUC):** How well SkyFlow distinguishes between delayed and on-time flights.
 
 Our goal is to make SkyFlow as accurate as possible, so everyone can rely on its predictions to make their travel smoother and more predictable. 
 
-To monitor overall performance, we use the Precision-Recall Area Under the Curve (PR AUC) and Receiver Operating Characteristic Area Under the Curve (ROC AUC). 
-For evaluating the balance between correctly identifying delays and avoiding false alarms, we rely on the F1 Score as the primary metric, which combines precision and recall into a single value.
+To monitor overall performance, we use the **Precision-Recall Area Under the Curve (PR AUC)** and **Receiver Operating Characteristic Area Under the Curve (ROC AUC)**. 
+
+For evaluating the balance between correctly identifying delays and avoiding false alarms, we rely on the **F1 Score** as the primary metric, which combines precision and recall into a single value.
 
 ### Approach
 
@@ -183,7 +184,7 @@ For the Flight Delay Prediction problem, the CRISP-DM (Cross Industry Standard P
 
 During the data preparation phase, significant feature engineering was conducted as outlined in a later Methodology section. Initially, features that captured the relationship between departure and arrival delays were found to introduce data leakage, leading to overly optimistic predictions. As a result, these features were excluded in Phase 2.
 
-To improve prediction delays in Phase2, new features were engineered by tracking flight segment sequences for each tail number on a given day (e.g., SEGMENT_NUMBER). **Historical flight information**, such as previous airports (PREVIOUS_AIRPORT), prior delays (PREVIOUS_ARR_DELAY), and flight durations (PREVIOUS_DURATION), was incorporated. This was done by merging **current flight records** with its own FLIGHT_DURATION with the corresponding previous segment data, providing a richer and more comprehensive dataset for predicting delays. Please refer to this section for details on the enhanced feature engineering algorithm.
+To improve prediction delays in Phase2, new features were engineered by tracking flight segment sequences for each tail number on a given day (e.g., SEGMENT_NUMBER). **Historical flight information**, such as previous airports (PREVIOUS_AIRPORT), prior delays (PREVIOUS_ARR_DELAY), and flight durations (PREVIOUS_DURATION), was incorporated. This was done by merging **current flight records** with its own FLIGHT_DURATION with the corresponding previous segment data, providing a richer and more comprehensive dataset for predicting delays. Please refer to [this section](#enhanced-feature-engineering-algorithm) for details on the algorithm.
 
 
 ### Key Findings from Exploratory Data Analysis:
@@ -285,7 +286,7 @@ The following classification models were evaluated for predicting flight delays,
 
 -   Hybrid Ensemble Models – Voting Classifier as an ensemble of XGBoost and Random Forest, Stacking Classifiers (hyperparameter tuned and without) with XGBoost and Random Forest as base estimator and a meta classifier with one-vs-rest Logistic Regression.
 
-The ensemble, and hybrid ensemble models outperformed the baseline, Logistic Regression, and Decision Tree models. This deep dive summarizes and compares the key metrics across these model groups, while making its final recommendation for production deployment here.
+The ensemble, and hybrid ensemble models outperformed the baseline, Logistic Regression, and Decision Tree models. This [section](#deep-dives) summarizes and compares the key metrics across these model groups, while making its final recommendation for production deployment here.
 
 ### Recommendations for Model Selection and Deployment for Flight Delay Predictions:
 
