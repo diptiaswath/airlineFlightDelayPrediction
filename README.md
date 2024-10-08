@@ -167,17 +167,17 @@ To improve model performance in Phase2, new features were engineered by tracking
 ##### Enhanced Feature Engineering Algorithm
 
 ```
-    ###### Input:
+    **Input:**
     - Raw flight data
     - Aircraft data
     - Weather data
     - Airport data
     - Airline data
 
-    ###### Output:
+    **Output:**
     - Enriched dataset with engineered features for flight delay prediction
 
-    ###### Algorithm:
+    **Algorithm:**
 
     1. Initialize empty dataset D for engineered features
 
