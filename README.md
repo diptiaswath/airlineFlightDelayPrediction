@@ -697,7 +697,7 @@ This project utilized Google Colab Pro to handle computationally intensive noteb
 
 ## Key Insights from Phase1 to Phase2 of Project
 
--   Switched to predicting three classes instead of earlier four classes removing granularity of whether a flight had a specific arrival delay or a departure delay
+-   Switched to predicting three classes instead of earlier four classes removing granularity of whether a flight had a specific arrival delay or a departure delay to see if performance with minority delay classes would improve
   
 -   Experimented with F2 scores as an evaluation metric
   
