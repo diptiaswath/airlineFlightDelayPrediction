@@ -30,9 +30,9 @@ Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| 
 
     - [Model Evaluation and Performance Summary](#model-evaluation-summary-and-performance-metrics)  
 
-    - [Recommendations for Model Selection and Deployment for Flight Delay Predictions](#recommendations-for-model-selection-and-deployment-for-flight-delay-predictions)
+    - [Actionable Insights - Recommendations for Model Selection and Deployment for Flight Delay Predictions](#actionable-insights---recommendations-for-model-selection-and-deployment-for-flight-delay-predictions)
 
-    - [Recommendations based on influential features in Flight Delay Predictions](#recommendations-based-on-influential-features-in-flight-delay-predictions)
+    - [Actionable Insights - Recommendations based on influential Features in Flight Delay Predictions](#actionable-insights---recommendations-based-on-influential-features-in-flight-delay-predictions)
 
 2. [Deep Dives](#deep-dives)
 
@@ -276,13 +276,13 @@ There was no significant trend observed in the average values of the selected we
 
 ### Model Evaluation and Performance Summary:
 
-The following classification models were evaluated for predicting flight delays, listed in order:
+The following machine learning models were evaluated for predicting flight delays, listed in order:
 
 -   Dummy Classifier (Baseline)
 
--   Multinomial Logistic Regression
+-   Multinomial Logistic Regression Classifier
 
--   Decision Trees with hyperparameter tuning
+-   Decision Tree Classifier with hyperparameter tuning
 
 -   Ensemble Models – Bagging with Bagging Classifier with Decision Trees, Random Forest; Boosting with XGBoost, CatBoost and Light Gradient Boosting Machine (LGBM)
 
@@ -290,7 +290,7 @@ The following classification models were evaluated for predicting flight delays,
 
 The ensemble, and hybrid ensemble models outperformed the baseline, Logistic Regression, and Decision Tree models. This [section](#deep-dives) summarizes and compares the key metrics across these model groups, while making its final recommendation for production deployment here.
 
-### Recommendations for Model Selection and Deployment for Flight Delay Predictions:
+### Actionable Insights - Recommendations for Model Selection and Deployment for Flight Delay Predictions:
 
 **Best Model: Voting Classifier**
 
@@ -343,7 +343,7 @@ The Hybrid Ensemble Classifier is an alternate choice:
 -   Use where compute resources and infrastructure allow for multiple model deployments
 
 
-### Recommendations based on influential features in Flight Delay Predictions:
+### Actionable Insights - Recommendations based on influential Features in Flight Delay Predictions:
 
 | **Feature** | **Recommendation** |
 |-------------|--------------------|
