@@ -16,7 +16,7 @@ Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| 
 
     - [Research Question](#research-question)
 
-    - [Flight Delay Predictions - Key Metrics](#flight-delay---predictions-key-metrics)
+    - [Flight Delay Predictions - Key Metrics](#flight-delay-predictions---key-metrics)
 
     - [Approach](#approach)
 
