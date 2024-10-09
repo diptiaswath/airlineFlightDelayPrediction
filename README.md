@@ -698,10 +698,12 @@ This project utilized Google Colab Pro to handle computationally intensive noteb
 ## Key Insights from Phase1 to Phase2 of Project
 
 -   Switched to predicting three classes instead of earlier four classes removing granularity of whether a flight had a specific arrival delay or a departure delay
-
+  
 -   Experimented with F2 scores as an evaluation metric
-
--   Switched back to focus on F1 Score to: a) Decrease false positives for delayed flights, especially Class 2, b) Improve accuracy of on-time flight predictions - Class1, c) Increase precision for Class 2 and Class 1
+  
+-   Switched back to focus on F1 Score to: a) Decrease false positives for delayed flights, especially Class2, b) Improve accuracy of on-time flight predictions - Class1, c) Increase precision for Class2 and Class1
+  
+-   Model Tuning by adjusting thresholds for Class2 to optimize for F1 score. Also, added class weights where needed
 
 -   Revisited SMOTETomek sampling strategy to improve prediction performance for minority classes – Class1 (either departure or arrival delayed) and Class2 – (both arrival and departure delayed)
 
