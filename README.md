@@ -66,7 +66,7 @@ Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| 
 
     - [Repository with GitLFS](#repository-with-gitlfs)
 
-7. [Project Infrastructure](#project-infrastructre)
+7. [Project Infrastructure](#project-infrastructure)
 
 8. [Key Insights from Phase1 to Phase2 of Project](#key-insights-from-phase1-to-phase2-of-project)
 
