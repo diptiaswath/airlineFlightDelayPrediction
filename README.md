@@ -162,7 +162,7 @@ Our goal is to make SkyFlow as accurate as possible, so everyone can rely on its
 
 To monitor overall performance, we use the **Precision-Recall Area Under the Curve (PR AUC)** and **Receiver Operating Characteristic Area Under the Curve (ROC AUC)**. 
 
-For evaluating the balance between correctly identifying delays and avoiding false alarms, we rely on the **F1 Score** as the primary metric, which combines precision and recall into a single value.
+For evaluating the balance between correctly identifying delays and avoiding false alarms, we rely on the **F1 Score** as the primary metric, which combines precision and recall into a single value. Further, the F1 score is optimized to give more weightage to the full-delay groups.
 
 ### Approach
 
@@ -249,7 +249,7 @@ It can be observed that flights traveling short and moderate distances tend to h
 
 ![A purple and orange bars Description automatically generated](images/0fcbd4012821aef1b942af25c8508065.jpeg)
 
-**Analyzing Historical Average Delays (2019):** Visualize the average historical delays of DEP_BLOCK_HIST, which represents the historical average delay for different departure time blocks aggregated by month, and DEP_AIRPORT_HIST, indicating the historical average delay rates for flights departing from specific airports per month. This analysis examines how these metrics fluctuate due to various time-related and seasonal factors, aiming to provide insights into delay patterns across different times of day, days of the week, and seasons.Bottom of Form
+**Analyzing Historical Average Delays (2019):** Visualize the average historical delays of DEP_BLOCK_HIST, which represents the historical average delay for different departure time blocks aggregated by month, and DEP_AIRPORT_HIST, indicating the historical average delay rates for flights departing from specific airports per month. This analysis examines how these metrics fluctuate due to various time-related and seasonal factors, aiming to provide insights into delay patterns across different times of day, days of the week, and seasons.
 
 -   **Seasonal Trends:** Historical average delays are generally higher during the summer months, followed by winter and spring.
 
