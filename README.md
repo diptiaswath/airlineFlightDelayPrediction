@@ -288,7 +288,7 @@ The following machine learning models were evaluated for predicting flight delay
 
 -   Ensemble Models – Bagging with Bagging Classifier with Decision Trees, Random Forest; Boosting with XGBoost, CatBoost and Light Gradient Boosting Machine (LGBM)
 
--   Hybrid Ensemble Models – Voting Classifier as an ensemble of XGBoost and Random Forest, Stacking Classifiers (hyperparameter tuned and without) with XGBoost and Random Forest as base estimator and a meta classifier with one-vs-rest Logistic Regression.
+-   Hybrid Ensemble Models – Voting Classifier as an ensemble of XGBoost and Random Forest; Stacking Classifiers (hyperparameter tuned and without) with XGBoost and Random Forest as base estimator and a meta classifier with one-vs-rest Logistic Regression; and a custom Hybrid Ensemble that comprises of both the Voting and tuned Stacking Classifier
 
 The ensemble, and hybrid ensemble models outperformed the baseline, Logistic Regression, and Decision Tree models. This [section](#deep-dives) summarizes and compares the key metrics across these model groups, while making its final recommendation for production deployment here.
 
