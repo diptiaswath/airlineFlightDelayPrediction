@@ -717,14 +717,14 @@ This project utilized Google Colab Pro to handle computationally intensive noteb
 
 **Use of Principal Component Analysis (PCA):** With 2D visualization to explore patterns within the current delay classes. If analysis reveals significant overlap between classes or a lack of distinct patterns, it may be beneficial to consider a more granular classification, such as separating arrival delays and departure delays into their own distinct classes.
 
-**Extend Forecast Horizon and Implement Multi-Step Forecasting**:
+**Extend Forecast Horizon and Implement Multi-Step Forecasting:**
 Increase the prediction timeframe beyond the current 24-hour forecast, implementing a multi-step forecasting approach that provides:
 - Short-term predictions (24 hours)
 - Medium-term predictions (48-72 hours)
 - Long-term predictions (up to 7 days)
 This multi-horizon approach allows for both immediate operational adjustments and longer-term strategic planning.
 
-**Explore use of Deep Learning Architectures:**:
+**Explore use of Deep Learning Architectures:**
 Investigate if performance can be improved further by:
 - Implementing LSTM (Long Short-Term Memory) networks to capture long-term dependencies in flight data
 - Exploring Transformer models for their ability to handle sequential data and long-range dependencies
