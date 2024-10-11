@@ -434,7 +434,11 @@ The Hybrid Ensemble Classifier is an alternate choice:
 
     7. Merge airport and airline data with D
 
-    8. Compute historical performance metrics:
+    8. Compute flight statistics, passenger statistics, and employee statistics:
+
+        8.1. Add all statistics features to D 
+
+    9. Compute historical performance metrics:
 
         8.1. Calculate CARRIER_HISTORICAL (average delay by carrier and month)
 
@@ -444,9 +448,9 @@ The Hybrid Ensemble Classifier is an alternate choice:
 
         8.4. Add historical metrics to D
 
-    9. Handle missing values and perform necessary data type conversions
+    10. Handle missing values and perform necessary data type conversions
 
-    10. Return enriched dataset D
+    11. Return enriched dataset D
 ```
 
 
