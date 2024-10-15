@@ -51,7 +51,7 @@ st.markdown(
         color: white;
     }
     /* Hide anchor links next to headers */
-    .stMarkdown h1 a, .stMarkdown h2 a {
+    .stMarkdown h1 a, .stMarkdown h2 .stMarkdown h3 a {
         display: none;
     }
     </style>
@@ -105,13 +105,13 @@ left_column, right_column = st.columns([1, 2])
 
 # Left column of inputs
 with left_column:
-    st.header("Share Your Flight Journey!")
+    st.markdown("<h2 style='text-align: center; color: #1E90FF;'>Share Your Flight Journey!</h2>", unsafe_allow_html=True)
 
     # Define input fields
     user_inputs_dict = {}
 
     # First sub-row: Date of Flight and Airline
-    st.subheader("Flight Date and Airline")
+    st.markdown("<h3 style='color: #1E90FF;'>Flight Date and Airline</h3>", unsafe_allow_html=True)
     col1, col2 = st.columns(2)
     with col1:
         flight_date = st.date_input("Date of Flight:")
@@ -120,7 +120,7 @@ with left_column:
         user_inputs_dict['AIRLINE'] = st.selectbox('Airline:', airlines['CARRIER_NAME'])
 
     # Second sub-row: From and To Airport
-    st.subheader("Airports")
+    st.markdown("<h3 style='color: #1E90FF;'>Airports</h3>", unsafe_allow_html=True)
     airports = pd.read_csv(airports_csv_path)
     col3, col4 = st.columns(2)
     with col3:
@@ -129,7 +129,7 @@ with left_column:
         user_inputs_dict['TO_AIRPORT'] = st.selectbox('To Airport:', airports['DISPLAY_AIRPORT_NAME'])
 
     # Third sub-row: Flight Times
-    st.subheader("Flight Times")
+    st.markdown("<h3 style='color: #1E90FF;'>Flight Times</h3>", unsafe_allow_html=True)
     col5, col6 = st.columns(2)
     with col5:
         departure_time = st.time_input("Departure Time:")
@@ -440,7 +440,7 @@ st.markdown(
     """
     <div style="text-align: center; font-size: 16px; color: #4CAF50;">
         <p>✨ Developed by <a href="https://www.linkedin.com/in/dipti-aswath-60b9131/"><strong>Dipti Aswath</strong></a></p>
-        <p>🔍 Explore SkyFlow's comprehensive documentation, including operational insights and technical details <a href="https://diptiaswath.github.io/airlineFlightDelayPrediction/" style="color: #1E90FF;">here</a>.</p>
+        <p>🔍 Explore SkyFlow's comprehensive documentation with operational insights and technical details <a href="https://diptiaswath.github.io/airlineFlightDelayPrediction/" style="color: #1E90FF;">here</a></p>
     </div>
     """,
     unsafe_allow_html=True
