@@ -704,6 +704,13 @@ This project utilized Google Colab Pro to handle computationally intensive noteb
 
 -   Decision tree and Random Forest tree structures are available externally - view [here](https://drive.google.com/drive/folders/1qXDYyuo2lqJBwFTBoI7KCV45SZC-w163?usp=drive_link)
 
+**MLOps with SkyFlow**
+
+- SkyFlow is a Streamlit application deployed on an Amazon EC2 instance, which serves as the hosting environment. The application is accessible via a registered domain name (skyflow-kvgrowth.com), managed through AWS Route 53. 
+
+- Route 53 is configured with an A record that points the domain(skyflow-kvgrowth.com) to the EC2 instance's Elastic IP address, ensuring a stable connection even if the instance is restarted. For secure access, an SSL/TLS certificate is implemented, using AWS Certificate Manager (ACM)  with an Application Load Balancer (ALB) for SSL termination.
+
+- EC2 instance's security group is configured to allow inbound traffic on necessary ports (8000, 443, and 8501 for Streamlit). This setup provides a secure, scalable, and easily manageable environment for hosting the Streamlit application, with the flexibility to handle increased traffic and maintain high availability.
 
 ## Key Insights from Phase1 to Phase2 of Project
 
