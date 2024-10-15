@@ -2,13 +2,9 @@
 port = 8501
 enableCORS = false
 enableXsrfProtection = false
+sslCertFile = "/home/ec2-user/ssl_certs/skyflow.pem"
+sslKeyFile = "/home/ec2-user/ssl_certs/skyflow.key"
 
 [browser]
 serverAddress = "ec2-18-219-112-73.us-east-2.compute.amazonaws.com"
 serverPort = 8501
-
-[server.sslCertFile]
-path = "/home/ec2-user/ssl_certs/cert.pem"
-
-[server.sslKeyFile]
-path = "/home/ec2-user/ssl/key.pem"

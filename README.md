@@ -1,6 +1,6 @@
 # SkyFlow: AI-Powered Flight Delay Predictions
 
-Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| [Email](mailto:dipti.aswath@gmail.com) \| [Early SkyFlow Prototype](http://18.219.112.73:8501/) 
+Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| [Email](mailto:dipti.aswath@gmail.com) \| [Early SkyFlow Prototype](https://ec2-18-219-112-73.us-east-2.compute.amazonaws.com:8501/) 
 
 ## License
 
