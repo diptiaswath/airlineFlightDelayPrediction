@@ -2,6 +2,12 @@
 
 Dipti Aswath \| [LinkedIn](https://www.linkedin.com/in/dipti-aswath-60b9131) \| [Email](mailto:dipti.aswath@gmail.com) \| [Early SkyFlow Prototype](http://18.219.112.73:8501/) 
 
+## License
+
+This project is licensed under the Apache License 2.0. You may use, modify, and distribute this code under the terms of the license. See the [LICENSE](./LICENSE) file for more details.
+
+Attribution: Please ensure to give proper credit to the original author of this project when reusing or redistributing the code.
+
 ## Table of Contents
 
 1. [Executive Summary](#executive-summary)
