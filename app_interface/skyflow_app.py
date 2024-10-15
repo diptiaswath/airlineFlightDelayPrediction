@@ -1,3 +1,15 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import streamlit as st
 import requests
 import pandas as pd
@@ -424,7 +436,7 @@ st.markdown(
     """
     <div style="text-align: center; font-size: 16px; color: #4CAF50;">
         <p>✨ Developed by <a href="https://www.linkedin.com/in/dipti-aswath-60b9131/"><strong>Dipti Aswath</strong></a></p>
-        <p>🔗 Explore the code on my <a href="https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/README.md" style="color: #1E90FF;">GitHub Repository</a></p>
+        <p>🔗 Explore the operation insights and code on my <a href="https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/README.md" style="color: #1E90FF;">GitHub Repository</a></p>
     </div>
     """,
     unsafe_allow_html=True
