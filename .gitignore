@@ -10,3 +10,7 @@ notebooks/utils/.DS_Store
 
 # Ignore virual env dir
 app_interface/venv_skyflow
+
+# Ignore pycache
+app_interface/__pycache__
+

@@ -50,6 +50,10 @@ st.markdown(
         background-color: #4CAF50;
         color: white;
     }
+    /* Hide anchor links next to headers */
+    h1 a.anchor-link, h2 a.anchor-link {
+        display: none;
+    }
     </style>
     """,
     unsafe_allow_html=True
