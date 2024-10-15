@@ -105,13 +105,13 @@ left_column, right_column = st.columns([1, 2])
 
 # Left column of inputs
 with left_column:
-    st.markdown("<h2 style='text-align: center; color: #1E90FF;'>Share Your Flight Journey!</h2>", unsafe_allow_html=True)
+    st.header("Share Your Flight Journey")
 
     # Define input fields
     user_inputs_dict = {}
 
     # First sub-row: Date of Flight and Airline
-    st.markdown("<h3 style='color: #1E90FF;'>Flight Date and Airline</h3>", unsafe_allow_html=True)
+    st.subheader("Flight Date and Airline")
     col1, col2 = st.columns(2)
     with col1:
         flight_date = st.date_input("Date of Flight:")
@@ -120,7 +120,7 @@ with left_column:
         user_inputs_dict['AIRLINE'] = st.selectbox('Airline:', airlines['CARRIER_NAME'])
 
     # Second sub-row: From and To Airport
-    st.markdown("<h3 style='color: #1E90FF;'>Airports</h3>", unsafe_allow_html=True)
+    st.subheader("Airports")
     airports = pd.read_csv(airports_csv_path)
     col3, col4 = st.columns(2)
     with col3:
@@ -129,7 +129,7 @@ with left_column:
         user_inputs_dict['TO_AIRPORT'] = st.selectbox('To Airport:', airports['DISPLAY_AIRPORT_NAME'])
 
     # Third sub-row: Flight Times
-    st.markdown("<h3 style='color: #1E90FF;'>Flight Times</h3>", unsafe_allow_html=True)
+    st.subheader("Flight Times")
     col5, col6 = st.columns(2)
     with col5:
         departure_time = st.time_input("Departure Time:")
