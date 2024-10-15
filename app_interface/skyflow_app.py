@@ -51,7 +51,7 @@ st.markdown(
         color: white;
     }
     /* Hide anchor links next to headers */
-    h1 a.anchor-link, h2 a.anchor-link {
+    .stMarkdown h1 a, .stMarkdown h2 a {
         display: none;
     }
     </style>
@@ -440,7 +440,7 @@ st.markdown(
     """
     <div style="text-align: center; font-size: 16px; color: #4CAF50;">
         <p>✨ Developed by <a href="https://www.linkedin.com/in/dipti-aswath-60b9131/"><strong>Dipti Aswath</strong></a></p>
-        <p>🔗 Explore the operation insights and code on my <a href="https://github.com/diptiaswath/airlineFlightDelayPrediction/blob/main/README.md" style="color: #1E90FF;">GitHub Repository</a></p>
+        <p>🔍 Explore SkyFlow's comprehensive documentation, including operational insights and technical details <a href="https://diptiaswath.github.io/airlineFlightDelayPrediction/" style="color: #1E90FF;">here</a>.</p>
     </div>
     """,
     unsafe_allow_html=True
