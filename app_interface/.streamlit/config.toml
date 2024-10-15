@@ -3,7 +3,7 @@ port = 8501
 enableCORS = false
 enableXsrfProtection = false
 sslCertFile = "/path/ssl_certs/skyflow.pem"
-sslKeyFile = "/path/ec2-user/ssl_certs/skyflow.key"
+sslKeyFile = "/path/ssl_certs/skyflow.key"
 
 [browser]
 serverAddress = "skyflow-kvgrowth.com"
