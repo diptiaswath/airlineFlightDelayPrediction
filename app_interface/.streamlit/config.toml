@@ -2,8 +2,8 @@
 port = 8501
 enableCORS = false
 enableXsrfProtection = false
-sslCertFile = "/home/ec2-user/ssl_certs/fullchain.pem"
-sslKeyFile = "/home/ec2-user/ssl_certs/privkey.key"
+sslCertFile = "/code/ssl_certs/fullchain.pem"
+sslKeyFile = "/code/ssl_certs/privkey.key"
 
 [browser]
 serverAddress = "skyflow-kvgrowth.com"
