@@ -23,10 +23,16 @@ warnings.filterwarnings("ignore")
 import os
 print(f'Current directory: {os.getcwd()}')
 
+# FastAPI endpoint accessible on EC2 instance: http://ec2-<blah>.us-east-2.compute.amazonaws.com:8000/docs#
 
-# FastAPI endpoint accessible on EC2 instance: http://ec2-18-219-112-73.us-east-2.compute.amazonaws.com:8000/docs#
-skyflow_model = joblib.load("../model_artifacts/best_xg_pipeline.pkl")
-skyflow_encoder = joblib.load("../model_artifacts/target_encoder.pkl")
+# When running on localhost without use of Dockerfile, uncomment below
+# skyflow_model = joblib.load("../model_artifacts/best_xg_pipeline.pkl")
+# skyflow_encoder = joblib.load("../model_artifacts/target_encoder.pkl")
+
+# When run through the use of Dockerfile, use below
+skyflow_model = joblib.load("./model_artifacts/best_xg_pipeline.pkl")
+skyflow_encoder = joblib.load("./model_artifacts/target_encoder.pkl")
+
 skyflow = FastAPI()
 
 class InputVars(BaseModel):
