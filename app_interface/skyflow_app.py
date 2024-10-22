@@ -22,8 +22,7 @@ warnings.filterwarnings("ignore")
 from datetime import datetime, time, date
 from geopy.distance import geodesic
 
-# SkyFlow is a StreamLit Application deployed on EC2 instance
-# http://ec2-18-219-112-73.us-east-2.compute.amazonaws.com:8501
+# SkyFlow is a StreamLit Application deployed on AWS EC2
 st.set_page_config(page_title="SkyFlow: AI-Powered Flight Delay Predictor", page_icon="✈️", layout="wide")
 
 st.markdown(
@@ -412,7 +411,7 @@ with right_column:
             derived_features = map_inputs_to_features(user_inputs_dict, flight_date, departure_time, arrival_time)   
             print(json.dumps(derived_features, indent=2))         
             
-            # FastAPI server deployed on EC2 instances. ALB points to this EC2 instance with through domain name skyflow-kvgrowth
+            # FastAPI server deployed on EC2 instance
             response = requests.post("http://ec2-13-59-138-172.us-east-2.compute.amazonaws.com:8000/predict", json = derived_features) 
             
             # FastAPI server deployed to local instance 
