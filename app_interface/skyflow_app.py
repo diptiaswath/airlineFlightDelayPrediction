@@ -19,11 +19,12 @@ import calendar
 import warnings
 warnings.filterwarnings("ignore")
 
-from datetime import datetime, time, date
+from datetime import datetime, time as dt_time, date
+import time
 from geopy.distance import geodesic
 
 # SkyFlow is a StreamLit Application deployed on AWS EC2
-st.set_page_config(page_title="SkyFlow: AI-Powered Flight Delay Predictor", page_icon="✈️", layout="wide")
+st.set_page_config(page_title="SkyFlow: AI-Powered Flight Delay Predictor & Airline Sentiment Analysis Dashboard", page_icon="✈️", layout="wide")
 
 st.markdown(
     """
@@ -33,7 +34,7 @@ st.markdown(
         color: #1E90FF; 
         font-weight: bold;
         text-align: left; 
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0); 
     }
     .stApp {
         background-image: url('https://skyflow.com/replace-later.jpg'); 
@@ -58,12 +59,16 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.markdown('<h1 class="custom-title">✈️ SkyFlow: Navigate Your Flight Delays with AI Precision!!</h1>', unsafe_allow_html=True)
+st.markdown(
+    '<h1 class="custom-title" style="font-family: Arial, sans-serif; color: #1E90FF; line-height: 1.2;">✈️ SkyFlow: Navigate Flight Delays and Analyze Airline Sentiment ✈️</h1>',
+    unsafe_allow_html=True
+)
+
 st.markdown(
     """
-    <div class="description">
-        <p>Our AI-Powered Flight Delay Predictor analyzes various factors to predict flight delays.
-        Simply enter the required information, and let our model do the rest!</p>
+    <div class="description" style="font-family: Arial, sans-serif; line-height: 1.6; padding: 8px; border-radius: 8px;  background-color: #E0E0E0;">
+        <h2 style="color: #1E90FF; line-height: 1.2;">AI-Powered Platform</h2>            
+        <p style="margin-top: 10px;">Skflow's platform leverages advanced machine learning algorithms and real-time data analytics to provide accurate predictions and insightful analyses. By harnessing the power of AI, we empower our travelers to make informed decisions regarding flight delays and airline sentiment.</p>
     </div>
     """,
     unsafe_allow_html=True
@@ -98,45 +103,6 @@ try:
 except FileNotFoundError as e:
     st.error(f"Error: Could not find either airlines or airports_list.csv file. {str(e)}")
     st.stop()
-   
-# Create two main columns for the layout
-left_column, right_column = st.columns([1, 2])
-
-# Left column of inputs
-with left_column:
-    st.header("Share Your Flight Journey")
-
-    # Define input fields
-    user_inputs_dict = {}
-
-    # First sub-row: Date of Flight and Airline
-    st.subheader("Flight Date and Airline")
-    col1, col2 = st.columns(2)
-    with col1:
-        flight_date = st.date_input("Date of Flight:")
-    with col2:
-        airlines = pd.read_csv(airlines_csv_path)
-        user_inputs_dict['AIRLINE'] = st.selectbox('Airline:', airlines['CARRIER_NAME'])
-
-    # Second sub-row: From and To Airport
-    st.subheader("Airports")
-    airports = pd.read_csv(airports_csv_path)
-    col3, col4 = st.columns(2)
-    with col3:
-        user_inputs_dict['FROM_AIRPORT'] = st.selectbox('From Airport:', airports['DISPLAY_AIRPORT_NAME'])
-    with col4:
-        user_inputs_dict['TO_AIRPORT'] = st.selectbox('To Airport:', airports['DISPLAY_AIRPORT_NAME'])
-
-    # Third sub-row: Flight Times
-    st.subheader("Flight Times")
-    col5, col6 = st.columns(2)
-    with col5:
-        departure_time = st.time_input("Departure Time:")
-    with col6:
-        arrival_time = st.time_input("Arrival Time:")
-
-    # Predict button (spanning the full width)
-    predict_button = st.button("Predict Flight Delay")
 
 # Map user interface inputs to domain or model required features
 def map_inputs_to_features(user_inputs, flight_date, departure_time, arrival_time):
@@ -286,11 +252,11 @@ def get_part_of_day(time_obj):
         time_obj = datetime.strptime(time_obj, '%H:%M').time()
     
     # Define time ranges for each part of the day
-    early_morning_late_night = time(0, 0) <= time_obj < time(6, 0)
-    morning = time(6, 0) <= time_obj < time(12, 0)
-    afternoon = time(12, 0) <= time_obj < time(17, 0)
-    evening = time(17, 0) <= time_obj < time(20, 0)
-    night = time(20, 0) <= time_obj <= time(23, 59)
+    early_morning_late_night = dt_time(0, 0) <= time_obj < dt_time(6, 0)
+    morning = dt_time(6, 0) <= time_obj < dt_time(12, 0)
+    afternoon = dt_time(12, 0) <= time_obj < dt_time(17, 0)
+    evening = dt_time(17, 0) <= time_obj < dt_time(20, 0)
+    night = dt_time(20, 0) <= time_obj <= dt_time(23, 59)
     
     # Determine part of day
     if early_morning_late_night:
@@ -401,38 +367,201 @@ def categorize_flight_duration(duration):
 def get_carrier_info(carrier_name):
     pass
 
-# Right column for results
-with right_column:
-    st.header("Flight Delay Insights Just for You!")
+# Add padding before the tabs
+st.markdown("<div style='padding: 8px;'></div>", unsafe_allow_html=True)
 
-    if predict_button:
-        try:
-            print(json.dumps(user_inputs_dict, indent=2))
-            derived_features = map_inputs_to_features(user_inputs_dict, flight_date, departure_time, arrival_time)   
-            print(json.dumps(derived_features, indent=2))         
+# Tab Titles
+tab_titles = ["Flight Delay Predictor", "Airline Pulse Notifications"]
+
+# Create Tabs
+tabs = st.tabs(tab_titles)
+
+# Style the tabs with a custom CSS class 
+st.markdown(
+    """
+    <style>
+        .stTabs { 
+            font-family: Arial, sans-serif; 
+            color: #1E90FF; 
+            font-size: 26px; 
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# Flight Delay Predictor Tab
+with tabs[0]:
+    st.markdown(
+        """
+        <div style="background-color: #f0f0f0; padding: 10px; border-radius: 8px; margin: 10px 0;">
+            <h3 style="color: black; font-family: Arial, sans-serif; line-height: 1.2;">Flight Delay Predictor</h3>
+            <p style="color: black; font-family: Arial, sans-serif; line-height: 1.6; margin-top: 10px;">Our Flight Delay Predictor analyzes various factors to forecast potential flight delays. Simply enter the required information, and let our model do the rest!</p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Create two main columns for the layout
+    left_column, right_column = st.columns([1, 2])
+
+    # Left column of inputs
+    with left_column:
+        st.markdown('<h3 style="color: black; font-family: Arial, sans-serif; line-height: 1.2;">Share Your Flight Journey</h3>', unsafe_allow_html=True)
+
+        # Define input fields
+        user_inputs_dict = {}
+
+        # First sub-row: Date of Flight and Airline
+        st.markdown(
+                 "<h4 style='color: black; font-family: Arial, sans-serif; line-height: 1.2;'>Flight Date and Airline</h4>",
+                unsafe_allow_html=True
+        )
+        col1, col2 = st.columns(2)
+        with col1:
+            flight_date = st.date_input("Date of Flight:")
+        with col2:
+            airlines = pd.read_csv(airlines_csv_path)
+            user_inputs_dict['AIRLINE'] = st.selectbox('Airline:', airlines['CARRIER_NAME'])
+
+        # Second sub-row: From and To Airport
+        st.markdown(
+                 "<h4 style='color: black; font-family: Arial, sans-serif; line-height: 1.2;'>Airports</h4>",
+                unsafe_allow_html=True
+        )
+        airports = pd.read_csv(airports_csv_path)
+        col3, col4 = st.columns(2)
+        with col3:
+            user_inputs_dict['FROM_AIRPORT'] = st.selectbox('From Airport:', airports['DISPLAY_AIRPORT_NAME'])
+        with col4:
+            user_inputs_dict['TO_AIRPORT'] = st.selectbox('To Airport:', airports['DISPLAY_AIRPORT_NAME'])
+
+        # Third sub-row: Flight Times
+        st.markdown(
+                 "<h4 style='color: black; font-family: Arial, sans-serif; line-height: 1.2;'>Flight Times</h4>",
+                unsafe_allow_html=True
+        )
+        col5, col6 = st.columns(2)
+        with col5:
+            departure_time = st.time_input("Departure Time:")
+        with col6:
+            arrival_time = st.time_input("Arrival Time:")
+
+        # Predict button 
+        predict_button = st.button("Predict Flight Delay")
+    
+    # Right column for results
+    with right_column:
+        st.markdown('<h3 style="color: black; font-family: Arial, sans-serif; line-height: 1.2;">Flight Delay Insights Just for You!</h3>', unsafe_allow_html=True)
+
+        if predict_button:
+            try:
+                print(json.dumps(user_inputs_dict, indent=2))
+                derived_features = map_inputs_to_features(user_inputs_dict, flight_date, departure_time, arrival_time)    
+                print(json.dumps(derived_features, indent=2))         
+                
+                # FastAPI server deployed on EC2 instance
+                response = requests.post("http://ec2-13-59-138-172.us-east-2.compute.amazonaws.com:8000/predict", json = derived_features) 
+                
+                # Uncomment for local testing
+                # response = requests.post("http://127.0.0.1:8000/predict", json = derived_features) 
+                response.raise_for_status()  # Raises an HTTPError if the HTTP request returned an unsuccessful status code
+                
+                result = response.json()
             
-            # FastAPI server deployed on EC2 instance
-            response = requests.post("http://ec2-13-59-138-172.us-east-2.compute.amazonaws.com:8000/predict", json = derived_features) 
+                if response.text == '2':
+                    st.error("⚠️ Both departure and arrival time of the flight are likely to be delayed.")
+                elif response.text == '1':
+                    st.warning("🕒 Either Flight departure or Flight arrival is predicted to be delayed.")
+                else:
+                    st.success("✅ Flight is predicted to be on-time for both departure and arrival.")
+                
+                # TODO: Add more details or visualizations based on the prediction
             
-            # FastAPI server deployed to local instance 
-            # response = requests.post("http://127.0.0.1:8000/predict", json = derived_features) 
-            response.raise_for_status()  # Raises an HTTPError if the HTTP request returned an unsuccessful status code
-            
-            result = response.json()
-            
-            if response.text == '2':
-                st.error("⚠️ Both departure and arrival time of the flight are likely to be delayed.")
-            elif response.text == '1':
-                st.warning("🕒 Either Flight departure or Flight arrival is predicted to be delayed.")
-            else:
-                st.success("✅ Flight is predicted to be on-time for both departure and arrival.")
-            
-            # TODO: Add more details or visualizations based on the prediction
-            
-        except requests.exceptions.RequestException as e:
-            st.error(f"An error occurred while making the prediction: {str(e)}")
-    else:
-        st.info("Share your Flight Journey and click 'Predict Flight Delay' to see results.")
+            except requests.exceptions.RequestException as e:
+                st.error(f"An error occurred while making the prediction: {str(e)}")
+        else:
+            st.info("Share your Flight Journey and click 'Predict Flight Delay' to see results.")
+
+# Airline Pulse Notifications Tab
+with tabs[1]:
+    st.markdown(
+        """
+        <div style="background-color: #f0f0f0; padding: 10px; border-radius: 8px; margin: 10px 0;">
+            <h3 style="color: black; font-family: Arial, sans-serif; line-height: 1.2;">Airline Pulse Notifications</h3>
+            <p style="color: black; font-family: Arial, sans-serif; line-height: 1.6; margin-top: 10px;">Stay informed with our live X feed that analyzes airline sentiments in real-time. Gain valuable insights and notifications on public perceptions about various airlines!</p> 
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Sample List of sentiment data for different airlines
+    airline_sentiments = [
+        {
+            "Airline": "Southwest Airlines",
+            "Positive Sentiment": 0.8,
+            "Negative Sentiment": 0.2,
+            "DelayedFlights": 0.36,
+            "Date": "Oct 31, 2024"
+        },
+        {
+            "Airline": "Delta Airlines",
+            "Positive Sentiment": 0.75,
+            "Negative Sentiment": 0.25,
+            "DelayedFlights": 0.30,
+            "Date": "Nov 1, 2024"
+        },
+        {
+            "Airline": "American Airlines",
+            "Positive Sentiment": 0.70,
+            "Negative Sentiment": 0.30,
+            "DelayedFlights": 0.40,
+            "Date": "Oct 30, 2024"
+        },
+        {
+            "Airline": "United Airlines",
+            "Positive Sentiment": 0.65,
+            "Negative Sentiment": 0.35,
+            "DelayedFlights": 0.45,
+            "Date": "Nov 1, 2024"
+        },
+        {
+            "Airline": "JetBlue Airways",
+            "Positive Sentiment": 0.85,
+            "Negative Sentiment": 0.15,
+            "DelayedFlights": 0.25,
+            "Date": "Nov 1, 2024"
+        },
+        {
+            "Airline": "Alaskan Airlines",
+            "Positive Sentiment": 0.55,
+            "Negative Sentiment": 0.45,
+            "DelayedFlights": 0.65,
+            "Date": "Nov 1, 2024"
+        }
+    ]
+
+    # Create a dropdown to select the airline
+    selected_airline = st.selectbox("Select Airline", [sentiment['Airline'] for sentiment in airline_sentiments])
+
+    # TODO: Analyze the sentiment text (start with a static CSV dump, and then move to leveraging real-time Twitter feed) instead of dummy reads of airline_sentiments 
+
+    # Find the selected airline's sentiment data
+    for sentiment in airline_sentiments:
+        if sentiment['Airline'] == selected_airline:
+            # Display the sentiment data for the selected airline with custom styling
+            st.markdown(
+                f"<h4 style='color: #1E90FF; font-family: Arial, sans-serif; line-height: 1.2;'>{sentiment['Airline']}</h4>",
+                unsafe_allow_html=True
+            )
+            st.markdown("<h5 style='color: #1E90FF; font-family: Arial, sans-serif; line-height: 1.2;'>Sentiment Analysis</h5>", unsafe_allow_html=True)
+            st.write(f"<p style='color: black; font-family: Arial, sans-serif; line-height: 1.2;'><strong>Positive Sentiment:</strong> {sentiment['Positive Sentiment'] * 100:.1f}%</p>", unsafe_allow_html=True)
+            st.write(f"<p style='color: black; font-family: Arial, sans-serif; line-height: 1.2;'><strong>Negative Sentiment:</strong> {sentiment['Negative Sentiment'] * 100:.1f}%</p>", unsafe_allow_html=True)
+            st.markdown("<h5 style='color: #1E90FF; font-family: Arial, sans-serif; line-height: 1.2;'>Flight Delay Information</h5>", unsafe_allow_html=True)
+            st.write(f"<p style='color: black; font-family: Arial, sans-serif; line-height: 1.2;'><strong>Percentage of Delayed Flights:</strong> {sentiment['DelayedFlights'] * 100:.1f}%</p>", unsafe_allow_html=True)
+            st.markdown(f"<p style='color: black; font-family: Arial, sans-serif; line-height: 1.2;'><em>Tweets analyzed for the 7-day period ending: {sentiment['Date']}</em></p>", unsafe_allow_html=True)
+
+        # Add a separator
 
 st.markdown("---")
 st.markdown(
