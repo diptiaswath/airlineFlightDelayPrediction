@@ -68,7 +68,7 @@ st.markdown(
     """
     <div class="description" style="font-family: Arial, sans-serif; line-height: 1.6; padding: 8px; border-radius: 8px;  background-color: #E0E0E0;">
         <h2 style="color: #1E90FF; line-height: 1.2;">AI-Powered Platform</h2>            
-        <p style="margin-top: 10px;">SkyFlow's platform leverages advanced machine learning algorithms and real-time data analytics to provide accurate predictions and insightful analyses. By harnessing the power of AI, we empower our travelers to make informed decisions regarding flight delays and airline sentiment.</p>
+        <p style="margin-top: 10px;">Skflow's platform leverages advanced machine learning algorithms and real-time data analytics to provide accurate predictions and insightful analyses. By harnessing the power of AI, we empower our travelers to make informed decisions regarding flight delays and airline sentiment.</p>
     </div>
     """,
     unsafe_allow_html=True
@@ -461,7 +461,7 @@ with tabs[0]:
                 print(json.dumps(derived_features, indent=2))         
                 
                 # FastAPI server deployed on EC2 instance
-                response = requests.post("http://ec2-18-116-112-50.us-east-2.compute.amazonaws.com:8000/predict", json = derived_features) 
+                response = requests.post("http://ec2-13-59-138-172.us-east-2.compute.amazonaws.com:8000/predict", json = derived_features) 
                 
                 # Uncomment for local testing
                 # response = requests.post("http://127.0.0.1:8000/predict", json = derived_features) 
