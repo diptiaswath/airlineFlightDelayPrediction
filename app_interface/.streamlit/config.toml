@@ -7,4 +7,5 @@ sslKeyFile = "/code/ssl_certs/privkey.key"
 
 [browser]
 serverAddress = "skyflow-kvgrowth.com"
-serverPort = 8501
+# serverAddress = "127.0.0.1"
+# serverPort = 8501

@@ -23,10 +23,13 @@ COPY ./app_interface/.streamlit/config.toml /code/app_interface/.streamlit/confi
 # Copy the model directory (with the saved model file) into the container
 COPY ./model_artifacts /code/model_artifacts
 
-# Copy the raw data files into the container
+# Copy the required data and image files into the container
 COPY ./raw_data/airports_list.csv /code/raw_data/airports_list.csv
 COPY ./raw_data/CARRIER_DECODE.csv /code/raw_data/CARRIER_DECODE.csv
 COPY ./raw_data/AIRPORT_COORDINATES.csv /code/raw_data/AIRPORT_COORDINATES.csv
+COPY ./combined_data/train.pkl /code/combined_data/train.pkl
+COPY ./images/b6cf1189a8363e9708a712a22171e35a.jpeg /code/images/b6cf1189a8363e9708a712a22171e35a.jpeg
+COPY ./images/Delays_by_Segment_Distance_Group.jpeg /code/images/Delays_by_Segment_Distance_Group.jpeg
 
 # Copy the start.sh script into the container
 COPY ./start.sh /code/start.sh
