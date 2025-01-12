@@ -1120,7 +1120,7 @@ with tabs[0]:
         """,
         unsafe_allow_html=True
     )
-    
+
     if state.tab_locked:
         locked_tab_content()
     else:
@@ -1179,6 +1179,7 @@ with tabs[0]:
 ######################################################################################################################################
 # Flight Delay Predictor Tab
 with tabs[1]:
+    state.tab_locked = True
     st.markdown(
         """
         <div style="background-color: #f0f0f0; padding: 10px; border-radius: 8px; margin: 10px 0;">
@@ -1276,6 +1277,7 @@ with tabs[1]:
 ######################################################################################################################################
 # Airline Sentiment Analyzer Tab
 with tabs[2]:
+    state.tab_locked = True
     st.markdown(
         """
         <div style="background-color: #f0f0f0; padding: 10px; border-radius: 8px; margin: 10px 0;">
@@ -1364,13 +1366,15 @@ with tabs[2]:
 ######################################################################################################################################
 # Flight and Trip Planner Tab
 with tabs[3]:
+    state.tab_locked = True
     st.markdown(
         """
         <div style="background-color: #f0f0f0; padding: 10px; border-radius: 8px; margin: 10px 0;">
             <h3 style="color: #555; font-family: Arial, sans-serif; line-height: 0.8;">Personalized Flight and Trip Planner</h3>
             <p style="color: #555; font-family: Arial, sans-serif; line-height: 0.8; margin-top: 10px;">Experience seamless travel planning with our Agentic AI-powered Planner. 
-            It dynamically tailors flight and trip recommendations based on your preferences, budget, and schedule, offering real-time updates and smart suggestions. 
-            From booking flights to curating personalized itineraries, it adapts to your unique travel needs, ensuring a hassle-free and unforgettable journey.</p> 
+            It dynamically tailors flight and trip recommendations based on your preferences, budget, and schedule, offering real-time updates and smart suggestions. </p>
+            <p style="color: #555; font-family: Arial, sans-serif; line-height: 0.8; margin-top: 10px;">From booking flights to curating personalized itineraries, 
+            it adapts to your unique travel needs, ensuring a hassle-free and unforgettable journey.</p> 
         </div>
         """,
         unsafe_allow_html=True
