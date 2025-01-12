@@ -203,7 +203,7 @@ except FileNotFoundError as e:
 ############################################################################################################
 # Function to prompt for NDA Consult 
 ############################################################################################################
-def locked_tab_content():
+def locked_tab_content(tab_name):
     st.warning("🔒 Access Restricted")
 
     st.markdown(
@@ -229,6 +229,7 @@ def locked_tab_content():
 
     st.button(
         "Request NDA Consultation",
+        key=f"request_nda_{tab_name}",
         on_click=lambda: st.info("Please use our official [contact page](http://kvgrowth.com/contact) to request an NDA consultation.")
     )
 
@@ -1122,7 +1123,7 @@ with tabs[0]:
     )
 
     if state.tab_locked:
-        locked_tab_content()
+        locked_tab_content(tabs[0])
     else:
         col = st.columns((1.5, 2.5, 4.5, 3.0), gap='medium')
         
@@ -1190,7 +1191,7 @@ with tabs[1]:
         unsafe_allow_html=True
     )
     if state.tab_locked:
-        locked_tab_content()
+        locked_tab_content(tabs[1])
     else:
         # Create two main columns for the layout
         left_column, right_column = st.columns([1, 2])
@@ -1288,7 +1289,7 @@ with tabs[2]:
         unsafe_allow_html=True
     )
     if state.tab_locked:
-        locked_tab_content()
+        locked_tab_content(tabs[2])
     else:
         # Sample List of sentiment data for different airlines
         airline_sentiments = [
@@ -1380,7 +1381,7 @@ with tabs[3]:
         unsafe_allow_html=True
     )
     if state.tab_locked:
-        locked_tab_content()
+        locked_tab_content(tabs[3])
     else:
         st.markdown("<h6 style='color: #808080; font-family: Arial, sans-serif; line-height: 0.8;'>Coming Soon!</h6>", unsafe_allow_html=True)
 
