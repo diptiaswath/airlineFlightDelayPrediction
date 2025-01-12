@@ -220,22 +220,13 @@ def locked_tab_content(tab_name):
                 <li>Once approved, you'll receive access to this tab's full functionality.</li>
             </ol>
             <p style="color: #856404; font-family: Arial, sans-serif; margin-top: 10px; font-size: 14px;">
-                For security and confidentiality, please use the official channels. If you have questions, reach out to [us](http://kvgrowth.com).
+                To ensure security and confidentiality, please use the official channels. If you have any questions, 
+                <a href="http://kvgrowth.com" style="color: #856404; text-decoration: none;">feel free to reach out to us</a>.
             </p>
         </div>
         """,
         unsafe_allow_html=True
     )
-
-    if st.button("Request NDA Consultation", key=f"request_nda_{tab_name}"):
-        st.markdown(
-            """
-            <script type="text/javascript">
-                window.location.href = "http://kvgrowth.com/contact";
-            </script>
-            """,
-            unsafe_allow_html=True
-        )
 
 ############################################################################################################
 # Functions for Flight Delay Predictor Tab
