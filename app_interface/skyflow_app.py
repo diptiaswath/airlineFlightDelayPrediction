@@ -227,11 +227,11 @@ def locked_tab_content(tab_name):
         unsafe_allow_html=True
     )
 
-    st.button(
-        "Request NDA Consultation",
-        key=f"request_nda_{tab_name}",
-        on_click=lambda: st.info("Please use our official [contact page](http://kvgrowth.com/contact) to request an NDA consultation.")
-    )
+    if st.button("Request NDA Consultation", key=f"request_nda_{tab_name}"):
+        st.markdown(
+            f'<a href="http://kvgrowth.com/contact" target="_blank">Click here to request an NDA consultation.</a>',
+            unsafe_allow_html=True
+        )
 
 ############################################################################################################
 # Functions for Flight Delay Predictor Tab
@@ -1372,10 +1372,9 @@ with tabs[3]:
         """
         <div style="background-color: #f0f0f0; padding: 10px; border-radius: 8px; margin: 10px 0;">
             <h3 style="color: #555; font-family: Arial, sans-serif; line-height: 0.8;">Personalized Flight and Trip Planner</h3>
-            <p style="color: #555; font-family: Arial, sans-serif; line-height: 0.8; margin-top: 10px;">Experience seamless travel planning with our Agentic AI-powered Planner. 
-            It dynamically tailors flight and trip recommendations based on your preferences, budget, and schedule, offering real-time updates and smart suggestions. </p>
-            <p style="color: #555; font-family: Arial, sans-serif; line-height: 0.8; margin-top: 10px;">From booking flights to curating personalized itineraries, 
-            it adapts to your unique travel needs, ensuring a hassle-free and unforgettable journey.</p> 
+            <p style="color: #555; font-family: Arial, sans-serif; line-height: 0.8; margin-top: 10px;">Experience seamless travel planning with our Agentic AI-powered Planner.<br><br>
+            It dynamically tailors flight and trip recommendations based on your preferences, budget, and schedule, offering real-time updates and smart suggestions.<br><br>
+            From booking flights to curating personalized itineraries, it adapts to your unique travel needs, ensuring a hassle-free and unforgettable journey.</p> 
         </div>
         """,
         unsafe_allow_html=True
