@@ -220,7 +220,7 @@ def locked_tab_content(tab_name):
                 <li>Once approved, you'll receive access to this tab's full functionality.</li>
             </ol>
             <p style="color: #856404; font-family: Arial, sans-serif; margin-top: 10px; font-size: 14px;">
-                For security and confidentiality, please use the official channels. If you have questions, reach out to our support team.
+                For security and confidentiality, please use the official channels. If you have questions, reach out to [us](http://kvgrowth.com).
             </p>
         </div>
         """,
@@ -229,7 +229,11 @@ def locked_tab_content(tab_name):
 
     if st.button("Request NDA Consultation", key=f"request_nda_{tab_name}"):
         st.markdown(
-            f'<a href="http://kvgrowth.com/contact" target="_blank">Click here to request an NDA consultation.</a>',
+            """
+            <script type="text/javascript">
+                window.location.href = "http://kvgrowth.com/contact";
+            </script>
+            """,
             unsafe_allow_html=True
         )
 
