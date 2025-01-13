@@ -1389,6 +1389,7 @@ st.markdown(
     <div style="text-align: center; font-size: 12px; color: #555;">
         <p>✨ Developed by <a href="https://www.linkedin.com/in/dipti-aswath-60b9131/"><strong>Dipti Aswath</strong></a></p>
         <p>🔍 Explore SkyFlow's comprehensive documentation with operational insights and technical details <a href="https://diptiaswath.github.io/airlineFlightDelayPrediction/" style="color: #1E90FF;">here</a></p>
+        <p style="margin-top: 20px;">© Pending. All rights reserved.</p>
     </div>
     """,
     unsafe_allow_html=True
